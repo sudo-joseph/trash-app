@@ -2,7 +2,16 @@
 
 This is a back-end nodejs server for Trash-app project. This server provides REST api accessing to backend data stored in both MongoDB and external API servers. 
 
-## Required npm packages
+
+## Data and Database
+
+- Database
+  - MongoDB
+- Public API
+  - Earth911
+  - TrashNothing
+  - Map
+    - Not GoogleMap
 
 ## Deployment Procesure
 
