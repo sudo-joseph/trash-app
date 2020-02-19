@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const HttpError = require('./models/error-http');
 /// Import routes
 const facilitiesRouts = require('./routes/facilities-routes');
 const itemsRouts = require('./routes/items-routes');
@@ -36,7 +37,11 @@ app.use('/api/facilities', facilitiesRouts);
 app.use('/api/items', itemsRouts);
 // app.use('/api/users', usersRoutes);
 
-
+// Throw an error when there is no route
+app.use((req, res, next) => {
+  const error = new HttpError('No route found for the URL path.', 404);
+  throw error;
+});
 
 /////////////////////////////////////////////
 // Boilerplate, no need to touch what's below
