@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="App-navigation">
-          <h1 className="App-title">MERN Starter</h1>
+          <h1 className="App-title">Trash App</h1>
           <Link to="/">Welcome</Link>
           <Link to="/browse/">Browse</Link>
           <Link to="/recycle/">Recycle</Link>
