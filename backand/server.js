@@ -59,6 +59,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
+// Error Handling
+app.use((err, req, res, next) => {
+  // if header was already sent, nothings to do here
+  if (res.headerSent) {
+    return next(err);
+  }
+  // if error.code was not set, 500 Internal Server Error
+  res.status(err.code || 500);
+  res.json({message: err.message || 'Unknown error!'});
+});
+
 
 // Set up configuration variables
 if (!process.env.MONGODB_URI) {
@@ -71,14 +82,14 @@ const splitUrl = MONGODB_URL.split('/');
 const mongoDbDatabaseName = splitUrl[splitUrl.length - 1];
 
 mongoose
-  .connect(MONGODB_URL)
+  .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, })
   .then(() => {
     // Start the server
     const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
       console.log(`
         *********************************************
-        * Backend server up at ${PORT}              *
+        * Backend server up at port ${PORT}         *
         *********************************************
       `);
     });

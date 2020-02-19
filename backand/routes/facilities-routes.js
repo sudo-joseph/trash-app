@@ -1,6 +1,9 @@
 const express = require('express');
 
+const HttpError = require('../models/error-http');
+
 const router = express.Router();
+
 
 let DUMMY_FACILITIES = [
     {
@@ -49,6 +52,12 @@ let DUMMY_FACILITIES = [
 
 router.get('/', (req, res, next) => {
     console.log('GET in facility-routes');
+
+    // If there is no facility found, NOT FOUND 404 will send back
+    // But, this is odd???
+    if(DUMMY_FACILITIES.length === 0){
+        throw new HttpError('Could not find the facility.', 404);
+    }
     res.json({results: DUMMY_FACILITIES})
 });
 
@@ -57,7 +66,11 @@ router.get('/:facId', (req, res, next) => {
     const facilityId = req.params.facId;
     const facility = DUMMY_FACILITIES.find( fac => {
         return Object.keys(fac)[0] === facilityId;
-    } )
+    });
+    // If there is no facility found, NOT FOUND 404 will send back
+    if(!facility){
+        throw new HttpError('Could not find the facility.', 404);
+    }
     res.json({ results: facility })
 
 });
