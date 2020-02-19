@@ -9,7 +9,7 @@ class LandingPage extends Component {
         <header className="LandingPage-header">
           <p>
             Kickstart Coding - Frontend React<br />
-            MERN Starter Project
+            NoTrash Starter Project
           </p>
           <Link to="/blog/">Blog</Link>
           <Link to="/write/">Write article</Link>
