@@ -1,29 +1,90 @@
+:root {
+    --navbar-color: #4CAF50;
+    --margin-color: rgb(120, 205, 107);
+    --mainContentBG-color: #DFE68E;
+
+    --barcolumn1-color:#8bbabb;
+    --barcolumn2-color:#c7f0db;
+    --barcolumn1-highlight: #80ecee;
+    --barcolumn2-highlight: #9effcd;
+}
+
+
+/* Palette 1 (Colormind.com)
+#2FCA72
+#2C9295
+#35495E
+#384649
+#C8AE3E
+ */
+ /* Palette 2 (Colormind.com)
+#728625
+#DFE68E
+#D9B863
+#B15A2B
+#39281B
+ */
+
+
+/* Basic level containment -------------------------------- */
 body {
     /* background: linear-gradient(to top, #2f6057, #458e31); */
     width: 100%;
     background: grey;
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
-    grid-template-rows: 100px auto;
+    /* display: grid; */
     /* grid-row-gap: 10px;
     grid-column-gap: 10px; */
-    align-items: stretch;
+    /* align-items: stretch; */
+    margin: 0;
+    /* background: url('../img/world-map-halftone-dots-background_153132-185.jpg') no-repeat top center fixed; */
+    background-size: cover;
+}
+
+.container {
+    /* grid-template-columns: 1fr minmax(auto, 1200px) 1fr; */
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-template-rows: 120px 1fr;
+    min-height: 100vh;
 }
 
 .nav-bar {
     grid-column: 1 / span 3;
     grid-row: 1;
-    border: 2px solid white;
-    background: black;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 1fr;
+    background: var(--navbar-color);
+    
     color: white;
-    display: flex;
-    cursor: pointer;
+    /* margin: -10px -10px 0px -10px; */
+    padding: 20px 10px 10px 10px;
+    /* border: 2px solid white; */
+    /* position: sticky; */
     /* align-items: left; */
+    /* cursor: pointer; */
+}
+.nav-title {
+    grid-column: 2;
+    padding-left: 20px;
+    /* border: 2px solid white; */
+}
+.nav-title > h1 {
+    font-size: 30px;
+    /* border: 2px solid white; */
+}
+
+.nav-links {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    background-color: rgb(17, 113, 28);
+    /* border: 2px solid white; */
+
 }
 
 .margin {
-    background-color: rgb(75, 75, 75);
+    background-color: var(--margin-color);
 }
 
 .margin-left {
@@ -39,5 +100,7 @@ body {
 .main-content {
     grid-column: 2;
     grid-row: 2;
-    border: 2px dashed white;
+    /* border: 2px dashed white; */
+    height: auto;
+    background: var(--mainContentBG-color);
 }
