@@ -3,9 +3,8 @@ import { Link, Switch, Route } from 'react-router-dom'
 
 import './App.css';
 
-import LandingPage from './components/pages/LandingPage/LandingPage.js';
-import Blog from './components/pages/Blog/Blog.js';
-import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
+import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
+import Browse from './components/pages/Browse/Browse.js';
 
 class App extends Component {
   render() {

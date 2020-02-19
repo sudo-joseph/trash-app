@@ -41,7 +41,7 @@ class Blog extends Component {
   voteArticle(article) {
     let newVoteCount = article.voteCount;
 
-    // Increase the vote count 
+    // Increase the vote count
     if (!newVoteCount) {
       newVoteCount = 1;
     } else {
@@ -96,4 +96,3 @@ class Blog extends Component {
 }
 
 export default Blog;
-
