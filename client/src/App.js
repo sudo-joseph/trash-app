@@ -6,7 +6,8 @@ import './App.css';
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
-
+import NavBar from './components/NavBar/NavBar.js';
+import Fetch from './components/Fetch/Fetch.js';
 
 class App extends Component {
   render() {
