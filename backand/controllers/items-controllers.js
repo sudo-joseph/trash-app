@@ -1,4 +1,5 @@
 const uuid = require('uuid/v4'); // Create a unique id
+const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/error-http');
 
@@ -77,6 +78,11 @@ const getItemById = (req, res, next) => {
 
 const createItem = (req, res, next) => {
     console.log('POST item in item-controller')
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        throw new HttpError('Invalid inputs. Please check input data.', 422);
+    }
+
     const { title, 
         content, 
         image, 
@@ -108,6 +114,11 @@ const createItem = (req, res, next) => {
 
 const updateItem = (req, res, next) => {
     console.log('UPDATE item in item-controller')
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        throw new HttpError('Invalid inputs. Please check input data.', 422);
+    }
+
     const itemId = req.params.itemId;
 
     const indexItem = DUMMY_ITEMS.findIndex(i => i.post_id === itemId || i.post_id === +itemId );
