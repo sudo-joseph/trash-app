@@ -78,8 +78,6 @@ mongoose
     app.listen(PORT, () => {
       console.log(`
         *********************************************
-        * Insecure prototyping backend is running!  *
-        * Only use for prototyping                  *
         * Backend server up at ${PORT}              *
         *********************************************
       `);
