@@ -53,7 +53,7 @@ DUMMY_ITEMS = [
 
 
 const getAllItems = (req, res, next) => {
-    console.log('GET in items-routes');
+    console.log('GET in items-controller');
 
     if(DUMMY_ITEMS.length === 0){
         throw new HttpError('Could not find items.', 404);
@@ -62,7 +62,7 @@ const getAllItems = (req, res, next) => {
 };
 
 const getItemById = (req, res, next) => {
-    console.log('GET :itemId in items-routes');
+    console.log('GET :itemId in items-controller');
     const id = req.params.itemId;
     const item = DUMMY_ITEMS.find(i => {
         return i.post_id === +id;
@@ -73,5 +73,11 @@ const getItemById = (req, res, next) => {
     res.json({results: item})
 };
 
+const createItem = (req, res, next) => {
+    console.log('POST item in item-controller')
+    res.json({message: 'Test: reached createItem'})
+}
+
 exports.getAllItems = getAllItems;
 exports.getItemById = getItemById;
+exports.createItem = createItem;
