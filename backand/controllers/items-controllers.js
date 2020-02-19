@@ -2,7 +2,7 @@ const uuid = require('uuid/v4'); // Create a unique id
 
 const HttpError = require('../models/error-http');
 
-DUMMY_ITEMS = [
+let DUMMY_ITEMS = [
     {
         outcome: null,
         user_id: 100231,
@@ -67,7 +67,7 @@ const getItemById = (req, res, next) => {
     console.log('GET :itemId in items-controller');
     const id = req.params.itemId;
     const item = DUMMY_ITEMS.find(i => {
-        return i.post_id === +id;
+        return i.post_id === id || i.post_id === +id ;
     });
     if(!item){
         throw new HttpError('Could not find the item.', 404);
@@ -110,8 +110,7 @@ const updateItem = (req, res, next) => {
     console.log('UPDATE item in item-controller')
     const itemId = req.params.itemId;
 
-    const indexItem = DUMMY_ITEMS.findIndex(i => i.post_id === itemId);
-    console.log(indexItem);
+    const indexItem = DUMMY_ITEMS.findIndex(i => i.post_id === itemId || i.post_id === +itemId );
     if(indexItem < 0) {
         throw new HttpError('Item not found.', 404);
     }
@@ -139,8 +138,17 @@ const updateItem = (req, res, next) => {
 
 const deleteItem = (req, res, next) => {
     console.log('DELETE item in item-controller')
-    res.json({message: 'Test: reached deleteItem'})
+    const itemId = req.params.itemId;
+
+    const indexItem = DUMMY_ITEMS.findIndex(i => i.post_id === itemId || i.post_id === +itemId );
+    if(indexItem < 0) {
+        throw new HttpError('Item not found.', 404);
+    }
+
+    DUMMY_ITEMS = DUMMY_ITEMS.filter(i => i.post_id !== +itemId);
+    res.json({message: `deteted ${itemId}`});
 }
+
 exports.getAllItems = getAllItems;
 exports.getItemById = getItemById;
 exports.createItem = createItem;
