@@ -5,6 +5,8 @@ import './App.css';
 
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
+import Welcome from './components/pages/Welcome/Welcome.js';
+
 
 class App extends Component {
   render() {
@@ -13,15 +15,15 @@ class App extends Component {
         <nav className="App-navigation">
           <h1 className="App-title">MERN Starter</h1>
           <Link to="/">Welcome</Link>
-          <Link to="/blog/">Blog</Link>
-          <Link to="/write/">Write Article</Link>
+          <Link to="/browse/">Browse</Link>
+          <Link to="/recycle/">Recycle</Link>
         </nav>
 
         <div className="App-mainContent">
           <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/blog/' component={Blog} />
-            <Route exact path='/write/' component={WriteArticle} />
+            <Route exact path='/' component={Welcome} />
+            <Route exact path='/browse/' component={Browse} />
+            <Route exact path='/recycle/' component={RecyclePage} />
           </Switch>
         </div>
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import './LandingPage.css';
-class LandingPage extends Component {
+import './RecyclePage.css';
+class RecyclePage extends Component {
   render() {
     return (
-      <div className="LandingPage">
-        <header className="LandingPage-header">
+      <div className="RecyclePage">
+        <header className="RecyclePage-header">
           <p>
             Kickstart Coding - Frontend React<br />
             MERN Starter Project
@@ -19,4 +19,4 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage;
+export default RecyclePage;
