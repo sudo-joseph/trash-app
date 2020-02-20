@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>NoTrash Mockup</title>
+    <meta name="description" content="Group project App">
+    <meta name="author" content="KC NoTrash Group">
+
+    <link rel="stylesheet" href="./layout-page.css">
+    <link rel="stylesheet" href="./add-item-page.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <h1 class="nav-title">NoTrash</h1>
+            <div class="nav-links">
+                <p>
+                    <a href="./recycle-page.html">Recycle</a><br />
+                    <a href="./browse-page.html">Browse</a><br />
+                    <a href="./add-item-page.html">Add Item</a><br />
+                </p>
+            </div>
+        </div>
+
+        <div class="margin margin-left"></div>
+        <div class="main-content">
+            <div class="list-item">
+                <h2>Add / Donate an Item</h2>
+                <p></p>
+
+                <div class="form-container">
+                    <form action="/action_page.php">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                        <label for="country">Category</label>
+                        <select id="country" name="country">
+                        <option value="australia">Rolexes</option>
+                        <option value="canada">Bicycles</option>
+                        <option value="usa">Furniture</option>
+                        </select>
+                    
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="margin margin-right"></div>
+        
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

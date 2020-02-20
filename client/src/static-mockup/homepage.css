@@ -1,0 +1,48 @@
+.main-content {
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    /* display: grid; */
+    /* grid-template-rows: 1fr 2fr 1fr; */
+    /* justify-content: space-around; */
+    align-content: center;
+}
+
+.home-margin-top {
+    display: grid;
+    grid-row: 1;
+}
+
+.home-margin-bottom {
+    height: auto;
+}
+
+.button-container {
+    background: rgb(226, 240, 174);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 30px 0px 30px;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.button-container > div {
+    border: 2px solid red;
+    height: 200px;
+    width: 200px;
+    margin: 15px;
+    text-align: center;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  /* padding: 15px 30px; */
+  line-height: 200px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 30px;
+}

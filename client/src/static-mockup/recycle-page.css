@@ -1,0 +1,110 @@
+.main-content {
+    display: flex;
+    flex-direction: row;
+    /* display: grid;
+    grid-template-columns: 2fr 3fr; */
+}
+
+.map-column {
+    width: 500px;
+    height: auto;
+    /* border: 1px solid black; */
+}
+
+.listings-column {
+    /* background-color: #aaa; */
+    width: 100%;
+    padding: 10px;
+    display: list-item;
+    border: 1px solid black;
+    /* flex-wrap: nowrap; */
+    /* align-content: stretch; */
+    
+}
+
+.map-space {
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    background: white;
+    border: 1px solid lightgreen;
+    border-radius: 16px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.map-selector {
+    width: 400px;
+    height: 50px;
+    margin: 10px;
+    background: lightyellow;
+    border: 1px solid yellow;
+    border-radius: 16px;
+    box-shadow: 5px 5px 5px grey;
+    margin-top: 20px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.list-item {
+    width: auto;
+    height: 200px;
+    border: 1px solid green;
+    border-radius: 8px;
+    margin: 10px 5px;
+    display: flex;
+    grid-template-rows: 2fr 3fr;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.recycle-card-image-space {
+    grid-row: 1;
+    width: 200px;
+    background: white;
+    border-radius: 8px 0px 0px 8px;
+    object-fit: scale-down;
+}
+
+.recycle-card-image {
+    /* max-height: auto; */
+    width: 300px;
+    object-fit: scale-down;
+}
+
+.recycle-card-info {
+    grid-row: 2;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* Grid view */
+/* .main-content {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+
+.map-column {
+    border: 1px solid black;
+    grid-column: 1;
+}
+
+.map-space {
+    width: 400px;
+    height: 400px;
+    background: white;
+    }
+
+.listings-column {
+    display: flex;
+    border: 1px solid black;
+    flex-flow: wrap;
+}
+
+.list-item {
+  background-color: #f1f1f1;
+  width: 200px;
+  height: 300px;
+  margin: 5px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+} */
