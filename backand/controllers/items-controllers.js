@@ -2,7 +2,7 @@ const uuid = require('uuid/v4'); // Create a unique id
 const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/error-http');
-
+const getDonationItems = require('../utils/fetch-trashnothing');
 let DUMMY_ITEMS = [
     {
         outcome: null,
@@ -160,8 +160,20 @@ const deleteItem = (req, res, next) => {
     res.json({message: `deteted ${itemId}`});
 }
 
+const getItemsFromTN = async (req, res, next) => {
+    console.log('GET getItemsFromTN in item-controller')
+    let data;
+    try {
+        data = await getDonationItems();
+    } catch (err) {
+        return next(err);
+    }
+    res.json({results: data});
+}
+
 exports.getAllItems = getAllItems;
 exports.getItemById = getItemById;
 exports.createItem = createItem;
 exports.updateItem = updateItem ;
 exports.deleteItem = deleteItem ;
+exports.getItemsFromTN = getItemsFromTN;

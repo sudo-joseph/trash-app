@@ -5,6 +5,9 @@ const itemsController = require('../controllers/items-controllers')
 
 const router = express.Router();
 
+// directly accessing TrashNothing Data
+router.get('/trashnothing', itemsController.getItemsFromTN);
+
 router.get('/', itemsController.getAllItems); 
 router.get('/:itemId', itemsController.getItemById);
 router.post('/', 
