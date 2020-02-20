@@ -1,6 +1,7 @@
 const HttpError = require('../models/error-http');
 
-const { getMaterialsByProximity } = require('../utils/fetch-earth911');
+const { getMaterialsByProximity,
+        getFacilities } = require('../utils/fetch-earth911');
 
 let DUMMY_FACILITIES = [
     {
@@ -81,7 +82,18 @@ const getMaterialsFromE911 = async (req, res, next) => {
     }
     res.json({results: data});
 };
-const getFacilitiesFromE911 = (req, res, next) => {};
+
+const getFacilitiesFromE911 = async (req, res, next) => {
+    console.log('GET getFacilitiesFromE911 in facilities-controller')
+    let data;
+    try {
+        data = await getFacilities();
+    } catch (err) {
+        return next(err);
+    }
+    res.json({results: data});
+
+};
 
 exports.getAllFacilities = getAllFacilities;
 exports.getFacilityById = getFacilityById;
