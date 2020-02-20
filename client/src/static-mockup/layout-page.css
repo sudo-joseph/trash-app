@@ -1,7 +1,7 @@
 :root {
-    --navbar-color: #4CAF50;
-    --margin-color: rgb(120, 205, 107);
-    --mainContentBG-color: #DFE68E;
+    --navbar-color: hsl(122, 39%, 49%);
+    --margin-color: rgb(229, 242, 208);
+    --mainContentBG-color: rgb(240, 244, 228);
 
     --barcolumn1-color:#8bbabb;
     --barcolumn2-color:#c7f0db;
@@ -30,7 +30,7 @@
 body {
     /* background: linear-gradient(to top, #2f6057, #458e31); */
     width: 100%;
-    background: grey;
+    background: rgb(45, 169, 54);
     /* display: grid; */
     /* grid-row-gap: 10px;
     grid-column-gap: 10px; */
@@ -58,7 +58,7 @@ body {
     
     color: white;
     /* margin: -10px -10px 0px -10px; */
-    padding: 20px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     /* border: 2px solid white; */
     /* position: sticky; */
     /* align-items: left; */
@@ -66,13 +66,12 @@ body {
 }
 .nav-title {
     grid-column: 2;
-    padding-left: 20px;
-    /* border: 2px solid white; */
-}
-.nav-title > h1 {
+    padding-left: 40px;
+    padding-top: 10px; 
     font-size: 30px;
     /* border: 2px solid white; */
 }
+
 
 .nav-links {
     grid-column: 1;
@@ -103,4 +102,5 @@ body {
     /* border: 2px dashed white; */
     height: auto;
     background: var(--mainContentBG-color);
+    display: flex;
 }
