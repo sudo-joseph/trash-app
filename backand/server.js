@@ -11,7 +11,6 @@ const facilitiesRouts = require('./routes/facilities-routes');
 const itemsRouts = require('./routes/items-routes');
 //const usersRoutes = require('./routes/items-routes');
 
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -21,7 +20,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers',
     'origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 
-    'GET, POST, UPDATE, PATCH, DELETE');
+    'GET, POST, PUT, PATCH, DELETE');
   
   next();
 });
