@@ -14,11 +14,23 @@ class App extends Component {
   state = {
     userLng: -122.269883,
     userLat: 37.806767,
-    userZoom : 14,
+    userZoom : 12,
+    geolocation:true,
     geolocationPermissions: false,
     geolocationModal: false
   }
 
+componentDidMount() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        userLng: position.coords.longitude,
+        userLat: position.coords.latitude});
+    });
+  } else {
+    this.setState({geolocationModal: true});
+  }
+}
 
   render() {
     return (
