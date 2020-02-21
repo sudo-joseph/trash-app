@@ -9,3 +9,7 @@ any sort of security. The only purpose of the API is to allow rapid front-end
 prototyping without much (or any) backend modifications.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Image Attribution
+
+Earth_recycle: https://commons.wikimedia.org/wiki/File:Earth_recycle.svg
