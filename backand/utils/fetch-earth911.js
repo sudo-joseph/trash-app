@@ -1,9 +1,7 @@
 const axios = require('axios');
-const dotenv = require('dotenv');
 
 const HttpError = require('../models/error-http'); 
 
-dotenv.config();
 const API_KEY = process.env.API_KEY_EARTH911;
 
 const url_api_base = 'http://api.earth911.com/earth911';
