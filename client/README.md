@@ -13,3 +13,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Image Attribution
 
 Earth_recycle: https://commons.wikimedia.org/wiki/File:Earth_recycle.svg
+
+
+## Components used
+
+### React Modal
+  https://reactcommunity.org/react-modal/
+
+### Map Box Gl
+  https://www.npmjs.com/package/mapbox-gl 
