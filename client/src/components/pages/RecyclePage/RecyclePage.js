@@ -19,7 +19,7 @@ class RecyclePage extends Component {
           isOpen={this.props.modal}
           onRequestClose={this.props.modalFcn}>
           <p>Hello Modal World</p>
-        </ReactModal>/>
+        </ReactModal>
 
         <div className="RecyclePage-left">
           <Map
