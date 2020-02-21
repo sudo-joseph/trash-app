@@ -13,7 +13,14 @@ class RecyclePage extends Component {
   render() {
     return (
       <div className="RecyclePage">
-        <h1>Recycle Page</h1>
+        <div className="RecyclePage-left">
+          <Map/>
+        </div>
+        <div className="RecyclePage-right">
+          <div>
+            <p>some filler text</p>
+          </div>
+        </div>
       </div>
     );
   }
