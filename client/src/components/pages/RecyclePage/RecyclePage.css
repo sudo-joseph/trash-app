@@ -13,4 +13,5 @@
 .RecyclePage-right {
   grid-area: 1 / 2 / 2 / 3;
   padding-left: 2rem;
+  display: flex;
 }
