@@ -6,15 +6,15 @@ import './RecyclePage.css';
 import Map from '../../Map/Map.js';
 
 class RecyclePage extends Component {
-  state = {
-    someStateVar: [],
-  }
 
   render() {
     return (
       <div className="RecyclePage">
         <div className="RecyclePage-left">
-          <Map/>
+          <Map
+            lat={this.props.lat}
+            lng={this.props.lng}
+            zoom={this.props.zoom}/>
         </div>
         <div className="RecyclePage-right">
           <div>
