@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal';
+// https://reactcommunity.org/react-modal/
 
 import './RecyclePage.css';
 
@@ -13,6 +15,12 @@ class RecyclePage extends Component {
   render() {
     return (
       <div className="RecyclePage">
+        <ReactModal
+          isOpen={this.props.modal}
+          onRequestClose={this.props.modalFcn}>
+          <p>Hello Modal World</p>
+        </ReactModal>/>
+
         <div className="RecyclePage-left">
           <Map
             lat={this.props.lat}
