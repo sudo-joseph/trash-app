@@ -20,13 +20,32 @@ class App extends Component {
     geolocationModal: false
   }
 
+toggleGeoLocationModal = (error) => {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      this.setState({geolocationModal: !this.geolocationModal})
+      break;
+    case error.POSITION_UNAVAILABLE:
+      this.setState({geolocationModal: !this.geolocationModal})
+      break;
+    case error.TIMEOUT:
+      console.log("Request to get user location timed out.")
+      break;
+    case error.UNKNOWN_ERROR:
+      console.log("An unknown error occurred.")
+      break;
+  }
+}
+
 componentDidMount() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         userLng: position.coords.longitude,
         userLat: position.coords.latitude});
-    });
+
+    }, this.toggleGeoLocationModal
+);
   } else {
     this.setState({geolocationModal: true});
   }
