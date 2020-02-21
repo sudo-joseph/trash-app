@@ -1,0 +1,106 @@
+:root {
+    --navbar-color: hsl(122, 39%, 49%);
+    --margin-color: rgb(229, 242, 208);
+    --mainContentBG-color: rgb(240, 244, 228);
+
+    --barcolumn1-color:#8bbabb;
+    --barcolumn2-color:#c7f0db;
+    --barcolumn1-highlight: #80ecee;
+    --barcolumn2-highlight: #9effcd;
+}
+
+
+/* Palette 1 (Colormind.com)
+#2FCA72
+#2C9295
+#35495E
+#384649
+#C8AE3E
+ */
+ /* Palette 2 (Colormind.com)
+#728625
+#DFE68E
+#D9B863
+#B15A2B
+#39281B
+ */
+
+
+/* Basic level containment -------------------------------- */
+body {
+    /* background: linear-gradient(to top, #2f6057, #458e31); */
+    width: 100%;
+    background: rgb(45, 169, 54);
+    /* display: grid; */
+    /* grid-row-gap: 10px;
+    grid-column-gap: 10px; */
+    /* align-items: stretch; */
+    margin: 0;
+    /* background: url('../img/world-map-halftone-dots-background_153132-185.jpg') no-repeat top center fixed; */
+    background-size: cover;
+}
+
+.container {
+    /* grid-template-columns: 1fr minmax(auto, 1200px) 1fr; */
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-template-rows: 120px 1fr;
+    min-height: 100vh;
+}
+
+.nav-bar {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 1fr;
+    background: var(--navbar-color);
+    
+    color: white;
+    /* margin: -10px -10px 0px -10px; */
+    padding: 10px 10px 10px 10px;
+    /* border: 2px solid white; */
+    /* position: sticky; */
+    /* align-items: left; */
+    /* cursor: pointer; */
+}
+.nav-title {
+    grid-column: 2;
+    padding-left: 40px;
+    padding-top: 10px; 
+    font-size: 30px;
+    /* border: 2px solid white; */
+}
+
+
+.nav-links {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    background-color: rgb(17, 113, 28);
+    /* border: 2px solid white; */
+
+}
+
+.margin {
+    background-color: var(--margin-color);
+}
+
+.margin-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.margin-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.main-content {
+    grid-column: 2;
+    grid-row: 2;
+    /* border: 2px dashed white; */
+    height: auto;
+    background: var(--mainContentBG-color);
+    display: flex;
+}
