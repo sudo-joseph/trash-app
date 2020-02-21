@@ -10,6 +10,16 @@ import NavBar from './components/NavBar/NavBar.js';
 import Fetch from './components/Fetch/Fetch.js';
 
 class App extends Component {
+
+  state = {
+    userLng: -122.269883,
+    userLat: 37.806767,
+    userZoom : 14,
+    geolocationPermissions: false,
+    geolocationModal: false
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -24,10 +34,14 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Welcome} />
             <Route exact path='/browse/' component={Browse} />
-            <Route exact path='/recycle/' component={RecyclePage} />
+            <Route exact path='/recycle/'
+                   render={(routeProps)=>(<RecyclePage {...routeProps}
+                                             lat={this.state.userLat}
+                                             lng={this.state.userLng}
+                                             zoom={this.state.userZoom}/>)}
+            />
           </Switch>
         </div>
-
       </div>
     );
   }

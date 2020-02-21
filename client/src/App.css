@@ -1,8 +1,8 @@
 .App {
-    background: linear-gradient(to top, #ff00cc, #333399);
+    background: linear-gradient(to top, #39ff14, #333399);
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+    grid-template-columns: 0.25fr minmax(auto, 800px) 0.25fr;
     grid-template-rows: 100px auto;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
@@ -51,5 +51,3 @@
 .App-mainContent {
     grid-column: 2;
 }
-
-
