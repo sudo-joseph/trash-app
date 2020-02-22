@@ -6,10 +6,12 @@
   "dependencies": {
     "mapbox-gl": "^1.8.0",
     "react": "16.6.3",
+    "react-css-burger": "^0.2.0",
     "react-dom": "16.6.3",
     "react-router-dom": "4.3.1",
     "react-scripts": "2.1.1",
-    "set-value": ">=2.0.1"
+    "set-value": ">=2.0.1",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

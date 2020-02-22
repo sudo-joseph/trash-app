@@ -7,6 +7,7 @@ import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
 import NavBar from './components/NavBar/NavBar.js';
+import SideBar from './components/SideBar/SideBar.js';
 import Fetch from './components/Fetch/Fetch.js';
 
 class App extends Component {
@@ -15,9 +16,16 @@ class App extends Component {
     userLng: -122.269883,
     userLat: 37.806767,
     userZoom : 12,
-    geolocation:false,
-    geolocationModal: false
-  }
+    geolocation: false,
+    geolocationModal: false,
+    burger: false,
+    pages: {Recycle: "/",
+            Browse: "/browse/"}
+         }
+
+toggleBurger = () => {
+  this.setState({burger: !this.state.burger})
+}
 
 
 openGeoLocationModal = () => {
@@ -66,19 +74,19 @@ componentDidMount() {
 
 render() {
   return (<div className="App">
-            <nav className="App-navigation">
-              <h1 className="App-title">Trash App</h1>
-              <Link to="/">Welcome</Link>
-              <Link to="/browse/">Browse</Link>
-              <Link to="/recycle/">Recycle</Link>
-            </nav>
-
+            <div className="App-NavBar">
+              <NavBar title="Trash App"
+                      burgerStatus={this.state.burger}
+                      toggleFcn={this.toggleBurger}
+                      pages={this.state.pages}>
+              </NavBar>
+            </div>
             <div className="App-mainContent">
+              <SideBar/>
               <Switch>
-                <Route exact="exact" path='/' component={Welcome}/>
-                <Route exact="exact" path='/browse/' component={Browse}/>
-                <Route exact="exact"
-                       path='/recycle/'
+                <Route exact path='/browse/' component={Browse}/>
+                <Route exact
+                       path='/'
                        render={(routeProps) => (<RecyclePage {...routeProps}
                                                     lat={this.state.userLat}
                                                     lng={this.state.userLng}
@@ -88,6 +96,9 @@ render() {
                                                 )}/>
               </Switch>
             </div>
+            <div className="App-leftMargin"></div>
+            <div className="App-rightMargin"></div>
+
          </div>
         );
       }

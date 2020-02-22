@@ -1,14 +1,68 @@
-.App {
-    background: linear-gradient(to top, #39ff14, #333399);
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 0.25fr minmax(auto, 800px) 0.25fr;
-    grid-template-rows: 100px auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
-    align-items: stretch;
+:root {
+    --navbar-color: hsl(122, 39%, 49%);
+    --margin-color: rgb(229, 242, 208);
+    --mainContentBG-color: rgb(240, 244, 228);
+
+    --barcolumn1-color:#8bbabb;
+    --barcolumn2-color:#c7f0db;
+    --barcolumn1-highlight: #80ecee;
+    --barcolumn2-highlight: #9effcd;
 }
 
+/* Palette 1 (Colormind.com)
+#2FCA72
+#2C9295
+#35495E
+#384649
+#C8AE3E
+ */
+ /* Palette 2 (Colormind.com)
+#728625
+#DFE68E
+#D9B863
+#B15A2B
+#39281B
+ */
+
+ .App {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    grid-template-rows: 100px 1fr;
+    grid-column-gap: 2px;
+    grid-row-gap: 0px;
+}
+
+.App-NavBar {
+  grid-area: 1 / 1 / 2 / 4;
+  z-index: 1;
+  position: fixed;
+  width:100%
+
+}
+
+.App-mainContent {
+  grid-area: 2 / 2 / 3 / 3;
+  height: auto;
+  background: var(--mainContentBG-color);
+
+}
+
+.App-leftMargin {
+  grid-area: 2 / 1 / 3 / 2;
+  background-color: var(--margin-color);
+  z-index: 0;
+
+}
+
+.App-rightMargin {
+  grid-area: 2 / 3 / 3 / 4;
+  background-color: var(--margin-color);
+  z-index: 0;
+}
+
+
+
+/*
 .App-navigation {
     padding: 10px;
     color: white;
@@ -50,4 +104,4 @@
 
 .App-mainContent {
     grid-column: 2;
-}
+} */
