@@ -1,9 +1,16 @@
+
+.div1 { grid-area: 1 / 1 / 2 / 2; }
+.div2 { grid-area: 1 / 2 / 2 / 3; }
+.div3 { grid-area: 1 / 3 / 2 / 4; }
+
+
 .NavBar {
-    grid-column: 1 / span 3;
-    grid-row: 1;
     display: grid;
-    grid-template-columns: 100px 1fr 100px;
+    grid-template-columns: 0.25fr repeat(2, 1fr);
     grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
     background: var(--navbar-color);
 
     color: white;
@@ -14,20 +21,42 @@
     /* align-items: left; */
     /* cursor: pointer; */
 }
+
+.NavBar-Burger {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.NavBar-Links {
+    grid-area: 1 / 2 / 2 / 3;
+    display:flex;
+    align-content: space-around;
+    justify-content: space-around;
+    padding: 10px 0px 0px 40px;
+    font-size: 30px;
+
+    /* grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    background-color: rgb(17, 113, 28); */
+    /* border: 2px solid white; */
+
+}
+
+.NavBar-Links--hidden {
+    display:none;
+    transition: all 50s cubic-bezier(0.17, 0.04, 0.03, 0.94);
+
+
+}
+.NavBar-Link {
+  padding: 10px 0px 0px 40px;
+  font-size: 30px;
+}
+
 .NavBar-title {
-    grid-column: 2;
+    grid-area: 1 / 3 / 2 / 4;
     padding-left: 40px;
     padding-top: 10px;
     font-size: 30px;
     /* border: 2px solid white; */
-}
-
-
-.NavBar-links {
-    grid-column: 1;
-    grid-row: 1;
-    text-align: center;
-    background-color: rgb(17, 113, 28);
-    /* border: 2px solid white; */
-
 }

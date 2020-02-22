@@ -24,4 +24,4 @@ Earth_recycle: https://commons.wikimedia.org/wiki/File:Earth_recycle.svg
   https://www.npmjs.com/package/mapbox-gl
 
 ### React CSS burger
-https://github.com/mattvox/react-css-burger
+  https://github.com/mattvox/react-css-burger
