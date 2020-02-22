@@ -8,6 +8,10 @@
 
 .RecyclePage-left {
   grid-area: 1 / 1 / 2 / 2;
+  position: fixed;
+  width: 500px;
+  height: auto;
+  padding: 10px 200px 0px 20px;
 }
 
 .RecyclePage-right {
@@ -15,4 +19,5 @@
   padding-left: 2rem;
   display: flex;
   flex-direction: column;
+  width: 90%;
 }

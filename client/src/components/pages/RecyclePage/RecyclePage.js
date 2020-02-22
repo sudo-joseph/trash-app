@@ -35,6 +35,12 @@ class RecyclePage extends Component {
               img={earth}/>
             <Card
               img={earth}/>
+              <Card
+                img={earth}/>
+              <Card
+                img={earth}/>
+              <Card
+                img={earth}/>
           </div>
         </div>
       </div>
