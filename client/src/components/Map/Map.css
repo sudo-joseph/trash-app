@@ -1,4 +1,7 @@
-.mapContainer {
-position: static;
+.Map {
+  width:100%
+}
 
+.Map-Container {
+position: static;
 }
