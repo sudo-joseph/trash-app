@@ -66,12 +66,10 @@ componentDidMount() {
 
 render() {
   return (<div className="App">
-            <nav className="App-navigation">
-              <h1 className="App-title">Trash App</h1>
-              <Link to="/">Welcome</Link>
-              <Link to="/browse/">Browse</Link>
-              <Link to="/recycle/">Recycle</Link>
-            </nav>
+
+            <NavBar className="App-navigation">
+
+            </NavBar>
 
             <div className="App-mainContent">
               <Switch>
