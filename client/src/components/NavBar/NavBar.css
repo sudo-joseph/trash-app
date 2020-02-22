@@ -1,3 +1,33 @@
-.NavBar-Title {
+.NavBar {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 1fr;
+    background: var(--navbar-color);
+
+    color: white;
+    /* margin: -10px -10px 0px -10px; */
+    padding: 10px 10px 10px 10px;
+    /* border: 2px solid white; */
+    /* position: sticky; */
+    /* align-items: left; */
+    /* cursor: pointer; */
+}
+.NavBar-title {
+    grid-column: 2;
+    padding-left: 40px;
+    padding-top: 10px;
+    font-size: 30px;
+    /* border: 2px solid white; */
+}
+
+
+.NavBar-links {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: center;
+    background-color: rgb(17, 113, 28);
+    /* border: 2px solid white; */
 
 }
