@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
+import Select from 'react-select';
 import Burger from 'react-css-burger';
 
 import './NavBar.css';
@@ -35,6 +36,18 @@ class NavBar extends Component {
         <div className="NavBar-Title">
           <h1 className="App-title">{this.props.title}</h1>
         </div>
+
+        <div className="NavBar-Search">
+          <Select
+            value={this.props.selectedOptions}
+            onChange={this.props.searchOnChange}
+            options={this.props.searchOptions}
+            isMulti={true}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          />
+        </div>
+
      </div>
     );
   }
