@@ -25,3 +25,6 @@ Earth_recycle: https://commons.wikimedia.org/wiki/File:Earth_recycle.svg
 
 ### React CSS burger
   https://github.com/mattvox/react-css-burger
+
+### React Select
+  https://react-select.com/home
