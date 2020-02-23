@@ -29,18 +29,20 @@ class RecyclePage extends Component {
 
           <div className="RecyclePage-Cards">
           <div>
-            <Card
-              img={earth}/>
-            <Card
-              img={earth}/>
-            <Card
-              img={earth}/>
+
+            {this.props.facilities.map(facility=>(
+
               <Card
-                img={earth}/>
-              <Card
-                img={earth}/>
-              <Card
-                img={earth}/>
+                img={earth}
+                name={facility.description}
+                category=""
+                location=""
+                description=""
+                contact=""
+                />
+            ))}
+
+
           </div>
         </div>
       </div>

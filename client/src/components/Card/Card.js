@@ -9,7 +9,7 @@ class Card extends Component {
                 <img src={this.props.img}/>
               </div>
               <div className="Card-Content">
-                <h2>Service Center</h2>
+                <h2>{this.props.name}</h2>
                 <p>Category: {this.props.category}</p>
                 <p>Location: {this.props.location}</p>
                 <p>Description: {this.props.description}</p>
