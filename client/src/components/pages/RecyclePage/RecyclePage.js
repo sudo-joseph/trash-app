@@ -1,36 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import ReactMapGL, {Popup, NavigationControl, FullscreenControl, ScaleControl} from 'react-map-gl';
-import Pins from './pins';
+import ReactMapGL, {Marker, Popup, NavigationControl, FullscreenControl, ScaleControl} from 'react-map-gl';
 
 import './RecyclePage.css';
 
-import Map from '../../Map/Map.js';
 import Card from '../../Card/Card.js';
 import earth from '../../../images/Earth_recycle.svg'
 
 const TOKEN = 'pk.eyJ1IjoianJlaWQ2NTUiLCJhIjoiY2szcXdpN3kyMDY5NjNubGR6NG40NXZ6dCJ9.w2GXxmIYTWfbbSXjzR9LTg';
 
 class RecyclePage extends Component {
-
-  // _renderPopup() {
-  //   const {popupInfo} = this.props.popupInfo;
-  //
-  //   return (
-  //     popupInfo && (
-  //       <Popup
-  //         tipSize={5}
-  //         anchor="top"
-  //         longitude={popupInfo.longitude}
-  //         latitude={popupInfo.latitude}
-  //         closeOnClick={false}
-  //         onClose={() => this.setState({popupInfo: null})}
-  //       >
-  //       <p>Placeholder info</p>
-  //       </Popup>
-  //     )
-  //   );
-  // }
 
   render() {
     return (
@@ -44,17 +22,48 @@ class RecyclePage extends Component {
                   mapboxApiAccessToken={TOKEN}
                   mapStyle="mapbox://styles/jreid655/ck452mq2x1o2k1dnw6b76y20v"
                 >
+                {this.props.facilities.map((facility, index)=>(
+                  (this.props.selectedFacility===facility.location_id)?
+                  (<Popup
+                      tipSize={5}
+                      anchor="top"
+                      longitude={facility.longitude}
+                      latitude={facility.latitude}
+                      closeOnClick={false}
+                      onClose={this.props.deselectFacility}
+                    >
+                    <div className='RecyclePage-Popup'>
+                      <h1>{facility.description}</h1>
+                     <p>Address: ""</p>
+                     <p>Contact Info: ""</p>
+                     <p>Materials Accepted: ""</p>
+                    </div>
+                   </Popup>
+                  ):(<Marker
+                        key={index}
+                        latitude={facility.latitude}
+                        longitude={facility.longitude}>
+                        <img id={facility.location_id}
+                               src={earth}
+                               style={{height:"25px",width:"25px"}}
+                               onClick={() => this.props._onClickMarker(facility.location_id)}/>
+                       </Marker>
+                     )))}
+
           </ReactMapGL>
         </div>
           <div className="RecyclePage-Cards">
-            {this.props.facilities.map(facility=>(
+            {this.props.facilities.map((facility, index)=>(
               <Card
+                key={index}
                 img={earth}
+                id={facility.location_id}
                 name={facility.description}
                 category=""
                 location=""
                 description=""
                 contact=""
+                _onClickMarker={this.props._onClickMarker}
                 />
             ))}
         </div>
