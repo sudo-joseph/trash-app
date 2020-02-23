@@ -29,26 +29,8 @@ class App extends Component {
                { value: 'vanilla', label: 'Vanilla' },
              ],
     selectedMaterial: [],
-    facilities: [{"curbside": false,
-                  "description": "Elihu Harris State Building",
-                  "distance": 0.1,
-                  "longitude": -122.27331877704263,
-                  "latitude": 37.80604715391224,
-                  "location_type_id": 1,
-                  "location_id": "Q1RQNVVeUldCUA",
-                  "municipal": true
-                },
-                {
-                  "curbside": false,
-                  "description": "EBMUD Administration Building",
-                  "distance": 0.3,
-                  "longitude": -122.27085505852355,
-                  "latitude": 37.80129160421266,
-                  "location_type_id": 1,
-                  "location_id": "Q1RQNVVfWVpKUQ",
-                  "municipal": true
-                },
-              ],
+    facilities:[],
+     selectedFacility:'',
      viewport: {
             latitude: 37.785164,
             longitude: -122.269883,
@@ -56,8 +38,6 @@ class App extends Component {
             bearing: 0,
             pitch: 0
           },
-     popupInfo: null
-
   }
 
 
@@ -66,10 +46,13 @@ _updateViewport = viewport => {
   this.setState({viewport});
 };
 
-_onClickMarker = city => {
-  this.setState({popupInfo: city});
+_onClickMarker = facility => {
+  this.setState({selectedFacility: facility});
 };
 
+_closePopup = () => {
+  this._onClickMarker('')
+}
 
 /////// Fetch Data ///////
 fetchFacilities = () => {
@@ -167,6 +150,7 @@ render() {
                       searchOptions={this.state.materials}
                       selectedOptions={this.state.selectedMaterial}
                       searchOnChange={this.handleSearchChange}
+                      popupInfo={this.state.facility_popup}
                       >
               </NavBar>
             </div>
@@ -197,7 +181,10 @@ render() {
                                                     modalFcn={this.closeGeoLocationModal}
                                                     facilities={this.state.facilities}
                                                     viewport={this.state.viewport}
-                                                    _updateViewport={this._updateViewport}/>
+                                                    _updateViewport={this._updateViewport}
+                                                    _onClickMarker={this._onClickMarker}
+                                                    selectedFacility={this.state.selectedFacility}
+                                                    deselectFacility={this._closePopup}/>
                                                 )}/>
               </Switch>
             </div>
