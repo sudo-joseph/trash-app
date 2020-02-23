@@ -20,17 +20,18 @@ class NavBar extends Component {
             scale={1.2}
           />
         </div>
-
-        <div className={(this.props.burgerStatus) ? ("NavBar-Links"):("NavBar-Links--hidden")}>
-             {
-               Object.entries(this.props.pages).map(([name, url]) => (
-                 <div className="NavBar-Link">
-                   <Link to={url}>{name}</Link>
-                 </div>
-
-               ))
-             }
-        </div>
+        {
+        // <div className={(this.props.burgerStatus) ? ("NavBar-Links"):("NavBar-Links--hidden")}>
+        //      {
+        //        Object.entries(this.props.pages).map(([name, url]) => (
+        //          <div className="NavBar-Link">
+        //            <Link to={url}>{name}</Link>
+        //          </div>
+        //
+        //        ))
+        //      }
+        // </div>
+      }
         <div className="NavBar-Title">
           <h1 className="App-title">{this.props.title}</h1>
         </div>
