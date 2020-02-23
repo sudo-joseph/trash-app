@@ -59,7 +59,7 @@ enterZip = (value) => {
 
 onModalOk = () => {
   this.closeGeoLocationModal()
-  //// TODO Update user lat lon based on API call here. 
+  //// TODO Update user lat lon based on API call here.
   this.render()
 }
 
@@ -82,7 +82,6 @@ closeGeoLocationModal = () => {
     this.setState({geolocationModal: false})
 }
 
-
 catchGeoLocationError = (error) => {
   console.log('error fcn')
   switch(error.code) {
@@ -103,17 +102,18 @@ catchGeoLocationError = (error) => {
 
 
 componentDidMount() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({
-        userLng: position.coords.longitude,
-        userLat: position.coords.latitude});
-
-    }, this.catchGeoLocationError
-);
-  } else {
-    this.openGeoLocationModal();
-  }
+if (this.state.userZip === '') {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({
+          userLng: position.coords.longitude,
+          userLat: position.coords.latitude});
+        }, this.catchGeoLocationError
+      );
+    } else {
+        this.openGeoLocationModal();
+  }}
+ this.fetchFacilities()
 }
 
 
