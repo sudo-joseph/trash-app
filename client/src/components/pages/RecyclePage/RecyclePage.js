@@ -21,13 +21,12 @@ class RecyclePage extends Component {
           <p>Hello Modal World</p>
         </ReactModal>
 
-        <div className="RecyclePage-left">
           <Map
             lat={this.props.lat}
             lng={this.props.lng}
             zoom={this.props.zoom}/>
-        </div>
-        <div className="RecyclePage-right">
+
+          <div className="RecyclePage-Cards">
           <div>
             <Card
               img={earth}/>

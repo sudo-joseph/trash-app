@@ -16,12 +16,22 @@ class App extends Component {
     userLng: -122.269883,
     userLat: 37.806767,
     userZoom : 12,
-    geolocation: false,
     geolocationModal: false,
     burger: false,
     pages: {Recycle: "/",
-            Browse: "/browse/"}
-         }
+            Browse: "/browse/"},
+    materials: [{ value: 'chocolate', label: 'Chocolate' }, //// TODO Replace with real values.
+               { value: 'strawberry', label: 'Strawberry' },
+               { value: 'vanilla', label: 'Vanilla' },
+             ],
+    selectedMaterial: []
+
+  }
+
+handleSearchChange = (selectedMaterial) => {
+  console.log('hello search')
+  this.setState({selectedMaterial})
+}
 
 toggleBurger = () => {
   this.setState({burger: !this.state.burger})
@@ -78,7 +88,9 @@ render() {
               <NavBar title="Trash App"
                       burgerStatus={this.state.burger}
                       toggleFcn={this.toggleBurger}
-                      pages={this.state.pages}>
+                      searchOptions={this.state.materials}
+                      selectedOptions={this.state.selectedMaterial}
+                      searchOnChange={this.handleSearchChange}>
               </NavBar>
             </div>
             <div className="App-mainContent">
@@ -96,9 +108,6 @@ render() {
                                                 )}/>
               </Switch>
             </div>
-            <div className="App-leftMargin"></div>
-            <div className="App-rightMargin"></div>
-
          </div>
         );
       }
