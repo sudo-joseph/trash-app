@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
-import Select from 'react-select';
+
 import Burger from 'react-css-burger';
+
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 import './NavBar.css';
 
+const animatedComponents = makeAnimated();
+
+
 class NavBar extends Component {
+
 
   render() {
 
@@ -39,6 +46,8 @@ class NavBar extends Component {
 
         <div className="NavBar-Search">
           <Select
+            closeMenuOnSelect={true}
+            components={animatedComponents}
             value={this.props.selectedOptions}
             onChange={this.props.searchOnChange}
             options={this.props.searchOptions}
