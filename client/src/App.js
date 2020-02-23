@@ -47,7 +47,6 @@ _updateViewport = viewport => {
 };
 
 _onClickMarker = facility => {
-  console.log("facility: "+facility)
   this.setState({selectedFacility: facility});
 };
 
