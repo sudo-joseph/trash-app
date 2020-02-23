@@ -51,7 +51,7 @@ class App extends Component {
                   "popup": true
                 },
               ],
-     selectedFacility:'Q1RQNVVfWVpKUQ',
+     selectedFacility:'',
      viewport: {
             latitude: 37.785164,
             longitude: -122.269883,

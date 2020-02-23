@@ -33,8 +33,9 @@ class RecyclePage extends Component {
                       closeOnClick={false}
                       onClose={this.props.deselectFacility}
                     >
-                    <div className='RecyclePage-Popup'>  //// TODO Replace dummy info here. 
+                    <div className='RecyclePage-Popup'>
                       <h1>{facility.description}</h1>
+                      <p>//// TODO Replace dummy info here</p>
                      <p>Address: ""                </p>
                      <p>Contact Info: ""           </p>
                      <p>Materials Accepted: ""     </p>
