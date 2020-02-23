@@ -1,3 +1,39 @@
-.Card-Title {
+.Card {
+  display: grid;
+  grid-template-columns: 0.25fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 25px;
+  grid-row-gap: 0px;
+  background-color: white;
+  width: auto;
+  height: 200px;
+  border: 1px solid green;
+  border-radius: 8px;
+  margin: 10px 5px;
+  display: flex;
+  grid-template-rows: 2fr 3fr;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.Card-Img {
+  grid-area: 1 / 1 / 2 / 2;
+  width: 200px;
+  background: white;
+  border-radius: 8px 0px 0px 8px;
+  object-fit: scale-down;
+}
+
+.Card-Img.img {
+    max-height: auto;
+    width: 300px;
+    object-fit: scale-down;
+    align-items: center;
+}
+
+.Card-Content {
+  grid-area: 1 / 2 / 2 / 3;
+  grid-row: 2;
+  text-align: left;
+  padding-left: 20px;
 
 }

@@ -1,0 +1,29 @@
+.RecyclePage {
+  display: grid;
+  grid-template-columns: 1fr 0.35fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.RecyclePage-Map {
+  /* position: absolute; */
+  grid-area: 1 / 1 / 2 / 3;
+  height:89vh;
+}
+
+.RecyclePage-Cards {
+  position: relative;
+  grid-area: 1 / 2 / 2 / 3;
+  z-index: 2;
+  overflow-y:scroll;
+  height: 85vh;
+}
+
+.RecyclePage-Cards::-webkit-scrollbar {
+  display: none;
+}
+
+.RecyclePage-Popup {
+  
+}
