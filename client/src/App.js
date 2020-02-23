@@ -24,8 +24,27 @@ class App extends Component {
                { value: 'strawberry', label: 'Strawberry' },
                { value: 'vanilla', label: 'Vanilla' },
              ],
-    selectedMaterial: []
-
+    selectedMaterial: [],
+    facilities: [{"curbside": false,
+                  "description": "Elihu Harris State Building",
+                  "distance": 0.1,
+                  "longitude": -122.27331877704263,
+                  "latitude": 37.80604715391224,
+                  "location_type_id": 1,
+                  "location_id": "Q1RQNVVeUldCUA",
+                  "municipal": true
+                },
+                {
+                  "curbside": false,
+                  "description": "EBMUD Administration Building",
+                  "distance": 0.3,
+                  "longitude": -122.27085505852355,
+                  "latitude": 37.80129160421266,
+                  "location_type_id": 1,
+                  "location_id": "Q1RQNVVfWVpKUQ",
+                  "municipal": true
+                },
+              ]
   }
 
 handleSearchChange = (selectedMaterial) => {
@@ -104,7 +123,8 @@ render() {
                                                     lng={this.state.userLng}
                                                     zoom={this.state.userZoom}
                                                     modal={this.state.geolocationModal}
-                                                    modalFcn={this.closeGeoLocationModal}/>
+                                                    modalFcn={this.closeGeoLocationModal}
+                                                    facilities={this.state.facilities}/>
                                                 )}/>
               </Switch>
             </div>

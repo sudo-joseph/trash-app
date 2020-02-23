@@ -24,7 +24,8 @@ class RecyclePage extends Component {
           <Map
             lat={this.props.lat}
             lng={this.props.lng}
-            zoom={this.props.zoom}/>
+            zoom={this.props.zoom}
+            facilities={this.props.facilities}/>
 
           <div className="RecyclePage-Cards">
           <div>

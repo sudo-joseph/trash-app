@@ -21,6 +21,20 @@ class Map extends Component {
                      lat: map.getCenter().lat.toFixed(4),
                      zoom: map.getZoom().toFixed(2)});
     });
+
+    this.props.facilities.map((facility)=>{
+
+      let coords = [facility.longitude, facility.latitude]
+      console.log(coords)
+      let el = document.createElement('div');
+      el.className = 'Map-Marker';
+
+      new mapboxgl.Marker(el)
+        .setLngLat(coords)
+        .addTo(map);
+
+    })
+
   }
 
   render() {
