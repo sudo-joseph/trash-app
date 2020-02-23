@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
-
-import './App.css';
+import ReactModal from 'react-modal';
+import Zip from 'react-zipcode'
 
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
@@ -10,12 +10,16 @@ import NavBar from './components/NavBar/NavBar.js';
 import SideBar from './components/SideBar/SideBar.js';
 import Fetch from './components/Fetch/Fetch.js';
 
+import './App.css';
+
+
 class App extends Component {
 
   state = {
     userLng: -122.269883,
     userLat: 37.806767,
     userZoom : 12,
+    userZip:'',
     geolocationModal: false,
     burger: false,
     pages: {Recycle: "/",
@@ -46,6 +50,18 @@ class App extends Component {
                 },
               ]
   }
+
+enterZip = (value) => {
+  this.setState({userZip:value})
+  this.onModalOk()  // Is this good or bad UX?
+
+}
+
+onModalOk = () => {
+  this.closeGeoLocationModal()
+  //// TODO Update user lat lon based on API call here. 
+  this.render()
+}
 
 handleSearchChange = (selectedMaterial) => {
   console.log('hello search')
@@ -109,9 +125,26 @@ render() {
                       toggleFcn={this.toggleBurger}
                       searchOptions={this.state.materials}
                       selectedOptions={this.state.selectedMaterial}
-                      searchOnChange={this.handleSearchChange}>
+                      searchOnChange={this.handleSearchChange}
+                      >
               </NavBar>
             </div>
+
+            <ReactModal
+              isOpen={this.state.geolocationModal}
+              onRequestClose={this.closeGeoLocationModal}
+              className="App-Modal"
+              overlayClassName="App-Overlay">
+              <div className="App-Modal-Content">
+                <h1>Location Error!</h1>
+                <p>Unable to detect your location. Please provide your zip code
+                so that we can provide local results</p>
+              <h3>Enter Zip:</h3>
+              <Zip onValue={(value) => {this.enterZip(value)}}/>
+              </div>
+              <button>OK</button>
+            </ReactModal>
+
             <div className="App-mainContent">
               <SideBar/>
               <Switch>
