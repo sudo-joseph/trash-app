@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import ReactModal from 'react-modal';
-// https://reactcommunity.org/react-modal/
+import ReactMapGL, {Popup, NavigationControl, FullscreenControl, ScaleControl} from 'react-map-gl';
+import Pins from './pins';
 
 import './RecyclePage.css';
 
@@ -9,38 +9,54 @@ import Map from '../../Map/Map.js';
 import Card from '../../Card/Card.js';
 import earth from '../../../images/Earth_recycle.svg'
 
+const TOKEN = 'pk.eyJ1IjoianJlaWQ2NTUiLCJhIjoiY2szcXdpN3kyMDY5NjNubGR6NG40NXZ6dCJ9.w2GXxmIYTWfbbSXjzR9LTg';
 
 class RecyclePage extends Component {
+
+  // _renderPopup() {
+  //   const {popupInfo} = this.props.popupInfo;
+  //
+  //   return (
+  //     popupInfo && (
+  //       <Popup
+  //         tipSize={5}
+  //         anchor="top"
+  //         longitude={popupInfo.longitude}
+  //         latitude={popupInfo.latitude}
+  //         closeOnClick={false}
+  //         onClose={() => this.setState({popupInfo: null})}
+  //       >
+  //       <p>Placeholder info</p>
+  //       </Popup>
+  //     )
+  //   );
+  // }
 
   render() {
     return (
       <div className="RecyclePage">
-        <ReactModal
-          isOpen={this.props.modal}
-          onRequestClose={this.props.modalFcn}>
-          <p>Hello Modal World</p>
-        </ReactModal>
-
-          <Map
-            lat={this.props.lat}
-            lng={this.props.lng}
-            zoom={this.props.zoom}/>
-
+        <div className="RecyclePage-Map">
+          <ReactMapGL
+                  {...this.props.viewport}
+                  width="100%"
+                  height="100%"
+                  onViewportChange={this.props._updateViewport}
+                  mapboxApiAccessToken={TOKEN}
+                  mapStyle="mapbox://styles/jreid655/ck452mq2x1o2k1dnw6b76y20v"
+                >
+          </ReactMapGL>
+        </div>
           <div className="RecyclePage-Cards">
-          <div>
-            <Card
-              img={earth}/>
-            <Card
-              img={earth}/>
-            <Card
-              img={earth}/>
+            {this.props.facilities.map(facility=>(
               <Card
-                img={earth}/>
-              <Card
-                img={earth}/>
-              <Card
-                img={earth}/>
-          </div>
+                img={earth}
+                name={facility.description}
+                category=""
+                location=""
+                description=""
+                contact=""
+                />
+            ))}
         </div>
       </div>
     );

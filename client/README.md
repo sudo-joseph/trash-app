@@ -17,11 +17,20 @@ Earth_recycle: https://commons.wikimedia.org/wiki/File:Earth_recycle.svg
 
 ## Components used
 
-### React Modal
+### React-map-gl
+  https://uber.github.io/react-map-gl/
+
+#### MapBox-Gl
+    https://www.npmjs.com/package/mapbox-gl
+
+### React-modal
   https://reactcommunity.org/react-modal/
 
-### Map Box Gl
-  https://www.npmjs.com/package/mapbox-gl
-
-### React CSS burger
+### React-CSS-burger
   https://github.com/mattvox/react-css-burger
+
+### React-select
+  https://react-select.com/home
+
+### React-zipcode
+  https://github.com/hanford/react-zipcode
