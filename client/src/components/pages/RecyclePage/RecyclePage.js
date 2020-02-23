@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactMapGL, {Marker, Popup, NavigationControl, FullscreenControl, ScaleControl} from 'react-map-gl';
 
+import 'mapbox-gl/dist/mapbox-gl.css';
 import './RecyclePage.css';
 
 import Card from '../../Card/Card.js';
@@ -32,11 +33,11 @@ class RecyclePage extends Component {
                       closeOnClick={false}
                       onClose={this.props.deselectFacility}
                     >
-                    <div className='RecyclePage-Popup'>
+                    <div className='RecyclePage-Popup'>  //// TODO Replace dummy info here. 
                       <h1>{facility.description}</h1>
-                     <p>Address: ""</p>
-                     <p>Contact Info: ""</p>
-                     <p>Materials Accepted: ""</p>
+                     <p>Address: ""                </p>
+                     <p>Contact Info: ""           </p>
+                     <p>Materials Accepted: ""     </p>
                     </div>
                    </Popup>
                   ):(<Marker
@@ -49,7 +50,6 @@ class RecyclePage extends Component {
                                onClick={() => this.props._onClickMarker(facility.location_id)}/>
                        </Marker>
                      )))}
-
           </ReactMapGL>
         </div>
           <div className="RecyclePage-Cards">
