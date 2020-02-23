@@ -35,7 +35,7 @@ class RecyclePage extends Component {
   render() {
     return (
       <div className="RecyclePage">
-        <div class="RecyclePage-Map">
+        <div className="RecyclePage-Map">
           <ReactMapGL
                   {...this.props.viewport}
                   width="100%"

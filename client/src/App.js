@@ -60,14 +60,18 @@ class App extends Component {
 
   }
 
-  _updateViewport = viewport => {
-    this.setState({viewport});
-  };
 
-  _onClickMarker = city => {
-    this.setState({popupInfo: city});
-  };
+/////// Map ///////
+_updateViewport = viewport => {
+  this.setState({viewport});
+};
 
+_onClickMarker = city => {
+  this.setState({popupInfo: city});
+};
+
+
+/////// Fetch Data ///////
 fetchFacilities = () => {
   fetch('http://localhost:8080/api/facilities/earth911/facilities')
     .then((response) => {
@@ -79,10 +83,24 @@ fetchFacilities = () => {
     this.render()
 }
 
+
+/////// Search Selector ///////
+handleSearchChange = (selectedMaterial) => {
+  console.log('hello search')
+  this.setState({selectedMaterial})
+}
+
+
+/////// Burger Button & Sidebar ///////
+toggleBurger = () => {
+  this.setState({burger: !this.state.burger})
+}
+
+
+/////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
   this.setState({userZip:value})
   this.onModalOk()  // Is this good or bad UX?
-
 }
 
 onModalOk = () => {
@@ -90,16 +108,6 @@ onModalOk = () => {
   //// TODO Update user lat lon based on API call here.
   this.render()
 }
-
-handleSearchChange = (selectedMaterial) => {
-  console.log('hello search')
-  this.setState({selectedMaterial})
-}
-
-toggleBurger = () => {
-  this.setState({burger: !this.state.burger})
-}
-
 
 openGeoLocationModal = () => {
     this.setState({geolocationModal: true})
@@ -128,7 +136,7 @@ catchGeoLocationError = (error) => {
   }
 }
 
-
+/////// Lifecycle Methods ///////
 componentDidMount() {
 if (this.state.userZip === '') {
     if (navigator.geolocation) {
