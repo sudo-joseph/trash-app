@@ -54,6 +54,7 @@ class NavBar extends Component {
             isMulti={true}
             className="basic-multi-select"
             classNamePrefix="select"
+            placeholder="Search..."
           />
         </div>
 
