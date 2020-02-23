@@ -25,7 +25,6 @@ class Map extends Component {
     this.props.facilities.map((facility)=>{
 
       let coords = [facility.longitude, facility.latitude]
-      console.log(coords)
       let el = document.createElement('div');
       el.className = 'Map-Marker';
 
