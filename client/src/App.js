@@ -48,8 +48,25 @@ class App extends Component {
                   "location_id": "Q1RQNVVfWVpKUQ",
                   "municipal": true
                 },
-              ]
+              ],
+     viewport: {
+            latitude: 37.785164,
+            longitude: -122.269883,
+            zoom: 14,
+            bearing: 0,
+            pitch: 0
+          },
+     popupInfo: null
+
   }
+
+  _updateViewport = viewport => {
+    this.setState({viewport});
+  };
+
+  _onClickMarker = city => {
+    this.setState({popupInfo: city});
+  };
 
 fetchFacilities = () => {
   fetch('http://localhost:8080/api/facilities/earth911/facilities')
@@ -117,8 +134,13 @@ if (this.state.userZip === '') {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
-          userLng: position.coords.longitude,
-          userLat: position.coords.latitude});
+            viewport: {latitude:position.coords.latitude,
+                       longitude: position.coords.longitude,
+                       zoom: 14,
+                       bearing: 0,
+                       pitch: 0}
+                     });
+        this.render()
         }, this.catchGeoLocationError
       );
     } else {
@@ -163,12 +185,11 @@ render() {
                 <Route exact
                        path='/'
                        render={(routeProps) => (<RecyclePage {...routeProps}
-                                                    lat={this.state.userLat}
-                                                    lng={this.state.userLng}
-                                                    zoom={this.state.userZoom}
                                                     modal={this.state.geolocationModal}
                                                     modalFcn={this.closeGeoLocationModal}
-                                                    facilities={this.state.facilities}/>
+                                                    facilities={this.state.facilities}
+                                                    viewport={this.state.viewport}
+                                                    _updateViewport={this._updateViewport}/>
                                                 )}/>
               </Switch>
             </div>

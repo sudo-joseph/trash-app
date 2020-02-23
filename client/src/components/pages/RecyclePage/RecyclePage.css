@@ -7,8 +7,9 @@
 }
 
 .RecyclePage-Map {
-  position: fixed;
+  /* position: absolute; */
   grid-area: 1 / 1 / 2 / 3;
+  height:89vh;
 }
 
 .RecyclePage-Cards {
