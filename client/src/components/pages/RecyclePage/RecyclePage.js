@@ -42,6 +42,7 @@ class RecyclePage extends Component {
                   height="100%"
                   onViewportChange={this.props._updateViewport}
                   mapboxApiAccessToken={TOKEN}
+                  mapStyle="mapbox://styles/jreid655/ck452mq2x1o2k1dnw6b76y20v"
                 >
           </ReactMapGL>
         </div>
