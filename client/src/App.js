@@ -51,6 +51,17 @@ class App extends Component {
               ]
   }
 
+fetchFacilities = () => {
+  fetch('http://localhost:8080/api/facilities/earth911/facilities')
+    .then((response) => {
+      return response.json();
+    })
+    .then((facilities_data) => {
+      this.setState({facilities:facilities_data.results.result})
+    });
+    this.render()
+}
+
 enterZip = (value) => {
   this.setState({userZip:value})
   this.onModalOk()  // Is this good or bad UX?
