@@ -1,23 +1,24 @@
 .RecyclePage {
   display: grid;
-  grid-template-columns: 0.45fr 1fr;
+  grid-template-columns: 1fr 0.35fr;
   grid-template-rows: 1fr;
-  grid-column-gap: 1fr;
+  grid-column-gap: 0px;
   grid-row-gap: 0px;
 }
 
-.RecyclePage-left {
-  grid-area: 1 / 1 / 2 / 2;
+.RecyclePage-Map {
   position: fixed;
-  width: 500px;
-  height: auto;
-  padding: 10px 200px 0px 20px;
+  grid-area: 1 / 1 / 2 / 3;
 }
 
-.RecyclePage-right {
+.RecyclePage-Cards {
+  position: relative;
   grid-area: 1 / 2 / 2 / 3;
-  padding-left: 2rem;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
+  z-index: 2;
+  overflow-y:scroll;
+  height: 85vh;
+}
+
+.RecyclePage-Cards::-webkit-scrollbar {
+  display: none;
 }

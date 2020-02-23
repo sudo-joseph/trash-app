@@ -96,9 +96,6 @@ render() {
                                                 )}/>
               </Switch>
             </div>
-            <div className="App-leftMargin"></div>
-            <div className="App-rightMargin"></div>
-
          </div>
         );
       }
