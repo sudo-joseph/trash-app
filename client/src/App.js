@@ -239,6 +239,7 @@ render() {
                                                     facilities={this.state.facilities}
                                                     viewport={this.state.viewport}
                                                     _updateViewport={this._updateViewport}
+                                                    _onClickMarker={this._onClickMarker}
                                                     _onClickCard={this._onClickCard}
                                                     selectedFacility={this.state.selectedFacility}
                                                     deselectFacility={this._closePopup}/>
