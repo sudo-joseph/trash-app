@@ -26,6 +26,7 @@ class RecyclePage extends Component {
                 {this.props.facilities.map((facility, index)=>(
                   (this.props.selectedFacility===facility.location_id)?
                   (<Popup
+                      key={index}
                       tipSize={5}
                       anchor="top"
                       longitude={facility.longitude}
@@ -44,11 +45,13 @@ class RecyclePage extends Component {
                   ):(<Marker
                         key={index}
                         latitude={facility.latitude}
-                        longitude={facility.longitude}>
+                        longitude={facility.longitude}
+                        offsetTop={-10}
+                        offsetLeft={-10}>
                         <img id={facility.location_id}
-                               src={earth}
-                               style={{height:"25px",width:"25px"}}
-                               onClick={() => this.props._onClickMarker(facility.location_id)}/>
+                             src={earth}
+                             style={{height:"25px",width:"25px"}}
+                             onClick={() => this.props._onClickMarker(facility)}/>
                        </Marker>
                      )))}
           </ReactMapGL>
@@ -58,13 +61,13 @@ class RecyclePage extends Component {
               <Card
                 key={index}
                 img={earth}
-                id={facility.location_id}
+                facility={facility}
                 name={facility.description}
                 category=""
                 location=""
                 description=""
                 contact=""
-                _onClickMarker={this.props._onClickMarker}
+                _onClickCard={this.props._onClickCard}
                 />
             ))}
         </div>
