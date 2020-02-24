@@ -7,8 +7,8 @@ import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
 import NavBar from './components/NavBar/NavBar.js';
-import SideBar from './components/SideBar/SideBar.js';
 import Fetch from './components/Fetch/Fetch.js';
+import ReactSideBar from './components/ReactSideBar/ReactSideBar.js';
 
 class App extends Component {
 
@@ -24,9 +24,13 @@ class App extends Component {
                { value: 'strawberry', label: 'Strawberry' },
                { value: 'vanilla', label: 'Vanilla' },
              ],
-    selectedMaterial: []
-
+    selectedMaterial: [],
+    sidebarOpen: false
   }
+
+onSetSidebarOpen(open) {
+  this.setState({ sidebarOpen: open });
+}
 
 handleSearchChange = (selectedMaterial) => {
   console.log('hello search')
@@ -35,13 +39,16 @@ handleSearchChange = (selectedMaterial) => {
 
 toggleBurger = () => {
   this.setState({burger: !this.state.burger})
+
+  this.onSetSidebarOpen(!this.state.sidebarOpen)
+  console.log('sidebarOpen?', this.state.sidebarOpen)
+
 }
 
 
 openGeoLocationModal = () => {
     this.setState({geolocationModal: true})
 }
-
 
 closeGeoLocationModal = () => {
     this.setState({geolocationModal: false})
@@ -92,9 +99,17 @@ render() {
                       selectedOptions={this.state.selectedMaterial}
                       searchOnChange={this.handleSearchChange}>
               </NavBar>
+              <ReactSideBar
+                sidebar={<b>Sidebar content</b>}
+                sidebarOpen={this.state.sidebarOpen}
+                onSetOpen={this.onSetSidebarOpen}
+              >
+                <button onClick={() => this.onSetSidebarOpen(true)}>
+                  SIDEBAR
+                </button>
+              </ReactSideBar>
             </div>
             <div className="App-mainContent">
-              <SideBar/>
               <Switch>
                 <Route exact path='/browse/' component={Browse}/>
                 <Route exact
