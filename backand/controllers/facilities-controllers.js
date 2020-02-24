@@ -4,7 +4,8 @@ const {
     getAllMaterials,
     getMaterialsByProximity,
     getFacilities,
-    getFacilityDetails } = require('../utils/fetch-earth911');
+    getFacilityDetails,
+    getCordsByPostal } = require('../utils/fetch-earth911');
 
 let DUMMY_FACILITIES = [
     {
@@ -104,6 +105,10 @@ const getFacilitiesFromE911 = async (req, res, next) => {
         lat: req.query.lat || 37.804829, 
         lng: req.query.lng || -122.272476
     }
+    const zipcode = req.query.zipcode;
+    if (zipcode && listOfMaterialIds){
+        // retrieve cordinates from the zip code
+    } 
 
     let data;
     try {
@@ -126,8 +131,21 @@ const getFacilityDetailsFromE911 = async (req, res, next) => {
         return next(err);
     }
     res.json({results: data});
-
 };
+
+const getCordsByPostalFromE911 = async (req, res, next) => {
+    console.log('GET getCordsByPostalFromE911 in facilities-controller')
+
+    const queryZipCode = req.query.zipcode;
+
+    let data;
+    try {
+        data = await getCordsByPostal(queryZipCode);
+    } catch (err) {
+        return next(err);
+    }
+    res.json({results: data});
+} ;
 
 exports.getAllFacilities = getAllFacilities;
 exports.getFacilityById = getFacilityById;
@@ -135,3 +153,4 @@ exports.getFacilitiesFromE911 = getFacilitiesFromE911;
 exports.getMaterialsByProximityFromE911 = getMaterialsByProximityFromE911;
 exports.getAllMaterialsFromE911 = getAllMaterialsFromE911;
 exports.getFacilityDetailsFromE911  = getFacilityDetailsFromE911;
+exports.getCordsByPostalFromE911 = getCordsByPostalFromE911 

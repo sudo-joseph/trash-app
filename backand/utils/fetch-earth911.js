@@ -64,7 +64,20 @@ const getFacilityDetails = async (facilityId) => {
     return data;
 };
 
+const getCordsByPostal = async (postalcode) => {
+    let url = `${url_api_base}.getPostalData?country=US&postal_code=${postalcode}&api_key=${API_KEY}`
+
+    const res = await axios.get(url);
+    const data = res.data;
+
+    if (!data) {
+        throw new HttpError('Could not find a facility details from earth911.', 422);
+    }
+    return data;
+};
+
 exports.getMaterialsByProximity = getMaterialsByProximity;
 exports.getAllMaterials = getAllMaterials; 
 exports.getFacilities = getFacilities;
 exports.getFacilityDetails = getFacilityDetails;
+exports.getCordsByPostal = getCordsByPostal;
