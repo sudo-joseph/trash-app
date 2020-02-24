@@ -108,7 +108,7 @@ const getFacilitiesFromE911 = async (req, res, next) => {
     const queryZipCode = req.query.zipcode;
     let data;
 
-    if (queryZipCode && listOfMaterialIds){
+    if (queryZipCode){
         try {
             const coordsData = await getCoordsByPostal(queryZipCode);
             const coordinates = { 

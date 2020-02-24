@@ -34,13 +34,17 @@ const getAllMaterials = async () => {
 
 const getFacilities = async (coordinates, listMaterials) => {
     const queryCoordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
-    const queryMaterialIds = listMaterials.split(',').map(i => Number(i))
-
+    let queryMaterialIds;
+    if(listMaterials) {
+        queryMaterialIds = listMaterials.split(',').map(i => Number(i));
+    }
     let queryString = "";
-    queryMaterialIds.forEach(element => {
-        queryString += `&material_id[]=${element}`
-    });
-    
+    if (queryMaterialIds && queryMaterialIds.length > 0) {
+        queryMaterialIds.forEach(element => {
+            queryString += `&material_id[]=${element}`
+        });
+    } 
+
     let url = `${url_api_base}.searchLocations?latitude=${queryCoordinates.lat}&longitude=${queryCoordinates.lng}&api_key=${API_KEY}${queryString}`
 
     const res = await axios.get(url);
