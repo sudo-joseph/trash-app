@@ -68,8 +68,9 @@ fetchAllFacilities = () => {
     })
     .then((facilities_data) => {
       this.setState({facilities:facilities_data.results.result})
-    });
-    this.render()
+    })
+    .then(this.render());
+
 }
 
 /////// Fetch Data ///////
@@ -115,8 +116,8 @@ fetchMaterials = () => {
                         label:material.description})
       });
       this.setState({materials:materials})
-      });
-    this.render()
+      })
+    .then(this.render());
 }
 
 /////// Search Selector ///////
@@ -186,8 +187,8 @@ if (this.state.userZip === '') {
                        pitch: 0},
             userLat: position.coords.latitude,
             userLng: position.coords.longitude,
-                     });
-        this.render()
+          }, ()=>this.render());
+
         }, this.catchGeoLocationError
       );
     } else {
