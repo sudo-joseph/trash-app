@@ -87,7 +87,7 @@ const splitUrl = MONGODB_URL.split('/');
 const mongoDbDatabaseName = splitUrl[splitUrl.length - 1];
 
 mongoose
-  .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, })
+  .connect(MONGODB_URL, { useCreateIndex: true,  useNewUrlParser: true, useUnifiedTopology: true, })
   .then(() => {
     // Start the server
     const PORT = process.env.PORT || 8080;

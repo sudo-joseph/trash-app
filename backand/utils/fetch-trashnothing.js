@@ -10,9 +10,9 @@ const API_KEY = process.env.API_KEY_TRASHNOTHING;
 const getDonationItems = async (coordinates, radius) => {
     // coordinates and radius are required for querying Items(Posts) 
     const queryRadius =  radius || 140;
-    const queryCordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
+    const queryCoordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
 
-    let url = `https://trashnothing.com/api/v1.1/posts?radius=${queryRadius}&latitude=${queryCordinates.lat}&longitude=${queryCordinates.lng}&sources=trashnothing&types=offer&api_key=${API_KEY}`
+    let url = `https://trashnothing.com/api/v1.1/posts?radius=${queryRadius}&latitude=${queryCoordinates.lat}&longitude=${queryCoordinates.lng}&sources=trashnothing&types=offer&api_key=${API_KEY}`
 
     const res = await axios.get(url);
     const data = res.data;
