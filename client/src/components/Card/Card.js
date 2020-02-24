@@ -5,7 +5,7 @@ class Card extends Component {
   render() {
 
     return (<div className="Card"
-                 onClick={() => this.props._onClickMarker(this.props.id)}>
+                 onClick={() => this.props._onClickCard(this.props.facility)}>
               <div className="Card-Img">
                 <img src={this.props.img}/>
               </div>

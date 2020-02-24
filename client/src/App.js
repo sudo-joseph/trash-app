@@ -43,8 +43,18 @@ _updateViewport = viewport => {
 };
 
 _onClickMarker = facility => {
-  this.setState({selectedFacility: facility});
-};
+  this.setState({selectedFacility: facility.location_id});
+}
+
+_onClickCard = facility => {
+  this.setState({selectedFacility: facility.location_id,
+                 viewport: {latitude: facility.latitude,
+                            longitude: facility.longitude,
+                            zoom: 12,
+                            bearing: 0,
+                            pitch: 0
+                          }});
+}
 
 _closePopup = () => {
   this._onClickMarker('')
@@ -67,26 +77,30 @@ fetchFacilitiesSpecificMaterials = () => {
   //Fetches facilities that can service user selcted materials.
   if (this.state.selectedMaterials != null) {
     let matString = "material_id[]=",
-        queryString ="";
-    this.state.selectedMaterials.map(material=> {
-      queryString = queryString + "&" + matString+material.value;});
+        queryMats =[],
+        queryMatsString = '',
+        lat = this.state.userLat,
+        lng = this.state.userLng;
 
-    let url = `http://api.earth911.com/earth911.searchLocations?latitude=37.804829&longitude=-122.272476&api_key=ff3d974207518af4${queryString}`;
-    console.log(url)
-    // fetch(url,{
-    //       mode:'no-cors',
-    //       })
-    //   .then((response) => {
-    //     console.log(response)
-    //     return response.json();
-    //   })
-    //   .then((myJson) => {
-    //     console.log(myJson);
-    //   });
+    this.state.selectedMaterials.map(material=> {
+      queryMats.push(material.value);});
+      queryMatsString = queryMats.toString()
+
+    let url = `http://localhost:8080/api/facilities/earth911/facilities/search?lat=${lat}&lng=${lng}&materials=${queryMatsString}`;
+
+    fetch(url,{
+
+          })
+      .then((response) => {
+        return response.json();
+      })
+      .then((facilities_data) => {
+        this.setState({facilities:facilities_data.results.result});
+      });
+  } else {
+    this.setState({facilities:[]},  ()=>this.render())
   }
  }
-
-
 
 
 fetchMaterials = () => {
@@ -165,11 +179,13 @@ if (this.state.userZip === '') {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
-            viewport: {latitude:position.coords.latitude,
+            viewport: {latitude: position.coords.latitude,
                        longitude: position.coords.longitude,
                        zoom: 14,
                        bearing: 0,
-                       pitch: 0}
+                       pitch: 0},
+            userLat: position.coords.latitude,
+            userLng: position.coords.longitude,
                      });
         this.render()
         }, this.catchGeoLocationError
@@ -223,7 +239,7 @@ render() {
                                                     facilities={this.state.facilities}
                                                     viewport={this.state.viewport}
                                                     _updateViewport={this._updateViewport}
-                                                    _onClickMarker={this._onClickMarker}
+                                                    _onClickCard={this._onClickCard}
                                                     selectedFacility={this.state.selectedFacility}
                                                     deselectFacility={this._closePopup}/>
                                                 )}/>
