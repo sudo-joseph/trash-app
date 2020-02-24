@@ -105,16 +105,15 @@ const getFacilitiesFromE911 = async (req, res, next) => {
         lat: req.query.lat || 37.804829, 
         lng: req.query.lng || -122.272476
     }
-    const zipcode = req.query.zipcode;
+    const queryZipCode = req.query.zipcode;
     let data;
 
-    if (zipcode && listOfMaterialIds){
+    if (queryZipCode && listOfMaterialIds){
         try {
-
             const coordsData = await getCoordsByPostal(queryZipCode);
             const coordinates = { 
-                lat: data.result.latitude || req.query.lat || 37.804829, 
-                lng: data.result.longitude || req.query.lng || -122.272476
+                lat: coordsData.result.latitude || req.query.lat || 37.804829, 
+                lng: coordsData.result.longitude || req.query.lng || -122.272476
             }
             data = await getFacilities(coordinates, listOfMaterialIds);
         } catch (err) {
