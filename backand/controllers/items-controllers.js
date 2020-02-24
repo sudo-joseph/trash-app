@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/error-http');
 const getDonationItems = require('../utils/fetch-trashnothing');
+const Item = require('../models/item');
+
 let DUMMY_ITEMS = [
     {
         outcome: null,
@@ -76,7 +78,7 @@ const getItemById = (req, res, next) => {
     res.json({results: item})
 };
 
-const createItem = (req, res, next) => {
+const createItem = async (req, res, next) => {
     console.log('POST item in item-controller')
     const errors = validationResult(req);
     if (!errors.isEmpty()){
@@ -91,7 +93,8 @@ const createItem = (req, res, next) => {
         postal_code, 
         user_id } = req.body;
     const source = "trashapp"
-    let newItem = {
+    //let newItem = {
+    const newItem = new Item({
         outcome: null,
         user_id: 000000,
         post_id: uuid(),
@@ -106,9 +109,18 @@ const createItem = (req, res, next) => {
         latitude: 37.8043637,
         group_id: null,
         type: "offer"
+    });
+
+    //DUMMY_ITEMS.push(newItem);
+    try{
+        await newItem.save();
+    } catch (err) {
+        console.log(err);
+        const error = new HttpError('Failed to create a new item to DB', 500);
+        return next(error);
     }
 
-    DUMMY_ITEMS.push(newItem);
+
     res.status(201).json({ item: newItem })
 }
 
