@@ -7,9 +7,9 @@ const API_KEY = process.env.API_KEY_EARTH911;
 const url_api_base = 'http://api.earth911.com/earth911';
 
 const getMaterialsByProximity = async (coordinates) => {
-    const queryCordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
+    const queryCoordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
 
-    let url = `${url_api_base}.searchMaterialsByProximity?latitude=${queryCordinates.lat}&longitude=${queryCordinates.lng}&api_key=${API_KEY}`
+    let url = `${url_api_base}.searchMaterialsByProximity?latitude=${queryCoordinates.lat}&longitude=${queryCoordinates.lng}&api_key=${API_KEY}`
 
     const res = await axios.get(url);
     const data = res.data;
@@ -33,7 +33,7 @@ const getAllMaterials = async () => {
 };
 
 const getFacilities = async (coordinates, listMaterials) => {
-    const queryCordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
+    const queryCoordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
     const queryMaterialIds = listMaterials.split(',').map(i => Number(i))
 
     let queryString = "";
@@ -41,7 +41,7 @@ const getFacilities = async (coordinates, listMaterials) => {
         queryString += `&material_id[]=${element}`
     });
     
-    let url = `${url_api_base}.searchLocations?latitude=${queryCordinates.lat}&longitude=${queryCordinates.lng}&api_key=${API_KEY}${queryString}`
+    let url = `${url_api_base}.searchLocations?latitude=${queryCoordinates.lat}&longitude=${queryCoordinates.lng}&api_key=${API_KEY}${queryString}`
 
     const res = await axios.get(url);
     const data = res.data;
@@ -64,7 +64,7 @@ const getFacilityDetails = async (facilityId) => {
     return data;
 };
 
-const getCordsByPostal = async (postalcode) => {
+const getCoordsByPostal = async (postalcode) => {
     let url = `${url_api_base}.getPostalData?country=US&postal_code=${postalcode}&api_key=${API_KEY}`
 
     const res = await axios.get(url);
@@ -80,4 +80,4 @@ exports.getMaterialsByProximity = getMaterialsByProximity;
 exports.getAllMaterials = getAllMaterials; 
 exports.getFacilities = getFacilities;
 exports.getFacilityDetails = getFacilityDetails;
-exports.getCordsByPostal = getCordsByPostal;
+exports.getCoordsByPostal = getCoordsByPostal;

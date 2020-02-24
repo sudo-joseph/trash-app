@@ -5,7 +5,7 @@ const {
     getMaterialsByProximity,
     getFacilities,
     getFacilityDetails,
-    getCordsByPostal } = require('../utils/fetch-earth911');
+    getCoordsByPostal } = require('../utils/fetch-earth911');
 
 let DUMMY_FACILITIES = [
     {
@@ -106,15 +106,26 @@ const getFacilitiesFromE911 = async (req, res, next) => {
         lng: req.query.lng || -122.272476
     }
     const zipcode = req.query.zipcode;
-    if (zipcode && listOfMaterialIds){
-        // retrieve cordinates from the zip code
-    } 
-
     let data;
-    try {
-        data = await getFacilities(coordinates, listOfMaterialIds);
-    } catch (err) {
-        return next(err);
+
+    if (zipcode && listOfMaterialIds){
+        try {
+
+            const coordsData = await getCoordsByPostal(queryZipCode);
+            const coordinates = { 
+                lat: data.result.latitude || req.query.lat || 37.804829, 
+                lng: data.result.longitude || req.query.lng || -122.272476
+            }
+            data = await getFacilities(coordinates, listOfMaterialIds);
+        } catch (err) {
+            return next(err);
+        } 
+    } else {
+        try {
+            data = await getFacilities(coordinates, listOfMaterialIds);
+        } catch (err) {
+            return next(err);
+        }
     }
     res.json({results: data});
 
@@ -133,14 +144,14 @@ const getFacilityDetailsFromE911 = async (req, res, next) => {
     res.json({results: data});
 };
 
-const getCordsByPostalFromE911 = async (req, res, next) => {
-    console.log('GET getCordsByPostalFromE911 in facilities-controller')
+const getCoordsByPostalFromE911 = async (req, res, next) => {
+    console.log('GET getCoordsByPostalFromE911 in facilities-controller')
 
     const queryZipCode = req.query.zipcode;
 
     let data;
     try {
-        data = await getCordsByPostal(queryZipCode);
+        data = await getCoordsByPostal(queryZipCode);
     } catch (err) {
         return next(err);
     }
@@ -153,4 +164,4 @@ exports.getFacilitiesFromE911 = getFacilitiesFromE911;
 exports.getMaterialsByProximityFromE911 = getMaterialsByProximityFromE911;
 exports.getAllMaterialsFromE911 = getAllMaterialsFromE911;
 exports.getFacilityDetailsFromE911  = getFacilityDetailsFromE911;
-exports.getCordsByPostalFromE911 = getCordsByPostalFromE911 
+exports.getCoordsByPostalFromE911 = getCoordsByPostalFromE911 
