@@ -4,12 +4,12 @@
     --mainContentBG-color: rgb(240, 244, 228);
 
     /* Added for reactSideBar component */
-    position: "absolute";
+    /* position: "absolute";
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: "hidden";
+    overflow: "hidden"; */
 }
 
 /* Palette 1 (Colormind.com)

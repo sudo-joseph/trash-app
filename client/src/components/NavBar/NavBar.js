@@ -7,7 +7,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 import './NavBar.css';
-import SideBar from '../SideBar/SideBar';
+import ReactSideBar from '../ReactSideBar/ReactSideBar';
 
 const animatedComponents = makeAnimated();
 
@@ -28,8 +28,6 @@ class NavBar extends Component {
             hoverOpacity={0.8}
             scale={1.2}
           >
-            <SideBar />
-
           </Burger>
         </div>
         {

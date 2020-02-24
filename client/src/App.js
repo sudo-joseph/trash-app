@@ -8,7 +8,7 @@ import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
 import NavBar from './components/NavBar/NavBar.js';
 import Fetch from './components/Fetch/Fetch.js';
-import ReactSideBar from './components/ReactSideBar/ReactSideBar.js';
+import ReactSideBar from "react-sidebar";
 
 class App extends Component {
 
@@ -30,6 +30,7 @@ class App extends Component {
 
 onSetSidebarOpen(open) {
   this.setState({ sidebarOpen: open });
+  console.log("setting sidebarOpen to:", this.state.sidebarOpen)
 }
 
 handleSearchChange = (selectedMaterial) => {
@@ -90,7 +91,9 @@ componentDidMount() {
 
 
 render() {
-  return (<div className="App">
+  
+  return (
+          <div className="App">
             <div className="App-NavBar">
               <NavBar title="Trash App"
                       burgerStatus={this.state.burger}
@@ -103,9 +106,11 @@ render() {
                 sidebar={<b>Sidebar content</b>}
                 sidebarOpen={this.state.sidebarOpen}
                 onSetOpen={this.onSetSidebarOpen}
+                style={{ sidebar: { background: "red" }}}
               >
                 <button onClick={() => this.onSetSidebarOpen(true)}>
-                  SIDEBAR
+                  SIDEBAR MENU
+                  
                 </button>
               </ReactSideBar>
             </div>
@@ -123,7 +128,7 @@ render() {
                                                 )}/>
               </Switch>
             </div>
-         </div>
+          </div>
         );
       }
 }
