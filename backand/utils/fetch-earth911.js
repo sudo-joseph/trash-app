@@ -20,6 +20,18 @@ const getMaterialsByProximity = async (coordinates) => {
     return data;
 };
 
+const getAllMaterials = async () => {
+    let url = `${url_api_base}.getMaterials?api_key=${API_KEY}`
+
+    const res = await axios.get(url);
+    const data = res.data;
+
+    if (!data) {
+        throw new HttpError('Could not get list of materials from earth911.', 422);
+    }
+    return data;
+};
+
 const getFacilities = async (coordinates) => {
     const queryCordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
 
@@ -35,4 +47,5 @@ const getFacilities = async (coordinates) => {
 };
 
 exports.getMaterialsByProximity = getMaterialsByProximity;
+exports.getAllMaterials = getAllMaterials; 
 exports.getFacilities = getFacilities;
