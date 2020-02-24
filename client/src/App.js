@@ -24,21 +24,17 @@ class App extends Component {
     burger: false,
     pages: {Recycle: "/",
             Browse: "/browse/"},
-    materials: [{ value: 'chocolate', label: 'Chocolate' }, //// TODO Replace with real values.
-               { value: 'strawberry', label: 'Strawberry' },
-               { value: 'vanilla', label: 'Vanilla' },
-             ],
-    selectedMaterial: [],
+    materials: [],
+    selectedMaterials: [],
     facilities:[],
-     selectedFacility:'',
-     viewport: {
-            latitude: 37.785164,
-            longitude: -122.269883,
-            zoom: 14,
-            bearing: 0,
-            pitch: 0
-          },
-  }
+    selectedFacility:'',
+    viewport: {latitude: 37.785164,
+               longitude: -122.269883,
+               zoom: 14,
+               bearing: 0,
+               pitch: 0
+              },
+          }
 
 
 /////// Map ///////
@@ -55,7 +51,7 @@ _closePopup = () => {
 }
 
 /////// Fetch Data ///////
-fetchFacilities = () => {
+fetchAllFacilities = () => {
   fetch('http://localhost:8080/api/facilities/earth911/facilities')
     .then((response) => {
       return response.json();
@@ -66,11 +62,55 @@ fetchFacilities = () => {
     this.render()
 }
 
+/////// Fetch Data ///////
+fetchFacilitiesSpecificMaterials = () => {
+  //Fetches facilities that can service user selcted materials.
+  if (this.state.selectedMaterials != null) {
+    let matString = "material_id[]=",
+        queryString ="";
+    this.state.selectedMaterials.map(material=> {
+      queryString = queryString + "&" + matString+material.value;});
+
+    let url = `http://api.earth911.com/earth911.searchLocations?latitude=37.804829&longitude=-122.272476&api_key=ff3d974207518af4${queryString}`;
+    console.log(url)
+    // fetch(url,{
+    //       mode:'no-cors',
+    //       })
+    //   .then((response) => {
+    //     console.log(response)
+    //     return response.json();
+    //   })
+    //   .then((myJson) => {
+    //     console.log(myJson);
+    //   });
+  }
+ }
+
+
+
+
+fetchMaterials = () => {
+  fetch('http://localhost:8080/api/facilities/earth911/materials')
+    .then((response) => {
+      return response.json();
+    })
+    .then((materials_data) => {
+      let materials = [];
+      materials_data.results.result.map(material=> {
+        materials.push({value:material.material_id,
+                        label:material.description})
+      });
+      this.setState({materials:materials})
+      });
+    this.render()
+}
 
 /////// Search Selector ///////
-handleSearchChange = (selectedMaterial) => {
-  console.log('hello search')
-  this.setState({selectedMaterial})
+handleSearchChange = (selectedMaterials) => {
+  this.setState({selectedMaterials},
+    ()=>this.fetchFacilitiesSpecificMaterials()
+  )
+
 }
 
 
@@ -137,7 +177,7 @@ if (this.state.userZip === '') {
     } else {
         this.openGeoLocationModal();
   }}
- this.fetchFacilities()
+ this.fetchMaterials();
 }
 
 
@@ -148,9 +188,10 @@ render() {
                       burgerStatus={this.state.burger}
                       toggleFcn={this.toggleBurger}
                       searchOptions={this.state.materials}
-                      selectedOptions={this.state.selectedMaterial}
+                      selectedOptions={this.state.selectedMaterials}
                       searchOnChange={this.handleSearchChange}
                       popupInfo={this.state.facility_popup}
+                      onSearch={this.fetchFacilitiesSpecificMaterials}
                       >
               </NavBar>
             </div>
