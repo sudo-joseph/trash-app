@@ -32,10 +32,16 @@ const getAllMaterials = async () => {
     return data;
 };
 
-const getFacilities = async (coordinates) => {
+const getFacilities = async (coordinates, listMaterials) => {
     const queryCordinates = coordinates || { lat: 37.804829, lng: -122.272476 };
+    const queryMaterialIds = listMaterials.split(',').map(i => Number(i))
 
-    let url = `${url_api_base}.searchLocations?latitude=${queryCordinates.lat}&longitude=${queryCordinates.lng}&api_key=${API_KEY}`
+    let queryString = "";
+    queryMaterialIds.forEach(element => {
+        queryString += `&material_id[]=${element}`
+    });
+    
+    let url = `${url_api_base}.searchLocations?latitude=${queryCordinates.lat}&longitude=${queryCordinates.lng}&api_key=${API_KEY}${queryString}`
 
     const res = await axios.get(url);
     const data = res.data;
@@ -46,6 +52,19 @@ const getFacilities = async (coordinates) => {
     return data;
 };
 
+const getFacilityDetails = async (facilityId) => {
+    let url = `${url_api_base}.getLocationDetails?location_id=${facilityId}&api_key=${API_KEY}`
+
+    const res = await axios.get(url);
+    const data = res.data;
+
+    if (!data) {
+        throw new HttpError('Could not find a facility details from earth911.', 422);
+    }
+    return data;
+};
+
 exports.getMaterialsByProximity = getMaterialsByProximity;
 exports.getAllMaterials = getAllMaterials; 
 exports.getFacilities = getFacilities;
+exports.getFacilityDetails = getFacilityDetails;

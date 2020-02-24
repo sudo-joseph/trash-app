@@ -3,7 +3,8 @@ const HttpError = require('../models/error-http');
 const { 
     getAllMaterials,
     getMaterialsByProximity,
-    getFacilities } = require('../utils/fetch-earth911');
+    getFacilities,
+    getFacilityDetails } = require('../utils/fetch-earth911');
 
 let DUMMY_FACILITIES = [
     {
@@ -98,9 +99,29 @@ const getMaterialsByProximityFromE911 = async (req, res, next) => {
 
 const getFacilitiesFromE911 = async (req, res, next) => {
     console.log('GET getFacilitiesFromE911 in facilities-controller')
+    const listOfMaterialIds = req.query.materials;
+    const coordinates = { 
+        lat: req.query.lat || 37.804829, 
+        lng: req.query.lng || -122.272476
+    }
+
     let data;
     try {
-        data = await getFacilities();
+        data = await getFacilities(coordinates, listOfMaterialIds);
+    } catch (err) {
+        return next(err);
+    }
+    res.json({results: data});
+
+};
+
+const getFacilityDetailsFromE911 = async (req, res, next) => {
+    console.log('GET getFacilityDetailsFromE911 in facilities-controller')
+    const facilityId = req.params.facId;
+
+    let data;
+    try {
+        data = await getFacilityDetails(facilityId);
     } catch (err) {
         return next(err);
     }
@@ -113,3 +134,4 @@ exports.getFacilityById = getFacilityById;
 exports.getFacilitiesFromE911 = getFacilitiesFromE911;
 exports.getMaterialsByProximityFromE911 = getMaterialsByProximityFromE911;
 exports.getAllMaterialsFromE911 = getAllMaterialsFromE911;
+exports.getFacilityDetailsFromE911  = getFacilityDetailsFromE911;
