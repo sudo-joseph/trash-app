@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
+  "engines": {
+    "node": "8.10.0"
+},
   "dependencies": {
     "mapbox-gl": "^1.8.0",
     "react": "^16.12.0",
