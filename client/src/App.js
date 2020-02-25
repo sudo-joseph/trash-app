@@ -40,10 +40,6 @@ class App extends React.Component {
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
-/////// Side Bar ///////
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
 
 /////// Map ///////
 _updateViewport = viewport => {
@@ -140,6 +136,9 @@ toggleBurger = () => {
   this.setState({sidebarOpen: !this.state.burger})
 }
 
+onSetSidebarOpen(open) {
+  this.setState({ sidebarOpen: open });
+}
 
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
@@ -205,68 +204,83 @@ if (this.state.userZip === '') {
 
 
 render() {
+  const sidebarStyle = {
+    sidebar: {
+      color: "white",
+      backgroundColor: "DarkGreen",
+      padding: "10px",
+      fontFamily: "Arial",
+      top: 100,
+      zIndex: 1010,
+      textDecoration: "none",
+      textAlign: "center"
+    }
+  };
+  const linkStyle = {
+    textDecoration: 'none',
+    color: "yellow"
+  }
   return (
-            <Sidebar
-              sidebar={<b>Sidebar content</b>}
-              open={this.state.sidebarOpen}
-              onSetOpen={this.onSetSidebarOpen}
-              styles={{ sidebar: { background: "white" } }}
-            >
-              {/* <button onClick={() => this.onSetSidebarOpen(true)}>
-                Open sidebar
-              </button> */}
-              <div className="App">
-            <div className="App-NavBar">
-              <NavBar title="Trash App"
-                      burgerStatus={this.state.burger}
-                      toggleFcn={this.toggleBurger}
-                      searchOptions={this.state.materials}
-                      selectedOptions={this.state.selectedMaterials}
-                      searchOnChange={this.handleSearchChange}
-                      popupInfo={this.state.facility_popup}
-                      onSearch={this.fetchFacilitiesSpecificMaterials}
-                      >
-              </NavBar>
+      <Sidebar
+        sidebar={<>
+          <h1>Sidebar content</h1>
+          <h2 className="SideLink"><Link to="/" style={linkStyle}>Recycle</Link></h2>
+          <h2 className="SideLink"><Link to="/" style={linkStyle}>About</Link></h2>
+          <h2 className="SideLink"><Link to="/" style={linkStyle}>Materials</Link></h2>
+        </>}
+        open={this.state.sidebarOpen}
+        onSetOpen={this.onSetSidebarOpen}
+        styles={sidebarStyle}
+      >
+        <div className="App">
+          <div className="App-NavBar">
+            <NavBar title="Trash App"
+                    burgerStatus={this.state.burger}
+                    toggleFcn={this.toggleBurger}
+                    searchOptions={this.state.materials}
+                    selectedOptions={this.state.selectedMaterials}
+                    searchOnChange={this.handleSearchChange}
+                    popupInfo={this.state.facility_popup}
+                    onSearch={this.fetchFacilitiesSpecificMaterials}
+                    >
+            </NavBar>
+          </div>
+          <ReactModal
+            isOpen={this.state.geolocationModal}
+            onRequestClose={this.closeGeoLocationModal}
+            className="App-Modal"
+            overlayClassName="App-Overlay">
+            <div className="App-Modal-Content">
+              <h1>Location Error!</h1>
+              <p>Unable to detect your location. Please provide your zip code
+              so that we can provide local results</p>
+            <h3>Enter Zip:</h3>
+            <Zip onValue={(value) => {this.enterZip(value)}}/>
             </div>
-
-            <ReactModal
-              isOpen={this.state.geolocationModal}
-              onRequestClose={this.closeGeoLocationModal}
-              className="App-Modal"
-              overlayClassName="App-Overlay">
-              <div className="App-Modal-Content">
-                <h1>Location Error!</h1>
-                <p>Unable to detect your location. Please provide your zip code
-                so that we can provide local results</p>
-              <h3>Enter Zip:</h3>
-              <Zip onValue={(value) => {this.enterZip(value)}}/>
-              </div>
-              <button>OK</button>
-            </ReactModal>
-
-            <div className="App-mainContent">
-              
-              <Switch>
-                <Route exact path='/browse/' component={Browse}/>
-                <Route exact
-                       path='/'
-                       render={(routeProps) => (<RecyclePage {...routeProps}
-                                                    modal={this.state.geolocationModal}
-                                                    modalFcn={this.closeGeoLocationModal}
-                                                    facilities={this.state.facilities}
-                                                    viewport={this.state.viewport}
-                                                    _updateViewport={this._updateViewport}
-                                                    _onClickMarker={this._onClickMarker}
-                                                    _onClickCard={this._onClickCard}
-                                                    selectedFacility={this.state.selectedFacility}
-                                                    deselectFacility={this._closePopup}/>
-                                                )}/>
-              </Switch>
-            </div>
-         </div>
-         </Sidebar>
-        );
-      }
+            <button>OK</button>
+          </ReactModal>
+          <div className="App-mainContent">
+            <Switch>
+              <Route exact path='/browse/' component={Browse}/>
+              <Route exact
+                    path='/'
+                    render={(routeProps) => (<RecyclePage {...routeProps}
+                                                  modal={this.state.geolocationModal}
+                                                  modalFcn={this.closeGeoLocationModal}
+                                                  facilities={this.state.facilities}
+                                                  viewport={this.state.viewport}
+                                                  _updateViewport={this._updateViewport}
+                                                  _onClickMarker={this._onClickMarker}
+                                                  _onClickCard={this._onClickCard}
+                                                  selectedFacility={this.state.selectedFacility}
+                                                  deselectFacility={this._closePopup}/>
+                                              )}/>
+            </Switch>
+          </div>
+        </div>
+      </Sidebar>
+    );
+  }
 }
 
 export default App;

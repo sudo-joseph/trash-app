@@ -78,6 +78,15 @@
   }
 }
 
+.SideLink {
+  width: auto;
+  height: 40px;
+  border: 1px solid blue;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
 /* .ReactModal__Overlay {
   z-index: 10
 } */
