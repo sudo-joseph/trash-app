@@ -8,24 +8,27 @@ import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
 import NavBar from './components/NavBar/NavBar.js';
 import Fetch from './components/Fetch/Fetch.js';
-import ReactSideBar from "react-sidebar";
+import SideBar from "react-sidebar";
 
 class App extends Component {
-
-  state = {
-    userLng: -122.269883,
-    userLat: 37.806767,
-    userZoom : 12,
-    geolocationModal: false,
-    burger: false,
-    pages: {Recycle: "/",
-            Browse: "/browse/"},
-    materials: [{ value: 'chocolate', label: 'Chocolate' }, //// TODO Replace with real values.
-               { value: 'strawberry', label: 'Strawberry' },
-               { value: 'vanilla', label: 'Vanilla' },
-             ],
-    selectedMaterial: [],
-    sidebarOpen: false
+  constructor(props) {
+    super(props);
+      this.state = {
+        userLng: -122.269883,
+        userLat: 37.806767,
+        userZoom : 12,
+        geolocationModal: false,
+        burger: false,
+        pages: {Recycle: "/",
+                Browse: "/browse/"},
+        materials: [{ value: 'chocolate', label: 'Chocolate' },  //TODO Replace with real values.
+                  { value: 'strawberry', label: 'Strawberry' },
+                  { value: 'vajnilla', label: 'Vanilla' },
+                ],
+        selectedMaterial: [],
+        sidebarOpen: false
+      };
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
 onSetSidebarOpen(open) {
@@ -93,42 +96,40 @@ componentDidMount() {
 render() {
   
   return (
-          <div className="App">
-            <div className="App-NavBar">
-              <NavBar title="Trash App"
-                      burgerStatus={this.state.burger}
-                      toggleFcn={this.toggleBurger}
-                      searchOptions={this.state.materials}
-                      selectedOptions={this.state.selectedMaterial}
-                      searchOnChange={this.handleSearchChange}>
-              </NavBar>
-              <ReactSideBar
+          <SideBar
                 sidebar={<b>Sidebar content</b>}
-                sidebarOpen={this.state.sidebarOpen}
+                open={this.state.sidebarOpen}
                 onSetOpen={this.onSetSidebarOpen}
-                style={{ sidebar: { background: "red" }}}
+                styles={{ sidebar: { background: "white" }}}
               >
-                <button onClick={() => this.onSetSidebarOpen(true)}>
-                  SIDEBAR MENU
-                  
-                </button>
-              </ReactSideBar>
-            </div>
-            <div className="App-mainContent">
-              <Switch>
-                <Route exact path='/browse/' component={Browse}/>
-                <Route exact
-                       path='/'
-                       render={(routeProps) => (<RecyclePage {...routeProps}
-                                                    lat={this.state.userLat}
-                                                    lng={this.state.userLng}
-                                                    zoom={this.state.userZoom}
-                                                    modal={this.state.geolocationModal}
-                                                    modalFcn={this.closeGeoLocationModal}/>
-                                                )}/>
-              </Switch>
-            </div>
-          </div>
+         <div className="App">
+             <div className="App-NavBar">
+               <NavBar title="Trash App"
+                       burgerStatus={this.state.burger}
+                       toggleFcn={this.toggleBurger}
+                       searchOptions={this.state.materials}
+                       selectedOptions={this.state.selectedMaterial}
+                       searchOnChange={this.handleSearchChange}>
+               </NavBar>
+              
+             </div>
+             <div className="App-mainContent">
+               <Switch>
+                 <Route exact path='/browse/' component={Browse}/>
+                 <Route exact
+                        path='/'
+                        render={(routeProps) => (<RecyclePage {...routeProps}
+                                                     lat={this.state.userLat}
+                                                     lng={this.state.userLng}
+                                                     zoom={this.state.userZoom}
+                                                     modal={this.state.geolocationModal}
+                                                     modalFcn={this.closeGeoLocationModal}/>
+                                                 )}/>
+               </Switch>
+             </div>
+           </div> 
+          
+        </SideBar>
         );
       }
 }
