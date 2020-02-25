@@ -35,7 +35,7 @@ class App extends React.Component {
                bearing: 0,
                pitch: 0
               },
-    sidebarOpen: true
+    sidebarOpen: false
     };
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
@@ -137,6 +137,7 @@ handleSearchChange = (selectedMaterials) => {
 /////// Burger Button & Sidebar ///////
 toggleBurger = () => {
   this.setState({burger: !this.state.burger})
+  this.setState({sidebarOpen: !this.state.burger})
 }
 
 
@@ -204,7 +205,17 @@ if (this.state.userZip === '') {
 
 
 render() {
-  return (<div className="App">
+  return (
+            <Sidebar
+              sidebar={<b>Sidebar content</b>}
+              open={this.state.sidebarOpen}
+              onSetOpen={this.onSetSidebarOpen}
+              styles={{ sidebar: { background: "white" } }}
+            >
+              {/* <button onClick={() => this.onSetSidebarOpen(true)}>
+                Open sidebar
+              </button> */}
+              <div className="App">
             <div className="App-NavBar">
               <NavBar title="Trash App"
                       burgerStatus={this.state.burger}
@@ -217,16 +228,6 @@ render() {
                       >
               </NavBar>
             </div>
-            <Sidebar
-              sidebar={<b>Sidebar content</b>}
-              open={this.state.sidebarOpen}
-              onSetOpen={this.onSetSidebarOpen}
-              styles={{ sidebar: { background: "white" } }}
-            >
-              <button onClick={() => this.onSetSidebarOpen(true)}>
-                Open sidebar
-              </button>
-            
 
             <ReactModal
               isOpen={this.state.geolocationModal}
@@ -262,8 +263,8 @@ render() {
                                                 )}/>
               </Switch>
             </div>
-            </Sidebar>
          </div>
+         </Sidebar>
         );
       }
 }
