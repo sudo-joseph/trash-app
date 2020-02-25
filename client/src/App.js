@@ -4,8 +4,8 @@ import ReactModal from 'react-modal';
 import Zip from 'react-zipcode'
 
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
-import Browse from './components/pages/Browse/Browse.js';
-import Welcome from './components/pages/Welcome/Welcome.js';
+import Materials from './components/pages/Materials/Materials.js';
+import About from './components/pages/About/About.js';
 import NavBar from './components/NavBar/NavBar.js';
 import Sidebar from "react-sidebar";
 import Fetch from './components/Fetch/Fetch.js';
@@ -225,8 +225,8 @@ render() {
       <Sidebar
         sidebar={<>
           <h2 className="SideLink"><Link to="/" style={linkStyle}>Home</Link></h2>
-          <h2 className="SideLink"><Link to="/" style={linkStyle}>About</Link></h2>
-          <h2 className="SideLink"><Link to="/browse/" style={linkStyle}>Materials</Link></h2>
+          <h2 className="SideLink"><Link to="/about/" style={linkStyle}>About</Link></h2>
+          <h2 className="SideLink"><Link to="/materials/" style={linkStyle}>Materials</Link></h2>
         </>}
         open={this.state.sidebarOpen}
         onSetOpen={this.onSetSidebarOpen}
@@ -261,7 +261,8 @@ render() {
           </ReactModal>
           <div className="App-mainContent">
             <Switch>
-              <Route exact path='/browse/' component={Browse}/>
+              <Route exact path='/materials/' component={Materials}/>
+              <Route exact path='/about/' component={About}/>
               <Route exact
                     path='/'
                     render={(routeProps) => (<RecyclePage {...routeProps}
