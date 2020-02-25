@@ -33,3 +33,5 @@ docs/build
 *.po
 *.egg*
 *.log
+
+package-lock.json
