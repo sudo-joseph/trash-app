@@ -208,25 +208,25 @@ render() {
     sidebar: {
       color: "white",
       backgroundColor: "DarkGreen",
-      padding: "10px",
       fontFamily: "Arial",
       top: 100,
-      zIndex: 1010,
-      textDecoration: "none",
-      textAlign: "center"
+      zIndex: 5,
+      textAlign: "center",
+      width: "200px"
     }
-  };
+  }
+  
   const linkStyle = {
     textDecoration: 'none',
     color: "yellow"
   }
+  
   return (
       <Sidebar
         sidebar={<>
-          <h1>Sidebar content</h1>
-          <h2 className="SideLink"><Link to="/" style={linkStyle}>Recycle</Link></h2>
+          <h2 className="SideLink"><Link to="/" style={linkStyle}>Home</Link></h2>
           <h2 className="SideLink"><Link to="/" style={linkStyle}>About</Link></h2>
-          <h2 className="SideLink"><Link to="/" style={linkStyle}>Materials</Link></h2>
+          <h2 className="SideLink"><Link to="/browse/" style={linkStyle}>Materials</Link></h2>
         </>}
         open={this.state.sidebarOpen}
         onSetOpen={this.onSetSidebarOpen}
@@ -234,7 +234,7 @@ render() {
       >
         <div className="App">
           <div className="App-NavBar">
-            <NavBar title="Trash App"
+            <NavBar title="NoTrash"
                     burgerStatus={this.state.burger}
                     toggleFcn={this.toggleBurger}
                     searchOptions={this.state.materials}
