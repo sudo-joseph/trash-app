@@ -4,18 +4,19 @@ import ReactModal from 'react-modal';
 import Zip from 'react-zipcode'
 
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
-import Browse from './components/pages/Browse/Browse.js';
-import Welcome from './components/pages/Welcome/Welcome.js';
+import Materials from './components/pages/Materials/Materials.js';
+import About from './components/pages/About/About.js';
 import NavBar from './components/NavBar/NavBar.js';
-import SideBar from './components/SideBar/SideBar.js';
+import Sidebar from "react-sidebar";
 import Fetch from './components/Fetch/Fetch.js';
 
 import './App.css';
 
 
-class App extends Component {
-
-  state = {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
     userLng: -122.269883,
     userLat: 37.806767,
     userZoom : 12,
@@ -34,7 +35,10 @@ class App extends Component {
                bearing: 0,
                pitch: 0
               },
-          }
+    sidebarOpen: false
+    };
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+  }
 
 
 /////// Map ///////
@@ -129,8 +133,12 @@ handleSearchChange = (selectedMaterials) => {
 /////// Burger Button & Sidebar ///////
 toggleBurger = () => {
   this.setState({burger: !this.state.burger})
+  this.setState({sidebarOpen: !this.state.burger})
 }
 
+onSetSidebarOpen(open) {
+  this.setState({ sidebarOpen: open });
+}
 
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
@@ -196,57 +204,84 @@ if (this.state.userZip === '') {
 
 
 render() {
-  return (<div className="App">
-            <div className="App-NavBar">
-              <NavBar title="Trash App"
-                      burgerStatus={this.state.burger}
-                      toggleFcn={this.toggleBurger}
-                      searchOptions={this.state.materials}
-                      selectedOptions={this.state.selectedMaterials}
-                      searchOnChange={this.handleSearchChange}
-                      popupInfo={this.state.facility_popup}
-                      onSearch={this.fetchFacilitiesSpecificMaterials}
-                      >
-              </NavBar>
+  const sidebarStyle = {
+    sidebar: {
+      color: "white",
+      backgroundColor: "DarkGreen",
+      fontFamily: "Arial",
+      top: 100,
+      zIndex: 5,
+      textAlign: "center",
+      width: "200px"
+    }
+  }
+  
+  const linkStyle = {
+    textDecoration: 'none',
+    color: "yellow"
+  }
+  
+  return (
+      <Sidebar
+        sidebar={<>
+          <h2 className="SideLink"><Link to="/" style={linkStyle}>Home</Link></h2>
+          <h2 className="SideLink"><Link to="/about/" style={linkStyle}>About</Link></h2>
+          <h2 className="SideLink"><Link to="/materials/" style={linkStyle}>Materials</Link></h2>
+        </>}
+        open={this.state.sidebarOpen}
+        onSetOpen={this.onSetSidebarOpen}
+        styles={sidebarStyle}
+      >
+        <div className="App">
+          <div className="App-NavBar">
+            <NavBar title="NoTrash"
+                    burgerStatus={this.state.burger}
+                    toggleFcn={this.toggleBurger}
+                    searchOptions={this.state.materials}
+                    selectedOptions={this.state.selectedMaterials}
+                    searchOnChange={this.handleSearchChange}
+                    popupInfo={this.state.facility_popup}
+                    onSearch={this.fetchFacilitiesSpecificMaterials}
+                    >
+            </NavBar>
+          </div>
+          <ReactModal
+            isOpen={this.state.geolocationModal}
+            onRequestClose={this.closeGeoLocationModal}
+            className="App-Modal"
+            overlayClassName="App-Overlay">
+            <div className="App-Modal-Content">
+              <h1>Location Error!</h1>
+              <p>Unable to detect your location. Please provide your zip code
+              so that we can provide local results</p>
+            <h3>Enter Zip:</h3>
+            <Zip onValue={(value) => {this.enterZip(value)}}/>
             </div>
-
-            <ReactModal
-              isOpen={this.state.geolocationModal}
-              onRequestClose={this.closeGeoLocationModal}
-              className="App-Modal"
-              overlayClassName="App-Overlay">
-              <div className="App-Modal-Content">
-                <h1>Location Error!</h1>
-                <p>Unable to detect your location. Please provide your zip code
-                so that we can provide local results</p>
-              <h3>Enter Zip:</h3>
-              <Zip onValue={(value) => {this.enterZip(value)}}/>
-              </div>
-              <button>OK</button>
-            </ReactModal>
-
-            <div className="App-mainContent">
-              <SideBar/>
-              <Switch>
-                <Route exact path='/browse/' component={Browse}/>
-                <Route exact
-                       path='/'
-                       render={(routeProps) => (<RecyclePage {...routeProps}
-                                                    modal={this.state.geolocationModal}
-                                                    modalFcn={this.closeGeoLocationModal}
-                                                    facilities={this.state.facilities}
-                                                    viewport={this.state.viewport}
-                                                    _updateViewport={this._updateViewport}
-                                                    _onClickMarker={this._onClickMarker}
-                                                    _onClickCard={this._onClickCard}
-                                                    selectedFacility={this.state.selectedFacility}
-                                                    deselectFacility={this._closePopup}/>
-                                                )}/>
-              </Switch>
-            </div>
-         </div>
-        );
-      }
+            <button>OK</button>
+          </ReactModal>
+          <div className="App-mainContent">
+            <Switch>
+              <Route exact path='/materials/' component={Materials}/>
+              <Route exact path='/about/' component={About}/>
+              <Route exact
+                    path='/'
+                    render={(routeProps) => (<RecyclePage {...routeProps}
+                                                  modal={this.state.geolocationModal}
+                                                  modalFcn={this.closeGeoLocationModal}
+                                                  facilities={this.state.facilities}
+                                                  viewport={this.state.viewport}
+                                                  _updateViewport={this._updateViewport}
+                                                  _onClickMarker={this._onClickMarker}
+                                                  _onClickCard={this._onClickCard}
+                                                  selectedFacility={this.state.selectedFacility}
+                                                  deselectFacility={this._closePopup}/>
+                                              )}/>
+            </Switch>
+          </div>
+        </div>
+      </Sidebar>
+    );
+  }
 }
 
 export default App;

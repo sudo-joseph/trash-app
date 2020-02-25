@@ -24,7 +24,7 @@
 #39281B
  */
 
- .App {
+.App {
     display: grid;
     grid-template-columns: 110px 1fr 110px;
     grid-template-rows: 100px 1fr;
@@ -76,6 +76,16 @@
     bottom: 25vh;
     background-color: white;
   }
+}
+
+.SideLink {
+  width: auto;
+  height: 40px;
+  border: 1px green;
+  text-decoration: none;
+  padding: 15px;
+  align-content: center;
+  box-shadow: 5px 5px 5px darkolivegreen;
 }
 
 /* .ReactModal__Overlay {
