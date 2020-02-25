@@ -68,15 +68,13 @@ fetchAllFacilities = () => {
     })
     .then((facilities_data) => {
       this.setState({facilities:facilities_data.results.result})
-    })
-    .then(this.render());
+    });
 
 }
 
 /////// Fetch Data ///////
 fetchFacilitiesSpecificMaterials = () => {
   //Fetches facilities that can service user selcted materials.
-  if (this.state.selectedMaterials != null) {
     let matString = "material_id[]=",
         queryMats =[],
         queryMatsString = '',
@@ -98,9 +96,6 @@ fetchFacilitiesSpecificMaterials = () => {
       .then((facilities_data) => {
         this.setState({facilities:facilities_data.results.result});
       });
-  } else {
-    this.setState({facilities:[]},  ()=>this.render())
-  }
  }
 
 
@@ -116,16 +111,18 @@ fetchMaterials = () => {
                         label:material.description})
       });
       this.setState({materials:materials})
-      })
-    .then(this.render());
+      });
 }
 
 /////// Search Selector ///////
 handleSearchChange = (selectedMaterials) => {
-  this.setState({selectedMaterials},
-    ()=>this.fetchFacilitiesSpecificMaterials()
-  )
-
+  if (selectedMaterials !== null) {
+    this.setState({selectedMaterials},
+      ()=>this.fetchFacilitiesSpecificMaterials()
+    )} else {
+      this.setState({selectedMaterials:selectedMaterials,
+                     facilities:[]})
+    }
 }
 
 
@@ -144,7 +141,7 @@ enterZip = (value) => {
 onModalOk = () => {
   this.closeGeoLocationModal()
   //// TODO Update user lat lon based on API call here.
-  this.render()
+
 }
 
 openGeoLocationModal = () => {
@@ -187,7 +184,7 @@ if (this.state.userZip === '') {
                        pitch: 0},
             userLat: position.coords.latitude,
             userLng: position.coords.longitude,
-          }, ()=>this.render());
+          });
 
         }, this.catchGeoLocationError
       );
