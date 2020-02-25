@@ -138,6 +138,7 @@ toggleBurger = () => {
 
 onSetSidebarOpen(open) {
   this.setState({ sidebarOpen: open });
+  this.toggleBurger()   // reset burger
 }
 
 /////// GeoLocation & Failure Modal ///////
@@ -224,13 +225,20 @@ render() {
   return (
       <Sidebar
         sidebar={<>
-          <h2 className="SideLink"><Link to="/" style={linkStyle}>Home</Link></h2>
-          <h2 className="SideLink"><Link to="/about/" style={linkStyle}>About</Link></h2>
-          <h2 className="SideLink"><Link to="/materials/" style={linkStyle}>Materials</Link></h2>
+          <Link to="/" style={linkStyle} 
+            onClick={this.onSetSidebarOpen}><h2 className="SideLink">Home</h2></Link>
+          <Link to="/about/" style={linkStyle} 
+            onClick={this.onSetSidebarOpen}><h2 className="SideLink">About</h2></Link>
+          <Link to="/materials/" 
+            style={linkStyle} 
+            onClick={this.onSetSidebarOpen}><h2 className="SideLink">Materials</h2></Link>
         </>}
         open={this.state.sidebarOpen}
         onSetOpen={this.onSetSidebarOpen}
         styles={sidebarStyle}
+        // onClick={this.onSetSidebarOpen}
+        // target sidebar overlay and when 
+        // overlayId={overlaySideBar}
       >
         <div className="App">
           <div className="App-NavBar">

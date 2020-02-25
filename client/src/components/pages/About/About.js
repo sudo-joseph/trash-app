@@ -11,7 +11,7 @@ class About extends Component {
     return (
       <div className="About">
         <h1>About</h1>
-       
+      
 
       </div>
     );
