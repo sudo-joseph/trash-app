@@ -7,15 +7,16 @@ import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Browse from './components/pages/Browse/Browse.js';
 import Welcome from './components/pages/Welcome/Welcome.js';
 import NavBar from './components/NavBar/NavBar.js';
-import SideBar from './components/SideBar/SideBar.js';
+import Sidebar from "react-sidebar";
 import Fetch from './components/Fetch/Fetch.js';
 
 import './App.css';
 
 
-class App extends Component {
-
-  state = {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
     userLng: -122.269883,
     userLat: 37.806767,
     userZoom : 12,
@@ -34,8 +35,15 @@ class App extends Component {
                bearing: 0,
                pitch: 0
               },
-          }
+    sidebarOpen: true
+    };
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+  }
 
+/////// Side Bar ///////
+  onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
+  }
 
 /////// Map ///////
 _updateViewport = viewport => {
@@ -209,6 +217,16 @@ render() {
                       >
               </NavBar>
             </div>
+            <Sidebar
+              sidebar={<b>Sidebar content</b>}
+              open={this.state.sidebarOpen}
+              onSetOpen={this.onSetSidebarOpen}
+              styles={{ sidebar: { background: "white" } }}
+            >
+              <button onClick={() => this.onSetSidebarOpen(true)}>
+                Open sidebar
+              </button>
+            
 
             <ReactModal
               isOpen={this.state.geolocationModal}
@@ -226,7 +244,7 @@ render() {
             </ReactModal>
 
             <div className="App-mainContent">
-              <SideBar/>
+              
               <Switch>
                 <Route exact path='/browse/' component={Browse}/>
                 <Route exact
@@ -244,6 +262,7 @@ render() {
                                                 )}/>
               </Switch>
             </div>
+            </Sidebar>
          </div>
         );
       }
