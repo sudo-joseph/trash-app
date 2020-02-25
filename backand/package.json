@@ -4,6 +4,7 @@
   "description": "This is a back-end nodejs server for Trash-app project. This server provides REST api accessing to backend data stored in both MongoDB and external API servers.",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -14,7 +15,8 @@
     "mongoose": "^5.9.2",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "uuid": "^7.0.0"
   },
   "devDependencies": {},
   "scripts": {
