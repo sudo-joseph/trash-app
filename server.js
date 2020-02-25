@@ -37,11 +37,13 @@ app.use('/api/facilities', facilitiesRouts);
 app.use('/api/items', itemsRouts);
 // app.use('/api/users', usersRoutes);
 
+//// TODO (Masa) Fix Bug Here: 
+
 // Throw an error when there is no route
-app.use((req, res, next) => {
-  const error = new HttpError('No route found for the URL path.', 404);
-  throw error;
-});
+// app.use((req, res, next) => {
+//   const error = new HttpError('No route found for the URL path.', 404);
+//   throw error;
+// });
 
 /////////////////////////////////////////////
 // Boilerplate, no need to touch what's below
@@ -57,12 +59,12 @@ app.use(logger);
 
 
 // // For production, handle any requests that don't match the ones above
-// app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // // Wild-card, so handle everything else
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 // Error Handling
 app.use((err, req, res, next) => {
