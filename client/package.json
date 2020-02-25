@@ -5,7 +5,8 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "mapbox-gl": "^1.8.0",
-    "react": "16.6.3",
+    "modal": "^1.2.0",
+    "react": "^16.6.3",
     "react-css-burger": "^0.2.0",
     "react-dom": "16.6.3",
     "react-router-dom": "4.3.1",
