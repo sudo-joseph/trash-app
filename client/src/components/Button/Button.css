@@ -4,7 +4,7 @@
     border: 1px solid #2d747a;
     border-radius: 4px;
     /* background: #ff0055; */
-    background: #2d747a;
+    background: #2d7a4a;
     color: white;
     cursor: pointer;
     margin-right: 1rem;
@@ -52,6 +52,11 @@
     color: #979797;
     border-color: #ccc;
     cursor: not-allowed;
+  }
+  
+  .button--smaller {
+    font-size: 0.6rem;
+    font-weight: bold;
   }
   
   .button--small {

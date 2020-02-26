@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import Modal from '../Modal/Modal';
-
+import Button from '../Button/Button';
 import './Card.css';
 
 
@@ -68,18 +68,25 @@ class Card extends Component {
     <div className="Card"
                 //  onMouseOver={() => this.props._onClickCard(this.props.facility)}>
                  onClick={() => this.props._onClickCard(this.props.facility)}>
-              <div className="Card-Img">
+              {/* <div className="Card-Img">
                 <img src={this.props.img}/>
-              </div>
-              <div className="Card-Content">
-                <h2>{this.props.name}</h2>
-                <p>Category: {this.props.category}</p>
-                <p>Location: {this.props.location}</p>
-                <p>Description: {this.props.description}</p>
-                <p>Contact Information: {this.props.contact}</p>
-              </div>
-            <button style={buttonStyle} onClick={this.openModalHander}>Detail</button>
-            </div>
+              </div> */}
+      <div className="Card-Content">
+        <div>
+          <ul style={{ listStyleType: "none" }}>                
+            <li>{this.props.name}</li>
+            { this.props.distance && <li>Distance: {this.props.distance} miles</li> }
+            { this.props.category && <li>Category: {this.props.category}</li> }
+            { this.props.location && <li>Location: {this.props.location}</li> }
+            { this.props.description && <li>Description: {this.props.description}</li> }
+            { this.props.contact && <li>Contact Information: {this.props.contact}</li> }
+          </ul>
+        </div>
+        <div style={{align: "right" }}>
+          <Button center size="smaller" style={buttonStyle} onClick={this.openModalHander}>INFO</Button>
+        </div>
+      </div>
+    </div>
 
       </React.Fragment>
           );
