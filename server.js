@@ -59,11 +59,11 @@ app.use(logger);
 
 
 // // For production, handle any requests that don't match the ones above
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Home Page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
