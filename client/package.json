@@ -17,8 +17,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-select": "^3.0.8",
-    "react-transition-group": "^4.3.0",
     "react-sidebar": "^3.0.2",
+    "react-transition-group": "^4.3.0",
     "react-zipcode": "^1.0.1",
     "set-value": "^3.0.1",
     "styled-components": "^5.0.1"
