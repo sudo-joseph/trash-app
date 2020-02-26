@@ -236,9 +236,6 @@ render() {
         open={this.state.sidebarOpen}
         onSetOpen={this.onSetSidebarOpen}
         styles={sidebarStyle}
-        // onClick={this.onSetSidebarOpen}
-        // target sidebar overlay and when 
-        // overlayId={overlaySideBar}
       >
         <div className="App">
           <div className="App-NavBar">

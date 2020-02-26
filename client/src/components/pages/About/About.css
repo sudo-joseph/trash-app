@@ -1,25 +1,24 @@
-.Blog {
+.Container {
+  /* border: 2px solid red; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
-.Blog-article {
-  background: white;
-  padding: 10px;
-  margin: 10px;
-  position: relative;
+.About {
+  display: flex-box;
+  color: red;
+  max-width: 800px;
+  width: 1fr;
+  height: 100%;
+  border: 1px solid black;
+  padding: 0px 20px 15px 20px;
+
 }
 
-.Blog-articleActions > div {
-  display: inline-block;
-  position: absolute;
-  top: 10px;
-  cursor: pointer;
-  user-select: none;
+img {
+  height: 300px;
+  width: flex;
+  margin-top: 30px;
 }
 
-.Blog-articleActions > div:first-child {
-  right: 10px;
-}
-
-.Blog-articleActions > div:last-child {
-  left: 10px;
-}
