@@ -1,27 +1,26 @@
 {
   "name": "trash-app-client",
-  "homepage":".",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",
   "engines": {
     "node": "8.10.0",
-    "npm": "3.5.2"
-},
+    "npm": "6.13.4"
+  },
   "dependencies": {
-    "mapbox-gl": "^1.8.0",
     "react": "^16.12.0",
     "react-css-burger": "^0.2.0",
     "react-dom": "^16.12.0",
     "react-map-gl": "^5.2.3",
-    "react-modal": "^3.11.1",
-    "react-router-dom": "4.3.1",
-    "react-scripts": "2.1.1",
+    "react-modal": "^3.11.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
     "react-select": "^3.0.8",
     "react-transition-group": "^4.3.0",
     "react-sidebar": "^3.0.2",
     "react-zipcode": "^1.0.1",
-    "set-value": ">=2.0.1",
+    "set-value": "^3.0.1",
     "styled-components": "^5.0.1"
   },
   "scripts": {
