@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import './About.css';
-import aboutPhoto from "../../../images/predator-handshake-1.jpg";
+import aboutPhoto from "../../../images/water-droplet.svg";
 
 class About extends Component {
-  state = {
-    someStateVar: [],
-  }
-
   render() {
     return (
       <div className="Container">
         <div className="About">
           <img src={aboutPhoto} alt="desc"/>
-          <h1>About</h1>
-          <p>This is our pitch</p>
-          <p>Camembert de normandie jarlsberg camembert de normandie. Melted cheese cheese slices chalk and cheese mozzarella stilton port-salut feta danish fontina. Parmesan danish fontina fromage frais cheesy feet port-salut halloumi hard cheese stinking bishop. Fromage goat.</p>
-          <p>Cheese on toast croque monsieur airedale. Cream cheese cow cow everyone loves who moved my cheese halloumi pecorino rubber cheese. Paneer cottage cheese cheese slices boursin bocconcini bocconcini monterey jack blue castello. Bavarian bergkase caerphilly mascarpone gouda parmesan fondue airedale parmesan. Bavarian bergkase port-salut mozzarella ricotta fromage frais roquefort who moved my cheese bocconcini. Bavarian bergkase rubber cheese squirty cheese manchego fromage frais babybel cheese strings say cheese. Rubber cheese gouda cheese and biscuits cheese on toast pepper jack squirty cheese brie cheddar. Cheesy feet gouda fromage frais goat mozzarella st. agur blue cheese cheese on toast paneer. Babybel.</p>
+          <article>
+            <h1>About NoTrash</h1>
+            <p>Ready to responsibly dispose of something, but not sure where to take it?
+              Trash app is the way to go! </p>
+            <p>Type in the item(s) you want to dispose of and get a list of places in your area to help plan your trip.</p>
+            <p>Want to know if your item(s) be accepted before you leave the house? Save yourself some time and contact services and facilities by their listing information. Trash app allows users to keep that spring cleaning momentum by quickly finding places for their unused items.</p>
+            <h3>Being Green</h3>
+            <p>We are conscious of our environment and the different ways to keep it clean - clean from trash and debris, but most importantly, hazardous things that could leech into the environment or contaminate.</p>
+            <p>Maybe you want to do the right thing and dispose of something that may be beyond the household recycling bin or isn’t gonna fit in you trash can.</p>
+            <p>Let’s say you are ready to go take care of it, but you don’t know where to go.</p>
+            <p>Don’t let that stop you anymore. </p>
+        </article>
         </div>
       </div>
     );
   }
 }
-
 export default About;

@@ -1,26 +1,37 @@
-.Blog {
+.Container {
+  /* border: 2px solid red; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.Blog-article {
-  background: white;
-  padding: 10px;
-  margin: 10px;
-  position: relative;
+.Materials {
+  display: flex-box;
+  color: black;
+  max-width: 1000px;
+  width: 1fr;
+  height: 100%;
+  background-color: rgba(250, 250, 239, 0.673);
+  box-shadow: 0px 0px 20px  rgba(101, 101, 101, 0.701);
+
 }
 
-.Blog-articleActions > div {
-  display: inline-block;
-  position: absolute;
-  top: 10px;
-  cursor: pointer;
-  user-select: none;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+  box-shadow: 0px 3px 5px  rgba(101, 101, 101, 0.701);
+  border-radius: 0px 0px 8px 8px;
 }
 
-.Blog-articleActions > div:first-child {
-  right: 10px;
+article {
+  padding: 20px 30px 15px 30px;
+  font-family: 'Montserrat';
 }
 
-.Blog-articleActions > div:last-child {
-  left: 10px;
+article > h1 {
+  font-family: 'Open Sans';
 }
-

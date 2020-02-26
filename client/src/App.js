@@ -206,6 +206,7 @@ if (this.state.userZip === '') {
 
 
 render() {
+  // Side Bar Styling Objects
   const sidebarStyle = {
     sidebar: {
       color: "white",
@@ -217,7 +218,6 @@ render() {
       width: "200px"
     }
   }
-  
   const linkStyle = {
     textDecoration: 'none',
     color: "yellow"
