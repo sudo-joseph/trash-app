@@ -1,122 +1,41 @@
+const fs = require('fs');
 const path = require('path');
+require('dotenv').config()
+
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const HttpError = require('./models/error-http');
+/// Import routes
+const facilitiesRouts = require('./routes/facilities-routes');
+const itemsRouts = require('./routes/items-routes');
+//const usersRoutes = require('./routes/items-routes');
+
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
 
-/// YOUR ROUTES GO HERE!
+// CORS settings
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers',
+    'origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE');
 
+  next();
+});
 
 /////////////////////////////////////////////
+///  ROUTES
+/////////////////////////////////////////////
 
-// Totally insecure backend routes below, good only for rapid prototyping
-// unsecured front-end applications. Should not be used in production.
+// Local static path
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
-
-// GET for getting existing item
-app.get('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-
-  // Get GET params, if there are any
-  const query = request.query || {};
-
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
-
-  db.collection(collectionName)
-    .find(query)
-    .toArray((err, results) => {
-      // Got data back.. send to client
-      if (err) throw err;
-      response.json(results);
-    });
-});
-
-// POST for creating a new item
-app.post('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const data = request.body;
-
-  db.collection(collectionName)
-    .insert(data, (err, results) => {
-      // Got data back.. send to client
-      if (err) throw err;
-
-      response.json({
-        'success': true,
-        'results': results,
-      });
-    });
-});
-
-
-// PUT endpoint for modifying an existing item
-app.put('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const data = request.body;
-  const query = request.query;
-
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
-
-  db.collection(collectionName)
-    .updateOne(query, {$set: data}, (err, results) => {
-      if (err) throw err;
-
-      // If we modified exactly 1, then success, otherwise failure
-      if (results.result.nModified === 1) {
-        response.json({
-          success: true,
-        });
-      } else {
-        response.json({
-          success: false,
-        });
-      }
-    });
-});
-
-
-// D in CRUD, delete a single item with given criteria
-app.delete('/api/mongodb/:collectionName/', (request, response) => {
-  const collectionName = request.params.collectionName;
-  const query = request.query;
-
-  // Due to a requirement of MongoDB, whenever we query based on _id field, we
-  // have to do it like this using ObjectId
-  if (query._id) {
-    query._id = ObjectId(query._id);
-  }
-
-  db.collection(collectionName)
-    .deleteOne(query, (err, results) => {
-      if (err) throw err;
-
-      // If we deleted exactly 1, then success, otherwise failure
-      if (results.result.n === 1) {
-        response.json({
-          success: true,
-        });
-      } else {
-        response.json({
-          success: false,
-        });
-      }
-    })
-});
-
-
-
-
-
-
+app.use('/api/facilities', facilitiesRouts);
+app.use('/api/items', itemsRouts);
+// app.use('/api/users', usersRoutes);
 
 /////////////////////////////////////////////
 // Boilerplate, no need to touch what's below
@@ -131,42 +50,49 @@ app.use(logger);
 /////////////////////////////////////////////
 
 
-// For production, handle any requests that don't match the ones above
+// // For production, handle any requests that don't match the ones above
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Wild-card, so handle everything else
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+// Home Page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+  res.status(404).send('404');
+});
+
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  const status = err.status || 500;
+  res.status(status);
+  res.json(err)
+});
 
 // Set up configuration variables
 if (!process.env.MONGODB_URI) {
   console.log('- Error - Must specify the following env variables:');
-  console.log("MONGODB_URI='mongodb://someUser:somePW@site.com:1234/someDB'");
-  console.log('- (See README.md)');
+  console.log("E.g. MONGODB_URI='mongodb://someUser:somePW@site.com:1234/someDB'");
   process.exit(1);
 }
 const MONGODB_URL = process.env.MONGODB_URI;
 const splitUrl = MONGODB_URL.split('/');
 const mongoDbDatabaseName = splitUrl[splitUrl.length - 1];
 
-let db;
-// First connect to MongoDB, then start HTTP server
-MongoClient.connect(MONGODB_URL, {useNewUrlParser: true}, (err, client) => {
-  if (err) throw err;
-  console.log("--MongoDB connection successful");
-  db = client.db(mongoDbDatabaseName);
-
-  // Start the server
-  const PORT = process.env.PORT || 8080;
-  app.listen(PORT, () => {
-    console.log(`
-      *********************************************
-      * Insecure prototyping backend is running!  *
-      * Only use for prototyping                  *
-      * Backend server up at ${PORT}              *
-      *********************************************
-    `);
+mongoose
+  .connect(MONGODB_URL, { useCreateIndex: true,  useNewUrlParser: true, useUnifiedTopology: true, })
+  .then(() => {
+    // Start the server
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`
+        *********************************************
+        * Backend server up at port ${PORT}         *
+        *********************************************
+      `);
+    });
   })
-});
+  .catch(err => {
+    console.log(err);
+  });

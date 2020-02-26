@@ -1,20 +1,33 @@
 {
-  "name": "mernstarter",
+  "name": "backand",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "bash ./client/build.sh",
-    "start": "node server.js"
-  },
-  "cacheDirectories": [
-    "client/node_modules",
-    "node_modules"
-  ],
+  "description": "This is a back-end nodejs server for Trash-app project. This server provides REST api accessing to backend data stored in both MongoDB and external API servers.",
+  "main": "server.js",
+  "engines": {
+    "node": "8.10.0"
+},
   "dependencies": {
-    "express": "4.16.3",
-    "mongodb": "3.1.1",
-    "set-value": ">=2.0.1"
-    }
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.3",
+    "mongoose": "^5.9.2",
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.2",
+    "uuid": "^7.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild":"client/build.sh",
+    "start": "node server.js"
+
+  },
+  "author": "",
+  "license": "ISC"
 }

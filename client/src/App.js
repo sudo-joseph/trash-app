@@ -67,7 +67,7 @@ _closePopup = () => {
 
 /////// Fetch Data ///////
 fetchAllFacilities = () => {
-  fetch('http://localhost:8080/api/facilities/earth911/facilities')
+  fetch('/api/facilities/earth911/facilities')
     .then((response) => {
       return response.json();
     })
@@ -90,7 +90,7 @@ fetchFacilitiesSpecificMaterials = () => {
       queryMats.push(material.value);});
       queryMatsString = queryMats.toString()
 
-    let url = `http://localhost:8080/api/facilities/earth911/facilities/search?lat=${lat}&lng=${lng}&materials=${queryMatsString}`;
+    let url = `/api/facilities/earth911/facilities/search?lat=${lat}&lng=${lng}&materials=${queryMatsString}`;
 
     fetch(url,{
 
@@ -105,7 +105,7 @@ fetchFacilitiesSpecificMaterials = () => {
 
 
 fetchMaterials = () => {
-  fetch('http://localhost:8080/api/facilities/earth911/materials')
+  fetch('/api/facilities/earth911/materials')
     .then((response) => {
       return response.json();
     })
