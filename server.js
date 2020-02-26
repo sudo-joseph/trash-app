@@ -61,21 +61,39 @@ app.use(logger);
 // // For production, handle any requests that don't match the ones above
 app.use(express.static(path.join(__dirname, '/client/build')));
 
-// // Wild-card, so handle everything else
-app.get('*', (req, res) => {
+// Home Page
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
-// Error Handling
-app.use((err, req, res, next) => {
-  // if header was already sent, nothings to do here
-  if (res.headerSent) {
-    return next(err);
-  }
-  // if error.code was not set, 500 Internal Server Error
-  res.status(statusCode >= 100 && statusCode < 600 ? err.code : 500);
-  res.json({message: err.message || 'Unknown error!'});
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+  res.status(404).send('404');
 });
+
+// app.use((req, res, next) => {
+//   const err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
+
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  const status = err.status || 500;
+  res.status(status);
+  res.json(err)
+});
+
+// // Error Handling
+// app.use((err, req, res, next) => {
+//   // if header was already sent, nothings to do here
+//   if (res.headerSent) {
+//     return next(err);
+//   }
+//   // if error.code was not set, 500 Internal Server Error
+//   res.status(statusCode >= 100 && statusCode < 600 ? err.code : 500);
+//   res.json({message: err.message || 'Unknown error!'});
+// });
 
 
 // Set up configuration variables
