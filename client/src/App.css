@@ -38,14 +38,12 @@
   z-index: 3;
   position: fixed;
   width:100%
-
 }
 
 .App-mainContent {
   grid-area: 2 / 1 / 4 / 4;
   height: auto;
   background: var(--mainContentBG-color);
-
 }
 
 .App-Modal {
@@ -149,3 +147,11 @@
 .App-mainContent {
     grid-column: 2;
 } */
+
+
+.center {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

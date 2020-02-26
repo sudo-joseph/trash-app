@@ -11,6 +11,7 @@ import Sidebar from "react-sidebar";
 import Fetch from './components/Fetch/Fetch.js';
 
 import './App.css';
+import MaterialsList from './components/pages/MaterialsList/MaterialsList';
 
 
 class App extends React.Component {
@@ -263,6 +264,7 @@ render() {
             <Switch>
               <Route exact path='/materials/' component={Materials}/>
               <Route exact path='/about/' component={About}/>
+              <Route exact path='/test/' component={MaterialsList}/>
               <Route exact
                     path='/'
                     render={(routeProps) => (<RecyclePage {...routeProps}
