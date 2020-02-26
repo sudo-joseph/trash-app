@@ -20,14 +20,14 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers',
     'origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 
+  res.setHeader('Access-Control-Allow-Methods',
     'GET, POST, PUT, PATCH, DELETE');
-  
+
   next();
 });
 
 /////////////////////////////////////////////
-///  ROUTES 
+///  ROUTES
 /////////////////////////////////////////////
 
 // Local static path
@@ -37,7 +37,7 @@ app.use('/api/facilities', facilitiesRouts);
 app.use('/api/items', itemsRouts);
 // app.use('/api/users', usersRoutes);
 
-//// TODO (Masa) Fix Bug Here: 
+//// TODO (Masa) Fix Bug Here:
 
 // Throw an error when there is no route
 // app.use((req, res, next) => {
@@ -73,7 +73,7 @@ app.use((err, req, res, next) => {
     return next(err);
   }
   // if error.code was not set, 500 Internal Server Error
-  res.status(err.code || 500);
+  res.status(statusCode >= 100 && statusCode < 600 ? err.code : 500);
   res.json({message: err.message || 'Unknown error!'});
 });
 
