@@ -163,7 +163,7 @@ closeGeoLocationModal = () => {
 }
 
 catchGeoLocationError = (error) => {
-  console.log('error fcn')
+  console.log('error fcn');
   switch(error.code) {
     case error.PERMISSION_DENIED:
       this.openGeoLocationModal()
