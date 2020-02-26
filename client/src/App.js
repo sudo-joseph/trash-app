@@ -230,7 +230,7 @@ render() {
               <SideBar/>
               <Switch>
                 <Route exact path='/browse/' component={Browse}/>
-                <Route exact path='/materials/' component={MaterialsList}/>
+                <Route exact path='/test/' component={MaterialsList}/>
                 <Route exact
                        path='/'
                        render={(routeProps) => (<RecyclePage {...routeProps}
