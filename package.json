@@ -1,11 +1,11 @@
 {
-  "name": "backand",
+  "name": "backend",
   "version": "1.0.0",
   "description": "This is a back-end nodejs server for Trash-app project. This server provides REST api accessing to backend data stored in both MongoDB and external API servers.",
   "main": "server.js",
   "engines": {
     "node": "8.10.0"
-},
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
@@ -24,9 +24,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild":"client/build.sh",
+    "heroku-postbuild": "client/build.sh",
     "start": "node server.js"
-
   },
   "author": "",
   "license": "ISC"
