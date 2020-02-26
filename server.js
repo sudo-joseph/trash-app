@@ -37,14 +37,6 @@ app.use('/api/facilities', facilitiesRouts);
 app.use('/api/items', itemsRouts);
 // app.use('/api/users', usersRoutes);
 
-//// TODO (Masa) Fix Bug Here:
-
-// Throw an error when there is no route
-// app.use((req, res, next) => {
-//   const error = new HttpError('No route found for the URL path.', 404);
-//   throw error;
-// });
-
 /////////////////////////////////////////////
 // Boilerplate, no need to touch what's below
 
@@ -71,30 +63,12 @@ app.get('*', function(req, res){
   res.status(404).send('404');
 });
 
-// app.use((req, res, next) => {
-//   const err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-
 app.use((err, req, res, next) => {
   res.locals.error = err;
   const status = err.status || 500;
   res.status(status);
   res.json(err)
 });
-
-// // Error Handling
-// app.use((err, req, res, next) => {
-//   // if header was already sent, nothings to do here
-//   if (res.headerSent) {
-//     return next(err);
-//   }
-//   // if error.code was not set, 500 Internal Server Error
-//   res.status(statusCode >= 100 && statusCode < 600 ? err.code : 500);
-//   res.json({message: err.message || 'Unknown error!'});
-// });
-
 
 // Set up configuration variables
 if (!process.env.MONGODB_URI) {
