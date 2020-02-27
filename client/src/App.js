@@ -286,7 +286,7 @@ render() {
           </ReactModal>
           <div className="App-mainContent">
             <Switch>
-              <Route exact path='/materials/' component={Materials}/>
+              <Route exact path='/materials/' component={Materials} itemCategories={this.state.Materials}/>
               <Route exact path='/about/' component={About}/>
               <Route exact path='/test/' component={MaterialsList}/>
               <Route exact
