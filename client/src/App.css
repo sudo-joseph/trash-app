@@ -40,7 +40,6 @@
 .App-mainContent {
   grid-area: 2 / 1 / 4 / 4;
   height: auto;
-  /* min-height: 110vh; */
   background: var(--mainContentBG-color);
 }
 
