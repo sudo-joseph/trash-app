@@ -108,26 +108,19 @@ const getFacilitiesFromE911 = async (req, res, next) => {
     const queryZipCode = req.query.zipcode;
     let data;
 
-    if (queryZipCode){
-        try {
+    try {
+        if (queryZipCode){
             const coordsData = await getCoordsByPostal(queryZipCode);
             const coordinates = { 
                 lat: coordsData.result.latitude || req.query.lat || 37.804829, 
                 lng: coordsData.result.longitude || req.query.lng || -122.272476
             }
-            data = await getFacilities(coordinates, listOfMaterialIds);
-        } catch (err) {
-            return next(err);
-        } 
-    } else {
-        try {
-            data = await getFacilities(coordinates, listOfMaterialIds);
-        } catch (err) {
-            return next(err);
         }
-    }
+        data = await getFacilities(coordinates, listOfMaterialIds);
+    } catch (err) {
+        return next(err);
+    } 
     res.json({results: data});
-
 };
 
 const getFacilityDetailsFromE911 = async (req, res, next) => {
@@ -157,6 +150,44 @@ const getCoordsByPostalFromE911 = async (req, res, next) => {
     res.json({results: data});
 } ;
 
+
+const createDBFacilities = async (req, res, next) => {
+    console.log('GET createDBFacilities in facilities-controller')
+    const coordinates = { 
+        lat: req.query.lat || 37.804829, 
+        lng: req.query.lng || -122.272476
+    }
+    const queryZipCode = req.query.zipcode;
+    let data;
+
+    try {
+        if (queryZipCode){
+            const coordsData = await getCoordsByPostal(queryZipCode) ;
+            const coordinates = { 
+                lat: coordsData.result.latitude || req.query.lat || 37.804829, 
+                lng: coordsData.result.longitude || req.query.lng || -122.272476
+            }
+        }
+        data = await getFacilities(coordinates)
+    } catch (err) {
+        return next(err);
+    } 
+    // 1. Create a list of location_ids
+    const listOfLocationIds = data.result.map( fac => fac.location_id)
+    // 2. Run getFacilities for the list of location_ids
+    // [ listOfLocationIds[0],listOfLocationIds[1],listOfLocationIds[3] ]
+
+    // 3. Create a new object with the location_id 
+    // 4. Add it to a new list of facilities
+    // 5. Bulk write to MongoDB
+
+    console.log(data.result.map( fac => fac.location_id))
+
+
+    // res.json({results: data});
+    res.json({results: listOfLocationIds});
+};
+
 exports.getAllFacilities = getAllFacilities;
 exports.getFacilityById = getFacilityById;
 exports.getFacilitiesFromE911 = getFacilitiesFromE911;
@@ -164,3 +195,4 @@ exports.getMaterialsByProximityFromE911 = getMaterialsByProximityFromE911;
 exports.getAllMaterialsFromE911 = getAllMaterialsFromE911;
 exports.getFacilityDetailsFromE911  = getFacilityDetailsFromE911;
 exports.getCoordsByPostalFromE911 = getCoordsByPostalFromE911 
+exports.createDBFacilities = createDBFacilities;
