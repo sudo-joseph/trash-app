@@ -38,7 +38,7 @@ class App extends React.Component {
               },
     sidebarOpen: false
     };
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+    this.toggleBurger = this.toggleBurger.bind(this);
   }
 
 
@@ -137,10 +137,6 @@ toggleBurger = () => {
   this.setState({sidebarOpen: !this.state.burger})
 }
 
-onSetSidebarOpen(open) {
-  this.setState({ sidebarOpen: open });
-  this.toggleBurger()   // reset burger
-}
 
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
@@ -206,7 +202,6 @@ if (this.state.userZip === '') {
 
 
 render() {
-  // Side Bar Styling Objects
   const sidebarStyle = {
     sidebar: {
       color: "white",
@@ -218,6 +213,7 @@ render() {
       width: "200px"
     }
   }
+  
   const linkStyle = {
     textDecoration: 'none',
     color: "yellow"
@@ -227,15 +223,15 @@ render() {
       <Sidebar
         sidebar={<>
           <Link to="/" style={linkStyle} 
-            onClick={this.onSetSidebarOpen}><h2 className="SideLink">Home</h2></Link>
+            onClick={this.toggleBurger}><h2 className="SideLink">Home</h2></Link>
           <Link to="/about/" style={linkStyle} 
-            onClick={this.onSetSidebarOpen}><h2 className="SideLink">About</h2></Link>
+            onClick={this.toggleBurger}><h2 className="SideLink">About</h2></Link>
           <Link to="/materials/" 
             style={linkStyle} 
-            onClick={this.onSetSidebarOpen}><h2 className="SideLink">Materials</h2></Link>
+            onClick={this.toggleBurger}><h2 className="SideLink">Materials</h2></Link>
         </>}
         open={this.state.sidebarOpen}
-        onSetOpen={this.onSetSidebarOpen}
+        onSetOpen={this.toggleBurger}
         styles={sidebarStyle}
       >
         <div className="App">
