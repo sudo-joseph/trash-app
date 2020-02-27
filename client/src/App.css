@@ -1,24 +1,8 @@
 :root {
-    --navbar-color: hsl(122, 39%, 49%);
+    --navbar-color: hsl(120, 100%, 24%);
     --margin-color: rgb(229, 242, 208);
     --mainContentBG-color: rgba(240, 244, 228, 0.543);
-
 }
-
-/* Palette 1 (Colormind.com)
-#2FCA72
-#2C9295
-#35495E
-#384649
-#C8AE3E
- */
- /* Palette 2 (Colormind.com)
-#728625
-#DFE68E
-#D9B863
-#B15A2B
-#39281B
- */
 
 .App {
     display: grid;

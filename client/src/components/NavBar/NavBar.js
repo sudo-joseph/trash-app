@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Burger from 'react-css-burger';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import logo from '../../images/noTrash-logo.svg';
+// import logo from '../../images/greenGo-logo.svg';
 
 import './NavBar.css';
 
@@ -39,7 +41,8 @@ class NavBar extends Component {
         // </div>
       } 
         <div className="NavBar-Title">
-          <Link to="/" className="NavTitle"><h1 className="App-title">{this.props.title}</h1></Link>
+          {/* <Link to="/" className="NavTitle"><h1 className="App-title">{this.props.title}</h1></Link> */}
+          <Link to="/" className="NavTitle"><img src={logo} className="logoHeader"></img></Link>
         </div>
         {this.props.showSearchBar ?
         <div className="NavBar-Search">
