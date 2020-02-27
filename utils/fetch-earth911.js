@@ -46,7 +46,6 @@ const getFacilities = async (coordinates, listMaterials) => {
     } 
 
     let url = `${url_api_base}.searchLocations?latitude=${queryCoordinates.lat}&longitude=${queryCoordinates.lng}&api_key=${API_KEY}${queryString}`
-
     const res = await axios.get(url);
     const data = res.data;
 
