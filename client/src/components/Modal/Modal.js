@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -7,13 +7,25 @@ import './Modal.css';
 
 // Modal Internal Component(Not Shared)
 const ModalOverlay = props => {
+  // Keyboard shortcut: Esc key
+  useEffect(() => {
+    const keyListner = ev => {
+      if (ev.keyCode === 27) {
+        props.onCancel();
+      }
+    }
+    document.addEventListener("keydown", keyListner);
+
+    return () => document.removeEventListener("keydown", keyListner);
+  }, []);
+
   const content = (
     <div className={`modal ${props.className}`} style={props.style}>
       <header className={`modal__header ${props.headerClass}`}>
         <h2>{props.header}</h2>
       </header>
       {/* Felexible form style block holds "div(body)" and "footer" */}
-      <form onSubmit={props.onSubmit ? props.onSubmit : (e) => e.preventDefault}>
+      <form onSubmit={props.onSubmit ? props.onSubmit : e => e.preventDefault()}>
         <div className={`modal__content ${props.contentClass}`}>
           {props.children}
         </div>
