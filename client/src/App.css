@@ -1,12 +1,8 @@
 :root {
     --navbar-color: hsl(122, 39%, 49%);
     --margin-color: rgb(229, 242, 208);
-    --mainContentBG-color: rgb(240, 244, 228);
+    --mainContentBG-color: rgba(240, 244, 228, 0.543);
 
-    --barcolumn1-color:#8bbabb;
-    --barcolumn2-color:#c7f0db;
-    --barcolumn1-highlight: #80ecee;
-    --barcolumn2-highlight: #9effcd;
 }
 
 /* Palette 1 (Colormind.com)
@@ -30,7 +26,8 @@
     grid-template-rows: 100px 1fr;
     grid-column-gap: 2px;
     grid-row-gap: 0px;
-
+    /* background: var(--mainContentBG-color);  */
+    background-image: url("../src/images/paper-background.jpg");
 }
 
 .App-NavBar {
