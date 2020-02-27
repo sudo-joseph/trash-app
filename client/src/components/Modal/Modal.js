@@ -13,7 +13,7 @@ const ModalOverlay = props => {
         <h2>{props.header}</h2>
       </header>
       {/* Felexible form style block holds "div(body)" and "footer" */}
-      <form onSubmit={props.onSubmit ? props.onSubmit : (e) => e.preventDefault}>
+      <form onSubmit={props.onSubmit ? props.onSubmit : e => e.preventDefault()}>
         <div className={`modal__content ${props.contentClass}`}>
           {props.children}
         </div>
