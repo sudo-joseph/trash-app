@@ -53,7 +53,8 @@ class Card extends Component {
         show={this.state.showModal} 
         onCancel={this.closeModalHandler} 
         header={this.state.facility.description}
-        // footer="This is footer. Buttons can be here."
+        footerClass="modal__footer__button_right"
+        footer={<Button onClick={this.closeModalHandler}>CLOSE</Button>}
       >
         <div>
           <ul style={{ listStyleType: "none" }}>
