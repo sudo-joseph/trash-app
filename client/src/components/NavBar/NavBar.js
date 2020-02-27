@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import Burger from 'react-css-burger';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import logo from '../../images/noTrash-logo.svg';
-// import logo from '../../images/greenGo-logo.svg';
+// import logo from '../../images/noTrash-logo.svg';
+import logo from '../../images/greenGo-logo.svg';
 
 import './NavBar.css';
 
@@ -28,20 +28,8 @@ class NavBar extends Component {
             scale={1.2}
           />
         </div>
-        {
-        // <div className={(this.props.burgerStatus) ? ("NavBar-Links"):("NavBar-Links--hidden")}>
-        //      {
-        //        Object.entries(this.props.pages).map(([name, url]) => (
-        //          <div className="NavBar-Link">
-        //            <Link to={url}>{name}</Link>
-        //          </div>
-        //
-        //        ))
-        //      }
-        // </div>
-      } 
+        
         <div className="NavBar-Title">
-          {/* <Link to="/" className="NavTitle"><h1 className="App-title">{this.props.title}</h1></Link> */}
           <Link to="/" className="NavTitle"><img src={logo} className="logoHeader"></img></Link>
         </div>
         {this.props.showSearchBar ?
