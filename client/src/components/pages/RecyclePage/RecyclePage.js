@@ -63,10 +63,11 @@ class RecyclePage extends Component {
                 img={earth}
                 facility={facility}
                 name={facility.description}
-                category=""
-                location=""
-                description=""
-                contact=""
+                // category=""
+                // location=""
+                // description=""
+                // contact=""
+                distance={facility.distance}
                 _onClickCard={this.props._onClickCard}
                 />
             ))}
