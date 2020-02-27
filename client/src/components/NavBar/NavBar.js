@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import Burger from 'react-css-burger';
-
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -42,7 +41,7 @@ class NavBar extends Component {
         <div className="NavBar-Title">
           <h1 className="App-title">{this.props.title}</h1>
         </div>
-
+        {this.props.showSearchBar ?
         <div className="NavBar-Search">
           <Select
             closeMenuOnSelect={true}
@@ -55,7 +54,7 @@ class NavBar extends Component {
             classNamePrefix="select"
             placeholder="Search..."
           />
-        </div>
+        </div>: null}
 
      </div>
     );

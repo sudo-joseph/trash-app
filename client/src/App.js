@@ -218,6 +218,17 @@ render() {
     textDecoration: 'none',
     color: "yellow"
   }
+
+  const navBarProps = {
+    title: "NoTrash",
+    burgerStatus: this.state.burger,
+    toggleFcn: this.toggleBurger,
+    searchOptions: this.state.materials,
+    selectedOptions: this.state.selectedMaterials,
+    searchOnChange: this.handleSearchChange,
+    popupInfo: this.state.facility_popup,
+    onSearch: this.fetchFacilitiesSpecificMaterials,
+  }
   
   return (
       <Sidebar
@@ -236,16 +247,28 @@ render() {
       >
         <div className="App">
           <div className="App-NavBar">
-            <NavBar title="NoTrash"
-                    burgerStatus={this.state.burger}
-                    toggleFcn={this.toggleBurger}
-                    searchOptions={this.state.materials}
-                    selectedOptions={this.state.selectedMaterials}
-                    searchOnChange={this.handleSearchChange}
-                    popupInfo={this.state.facility_popup}
-                    onSearch={this.fetchFacilitiesSpecificMaterials}
-                    >
-            </NavBar>
+
+            <Switch>
+              <Route exact
+                    path='/'
+                    render={(routeProps) => (<NavBar 
+                                              {...navBarProps}
+                                              showSearchBar={true}
+                                              >
+                                            </NavBar>
+                                              )}/>
+
+              <Route
+                    path='*'
+                    render={(routeProps) => (<NavBar
+                                              {...navBarProps}
+                                              showSearchBar={false}
+
+                                              >
+                                            </NavBar>
+                                              )}/>
+            </Switch>
+            
           </div>
           <ReactModal
             isOpen={this.state.geolocationModal}
