@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom'
 import Burger from 'react-css-burger';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -13,7 +14,6 @@ class NavBar extends Component {
 
 
   render() {
-
     return (
       <div className="NavBar">
         <div className="NavBar-Burger">
@@ -37,9 +37,9 @@ class NavBar extends Component {
         //        ))
         //      }
         // </div>
-      }
+      } 
         <div className="NavBar-Title">
-          <h1 className="App-title">{this.props.title}</h1>
+          <Link to="/" className="NavTitle"><h1 className="App-title">{this.props.title}</h1></Link>
         </div>
         {this.props.showSearchBar ?
         <div className="NavBar-Search">

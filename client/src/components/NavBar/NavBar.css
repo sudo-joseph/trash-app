@@ -24,6 +24,11 @@
     /* border: 2px solid white; */
 }
 
+.NavTitle {
+  text-decoration: none;
+  color: yellow;
+}
+
 .NavBar-Search {
   grid-area: 1 / 3 / 2 / 4;
   color:black;
