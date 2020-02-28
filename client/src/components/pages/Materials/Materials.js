@@ -15,8 +15,8 @@ class Materials extends Component {
           <article>
             <h1>Materials</h1>
             <h4>The categories listed in your search cover many types of materials and objects:</h4>
-            <div>{this.props.itemCategories.map(item => (
-              <div>{item.label}</div>
+            <div className="MaterialList">{this.props.itemCategories.map(item => (
+              <h5>{item.label}</h5>
             ))}</div>
             
           </article>

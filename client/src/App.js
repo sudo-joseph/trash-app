@@ -322,9 +322,9 @@ render() {
             <Switch>
               <Route exact path='/materials/' 
                      render={(routeProps) =>
-                                (<Materials itemCategories={this.state.materials}/>
+                                (<Materials {...routeProps}
+                                itemCategories={this.state.materials}/>
                             )}/>
-              {/* <Route exact path='/materials/' component={Materials}/> */}
               <Route exact path='/about/' component={About}/>
               <Route exact path='/test/' component={MaterialsList}/>
               <Route exact

@@ -36,3 +36,7 @@ article {
 article > h1 {
   font-family: 'Open Sans';
 }
+
+.MaterialList {
+  padding-left: 30px;
+}
