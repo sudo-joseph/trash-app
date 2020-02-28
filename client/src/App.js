@@ -120,8 +120,8 @@ fetchMaterials = () => {
 }
 
 /////// Search Selector ///////
-handleSearchChange = (selectedMaterials) => {
-  if (selectedMaterials !== null) {
+handleSearchChange = (selectedMaterials, action) => {
+  if (selectedMaterials !== null && action.action !== 'clear') {
     this.setState({selectedMaterials},
       ()=>this.fetchFacilitiesSpecificMaterials()
     )} else {

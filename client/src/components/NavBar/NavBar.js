@@ -35,10 +35,12 @@ class NavBar extends Component {
         {this.props.showSearchBar ?
         <div className="NavBar-Search">
           <Select
+            key="search"
             closeMenuOnSelect={true}
             components={animatedComponents}
             value={this.props.selectedOptions}
             onChange={this.props.searchOnChange}
+            handleChange={(selectedValue,action) => this.props.searchOnChange(selectedValue, action)}
             options={this.props.searchOptions}
             isMulti={true}
             className="basic-multi-select"
