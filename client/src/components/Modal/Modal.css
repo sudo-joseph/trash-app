@@ -15,6 +15,7 @@
     padding: 1rem 0.5rem;
     background: #556b2f;
     color: white;
+    border-radius: 8px 8px 0px 0px;
   }
   
   .modal__header h2 {

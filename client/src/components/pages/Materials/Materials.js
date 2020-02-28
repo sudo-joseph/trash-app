@@ -15,9 +15,11 @@ class Materials extends Component {
           <article>
             <h1>Materials</h1>
             <h4>The categories listed in your search cover many types of materials and objects:</h4>
-            {this.props.itemCategories}
+            <div>{this.props.itemCategories.map(item => (
+              <div>{item.label}</div>
+            ))}</div>
             
-        </article>
+          </article>
         </div>
       </div>
     );
