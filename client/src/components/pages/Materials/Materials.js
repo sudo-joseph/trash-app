@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Materials.css';
-import materialsPhoto from "../../../images/recycle-types.svg";
+import materialsPhoto from "../../../images/recycle-types.jpg";
 
 class Materials extends Component {
   state = {
