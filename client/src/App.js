@@ -141,7 +141,7 @@ fetchFacilityDetails = (facility_id) => {
 }
 
 /////// Detail Modal ///////
-openModalHander = (facility_id) => {
+openModalHandler = (facility_id) => {
   console.log(facility_id)
   this.fetchFacilityDetails(facility_id)
         .then(this.setState({selectedFacility:facility_id,
@@ -160,7 +160,8 @@ handleSearchChange = (selectedMaterials, action) => {
       ()=>this.fetchFacilitiesSpecificMaterials()
     )} else {
       this.setState({selectedMaterials:selectedMaterials,
-                     facilities:[]})
+                     facilities:[],
+                     selectedFacility:''})
     }
 }
 
@@ -335,7 +336,7 @@ render() {
                                     _onClickCard={this._onClickCard}
                                     selectedFacility={this.state.selectedFacility}
                                     deselectFacility={this._closePopup}
-                                    openModalHander={this.openModalHander}
+                                    openModalHandler={this.openModalHandler}
                                     facilityModal={this.state.facilityModal}
                                     closeModalHandler={this.closeModalHandler}
                                     facilityDetails={this.state.facilityDetails}/>

@@ -31,7 +31,7 @@ class Card extends Component {
         <div style={{align: "right" }}>
           <Button center size="smaller"
                   style={buttonStyle}
-                  onClick={(location_id) => this.props.openModalHander(this.props.facility.location_id)}
+                  onClick={(location_id) => this.props.openModalHandler(this.props.facility.location_id)}
                   >INFO</Button>
         </div>
       </div>
