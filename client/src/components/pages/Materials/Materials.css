@@ -30,8 +30,13 @@ img {
 article {
   padding: 20px 30px 15px 30px;
   font-family: 'Montserrat';
+  margin-bottom: 50px;
 }
 
 article > h1 {
   font-family: 'Open Sans';
+}
+
+.MaterialList {
+  padding-left: 30px;
 }

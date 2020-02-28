@@ -263,7 +263,7 @@ render() {
     popupInfo: this.state.facility_popup,
     onSearch: this.fetchFacilitiesSpecificMaterials,
   }
-
+  console.log("materials list: ", this.state.materials)
   return (
       <Sidebar
         sidebar={<>
@@ -320,7 +320,11 @@ render() {
           </ReactModal>
           <div className="App-mainContent">
             <Switch>
-              <Route exact path='/materials/' component={Materials}/>
+              <Route exact path='/materials/' 
+                     render={(routeProps) =>
+                                (<Materials {...routeProps}
+                                itemCategories={this.state.materials}/>
+                            )}/>
               <Route exact path='/about/' component={About}/>
               <Route exact path='/test/' component={MaterialsList}/>
               <Route exact

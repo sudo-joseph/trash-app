@@ -2,6 +2,8 @@
     --navbar-color: hsl(120, 100%, 24%);
     --margin-color: rgb(229, 242, 208);
     --mainContentBG-color: rgba(240, 244, 228, 0.543);
+    background-image: url("../src/images/paper-background.jpg");
+    background-size: cover;
 }
 
 .App {
@@ -10,8 +12,7 @@
     grid-template-rows: 100px 1fr;
     grid-column-gap: 2px;
     grid-row-gap: 0px;
-    /* background: var(--mainContentBG-color);  */
-    background-image: url("../src/images/paper-background.jpg");
+    /* background-image: url("../src/images/paper-background.jpg"); */
 }
 
 .App-NavBar {
@@ -24,7 +25,7 @@
 .App-mainContent {
   grid-area: 2 / 1 / 4 / 4;
   height: auto;
-  background: var(--mainContentBG-color);
+  /* background: var(--mainContentBG-color); */
 }
 
 .App-Modal {
