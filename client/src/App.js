@@ -9,9 +9,9 @@ import About from './components/pages/About/About.js';
 import NavBar from './components/NavBar/NavBar.js';
 import Sidebar from "react-sidebar";
 import Fetch from './components/Fetch/Fetch.js';
+import MaterialsList from './components/pages/MaterialsList/MaterialsList';
 
 import './App.css';
-import MaterialsList from './components/pages/MaterialsList/MaterialsList';
 
 
 class App extends React.Component {
@@ -23,6 +23,7 @@ class App extends React.Component {
     userZoom : 12,
     userZip:'',
     geolocationModal: false,
+    facilityModal:false,
     burger: false,
     pages: {Recycle: "/",
             Browse: "/browse/"},
@@ -30,6 +31,7 @@ class App extends React.Component {
     selectedMaterials: [],
     facilities:[],
     selectedFacility:'',
+    facilityDetails:null,
     viewport: {latitude: 37.785164,
                longitude: -122.269883,
                zoom: 14,
@@ -65,6 +67,7 @@ _closePopup = () => {
   this._onClickMarker('')
 }
 
+
 /////// Fetch Data ///////
 fetchAllFacilities = () => {
   fetch('/api/facilities/earth911/facilities')
@@ -77,7 +80,6 @@ fetchAllFacilities = () => {
 
 }
 
-/////// Fetch Data ///////
 fetchFacilitiesSpecificMaterials = () => {
   //Fetches facilities that can service user selcted materials.
     let matString = "material_id[]=",
@@ -103,7 +105,6 @@ fetchFacilitiesSpecificMaterials = () => {
       });
  }
 
-
 fetchMaterials = () => {
   fetch('/api/facilities/earth911/materials')
     .then((response) => {
@@ -119,14 +120,48 @@ fetchMaterials = () => {
       });
 }
 
+fetchFacilityDetails = (facility_id) => {
+  //Fetches facilities that can service user selcted facility on this card
+  let url = `/api/facilities/earth911/facilities/${facility_id}`
+
+  let myPromise = fetch(url, {})
+                    .then((response) => {
+                      return response.json();
+                    })
+                    .then((facility_data) => {
+                      console.log(facility_data);
+                      this.setState({facilityDetails: facility_data.results.result[facility_id]});
+                    }).then((data) => {
+                      const myPromise = new Promise(function(resolve, reject) {
+                         resolve();
+                      });
+                      return myPromise
+                    });
+  return myPromise
+}
+
+/////// Detail Modal ///////
+openModalHandler = (facility_id) => {
+  console.log(facility_id)
+  this.fetchFacilityDetails(facility_id)
+        .then(this.setState({selectedFacility:facility_id,
+                             facilityModal:true}));
+}
+
+closeModalHandler = (event) => {
+  this.setState({facilityModal: false});
+}
+
+
 /////// Search Selector ///////
-handleSearchChange = (selectedMaterials) => {
-  if (selectedMaterials !== null) {
+handleSearchChange = (selectedMaterials, action) => {
+  if (selectedMaterials !== null && action.action !== 'clear') {
     this.setState({selectedMaterials},
       ()=>this.fetchFacilitiesSpecificMaterials()
     )} else {
       this.setState({selectedMaterials:selectedMaterials,
-                     facilities:[]})
+                     facilities:[],
+                     selectedFacility:''})
     }
 }
 
@@ -141,10 +176,10 @@ toggleBurger = () => {
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
   this.setState({userZip:value})
-  this.onModalOk()  // Is this good or bad UX?
+  this.closeGeoLocationModal()  // Is this good or bad UX?
 }
 
-onModalOk = () => {
+closeGeoLocationModal = () => {
   this.closeGeoLocationModal()
   //// TODO Update user lat lon based on API call here.
 
@@ -153,7 +188,6 @@ onModalOk = () => {
 openGeoLocationModal = () => {
     this.setState({geolocationModal: true})
 }
-
 
 closeGeoLocationModal = () => {
     this.setState({geolocationModal: false})
@@ -213,7 +247,7 @@ render() {
       width: "200px"
     }
   }
-  
+
   const linkStyle = {
     textDecoration: 'none',
     color: "yellow"
@@ -229,16 +263,16 @@ render() {
     popupInfo: this.state.facility_popup,
     onSearch: this.fetchFacilitiesSpecificMaterials,
   }
-  
+
   return (
       <Sidebar
         sidebar={<>
-          <Link to="/" style={linkStyle} 
+          <Link to="/" style={linkStyle}
             onClick={this.toggleBurger}><h2 className="SideLink">Home</h2></Link>
-          <Link to="/about/" style={linkStyle} 
+          <Link to="/about/" style={linkStyle}
             onClick={this.toggleBurger}><h2 className="SideLink">About</h2></Link>
-          <Link to="/materials/" 
-            style={linkStyle} 
+          <Link to="/materials/"
+            style={linkStyle}
             onClick={this.toggleBurger}><h2 className="SideLink">Materials</h2></Link>
         </>}
         open={this.state.sidebarOpen}
@@ -251,7 +285,7 @@ render() {
             <Switch>
               <Route exact
                     path='/'
-                    render={(routeProps) => (<NavBar 
+                    render={(routeProps) => (<NavBar
                                               {...navBarProps}
                                               showSearchBar={true}
                                               >
@@ -268,7 +302,7 @@ render() {
                                             </NavBar>
                                               )}/>
             </Switch>
-            
+
           </div>
           <ReactModal
             isOpen={this.state.geolocationModal}
@@ -290,18 +324,23 @@ render() {
               <Route exact path='/about/' component={About}/>
               <Route exact path='/test/' component={MaterialsList}/>
               <Route exact
-                    path='/'
-                    render={(routeProps) => (<RecyclePage {...routeProps}
-                                                  modal={this.state.geolocationModal}
-                                                  modalFcn={this.closeGeoLocationModal}
-                                                  facilities={this.state.facilities}
-                                                  viewport={this.state.viewport}
-                                                  _updateViewport={this._updateViewport}
-                                                  _onClickMarker={this._onClickMarker}
-                                                  _onClickCard={this._onClickCard}
-                                                  selectedFacility={this.state.selectedFacility}
-                                                  deselectFacility={this._closePopup}/>
-                                              )}/>
+                     path='/'
+                     render={(routeProps) =>
+                                (<RecyclePage {...routeProps}
+                                    modal={this.state.geolocationModal}
+                                    modalFcn={this.closeGeoLocationModal}
+                                    facilities={this.state.facilities}
+                                    viewport={this.state.viewport}
+                                    _updateViewport={this._updateViewport}
+                                    _onClickMarker={this._onClickMarker}
+                                    _onClickCard={this._onClickCard}
+                                    selectedFacility={this.state.selectedFacility}
+                                    deselectFacility={this._closePopup}
+                                    openModalHandler={this.openModalHandler}
+                                    facilityModal={this.state.facilityModal}
+                                    closeModalHandler={this.closeModalHandler}
+                                    facilityDetails={this.state.facilityDetails}/>
+                                )}/>
             </Switch>
           </div>
         </div>
