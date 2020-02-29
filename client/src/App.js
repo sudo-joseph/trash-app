@@ -121,36 +121,24 @@ fetchMaterials = () => {
       });
 }
 
-fetchFacilityDetails = (facility_id) => {
+fetchFacilityDetails = facility_id => {
   //Fetches facilities that can service user selcted facility on this card
   let url = `/api/facilities/earth911/facilities/${facility_id}`
 
-  let myPromise = fetch(url, {})
-                    .then((response) => {
-                      return response.json();
-                    })
-                    .then((facility_data) => {
-                      console.log(facility_data);
-                      this.setState({
-                        facilityDetails: facility_data.results.result[facility_id],
-                        selectedFacility: facility_id,
-                        facilityModal: true,
-                      });
-                    }).then((data) => {
-                      const myPromise = new Promise(function(resolve, reject) {
-                         resolve();
-                      });
-                      return myPromise
-                    });
-  return myPromise
+  fetch(url, {})
+    .then((response) => response.json())
+    .then((facility_data) => {
+      this.setState({
+        facilityDetails: facility_data.results.result[facility_id],
+        selectedFacility: facility_id,
+        facilityModal: true
+      });
+    })
 }
 
 /////// Detail Modal ///////
 openModalHandler = (facility_id) => {
-  console.log(facility_id)
   this.fetchFacilityDetails(facility_id)
-        // .then(this.setState({selectedFacility:facility_id,
-        //                      facilityModal:true}));
 }
 
 closeModalHandler = (event) => {
