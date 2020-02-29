@@ -11,11 +11,12 @@ Backend is a nodejs express server written for trash-app project. This server pr
 
 ### REST APIs
 
-| api end point    | Are           |
-| ---------------- |:-------------:|
-| /api/items       | right-aligned |
-| /api/users       | centered      |
-| /api/facilities  | are neat      |
+| api end point    | description      |
+| ---------------- |:----------------:|
+| /api/facilities  | all data         |
+| /api/items       | for future use   |
+| /api/users       | for future use   |
+
 
 ## Front End
 Front end is built with create-react-app. Main features are multi-select search box and search results being displayed in map. Additional features include card results and a results modal.
@@ -73,10 +74,12 @@ To set up your development environment, follow these steps:
     ```
 ### Secrets
 Your .env file should have the following environment variables:
+  ```
   MONGODB_URI=''
   PORT=8080
   API_KEY_TRASHNOTHING=''
   API_KEY_EARTH911=''
+  ```
 
 ## Build
 To build front end, run the build script:
