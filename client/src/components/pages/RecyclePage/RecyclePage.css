@@ -9,15 +9,39 @@
 .RecyclePage-Map {
   /* position: absolute; */
   grid-area: 1 / 1 / 2 / 3;
-  height:89vh;
+  height: 89vh;
 }
 
 .RecyclePage-Cards {
   position: relative;
   grid-area: 1 / 2 / 2 / 3;
   z-index: 2;
-  overflow-y:scroll;
+  overflow-y: scroll;
   height: 85vh;
+}
+
+@media only screen and (max-width: 800px) {
+  .RecyclePage {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.7fr 0.3fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .RecyclePage-Map {
+    /* position: absolute; */
+    grid-area: 1 / 1 / 3 / 2;
+    height: 89vh;
+  }
+
+  .RecyclePage-Cards {
+    position: relative;
+    grid-area: 2 / 1 / 3 / 2;
+    z-index: 3;
+    overflow-y: scroll;
+    height: 85vh;
+  }
 }
 
 .RecyclePage-Cards::-webkit-scrollbar {
