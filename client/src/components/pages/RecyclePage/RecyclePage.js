@@ -27,7 +27,6 @@ class RecyclePage extends Component {
                 <li><strong>Phone:</strong> {this.props.facilityDetails.phone}</li>
                 <li><strong>Hours:</strong>  {this.props.facilityDetails.hours}</li>
                 <li><strong>URL:</strong> {this.props.facilityDetails.url ? this.props.facilityDetails.url : "N/A"}</li>
-
               </ul>
                 <p>Note: {this.props.facilityDetails.notes_public ? this.props.facilityDetails.notes_public : "N/A" }</p>
             </div>

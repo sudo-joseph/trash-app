@@ -50,17 +50,14 @@ app.use(logger);
 /////////////////////////////////////////////
 
 
-// // For production, handle any requests that don't match the ones above
-app.use(express.static(path.join(__dirname, 'client/build')));
+// For production, handle any requests that don't match the ones above
+app.use('/',express.static(path.join(__dirname, 'client/build')));
+app.use('/about/',express.static(path.join(__dirname, 'client/build')));
+app.use('/materials/',express.static(path.join(__dirname, 'client/build')));
 
-// Home Page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
-
-//The 404 Route (ALWAYS Keep this as the last route)
-app.get('*', function(req, res){
-  res.status(404).send('404');
+// Wild-card, so handle everything else
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 app.use((err, req, res, next) => {
