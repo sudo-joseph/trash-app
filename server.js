@@ -53,7 +53,7 @@ app.use(logger);
 // For production, handle any requests that don't match the ones above
 app.use('/',express.static(path.join(__dirname, 'client/build')));
 app.use('/about/',express.static(path.join(__dirname, 'client/build')));
-app.use('/materails/',express.static(path.join(__dirname, 'client/build')));
+app.use('/materials/',express.static(path.join(__dirname, 'client/build')));
 
 // Wild-card, so handle everything else
 app.get('*', (req, res) => {
