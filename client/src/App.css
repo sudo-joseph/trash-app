@@ -60,13 +60,13 @@
 
 .SideLink {
   width: auto;
-  height: 40px;
+  height: auto;
   border: 1px green;
   text-decoration: none;
   padding: 15px;
   align-content: center;
   box-shadow: 5px 5px 5px darkolivegreen;
-}
+  }
 
 /* .ReactModal__Overlay {
   z-index: 10

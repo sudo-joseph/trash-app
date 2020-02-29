@@ -35,4 +35,5 @@ article {
 
 article > h1, h3 {
   font-family: 'Open Sans';
+  color: rgb(32, 85, 16);
 }
