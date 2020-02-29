@@ -11,8 +11,9 @@ class Card extends Component {
     };
     return (
       <div className="Card"
-          //  onMouseOver={() => this.props._onClickCard(this.props.facility)}>
-          onClick={() => this.props._onClickCard(this.props.facility)}>
+        onMouseOver={() => this.props.onMouseOver(this.props.facility.location_id)}
+        onMouseOut={() => this.props.onMouseOut(this.props.facility.location_id)}
+        onClick={() => this.props._onClickCard(this.props.facility)}>
         <div className="Card-Content">
           <div>
             <ul style={{ listStyleType: "none" }}>

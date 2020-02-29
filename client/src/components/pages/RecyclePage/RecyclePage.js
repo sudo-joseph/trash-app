@@ -56,6 +56,8 @@ class RecyclePage extends Component {
                 distance={facility.distance}
                 _onClickCard={this.props._onClickCard}
                 openModalHandler={()=>this.props.openModalHandler(facility.location_id)}
+                onMouseOver={this.props.onMouseOver}
+                onMouseOut={this.props.onMouseOut}
                 />
               ))}
           </div>
