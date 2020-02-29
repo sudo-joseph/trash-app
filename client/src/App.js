@@ -130,7 +130,11 @@ fetchFacilityDetails = (facility_id) => {
                     })
                     .then((facility_data) => {
                       console.log(facility_data);
-                      this.setState({facilityDetails: facility_data.results.result[facility_id]});
+                      this.setState({
+                        facilityDetails: facility_data.results.result[facility_id],
+                        selectedFacility: facility_id,
+                        facilityModal: true,
+                      });
                     }).then((data) => {
                       const myPromise = new Promise(function(resolve, reject) {
                          resolve();
@@ -144,8 +148,8 @@ fetchFacilityDetails = (facility_id) => {
 openModalHandler = (facility_id) => {
   console.log(facility_id)
   this.fetchFacilityDetails(facility_id)
-        .then(this.setState({selectedFacility:facility_id,
-                             facilityModal:true}));
+        // .then(this.setState({selectedFacility:facility_id,
+        //                      facilityModal:true}));
 }
 
 closeModalHandler = (event) => {
