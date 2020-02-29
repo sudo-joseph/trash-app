@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom'
-import ReactModal from 'react-modal';
 import Zip from 'react-zipcode'
+import Sidebar from "react-sidebar";
 
 import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Materials from './components/pages/Materials/Materials.js';
 import About from './components/pages/About/About.js';
 import NavBar from './components/NavBar/NavBar.js';
-import Sidebar from "react-sidebar";
-import Fetch from './components/Fetch/Fetch.js';
 import MaterialsList from './components/pages/MaterialsList/MaterialsList';
+import Modal from './components/Modal/Modal.js';
+import Button from './components/Button/Button.js';
+
 
 import './App.css';
 
@@ -67,6 +68,15 @@ _closePopup = () => {
   this._onClickMarker('')
 }
 
+onMouseOver = (facility_id) => {
+  var element = document.getElementById(facility_id);
+  element.classList.add("MapPin-Icon-CardHover");
+}
+
+onMouseOut = (facility_id) => {
+  var element = document.getElementById(facility_id);
+  element.classList.remove("MapPin-Icon-CardHover");
+}
 
 /////// Fetch Data ///////
 fetchAllFacilities = () => {
@@ -140,6 +150,18 @@ fetchFacilityDetails = (facility_id) => {
   return myPromise
 }
 
+fetchLocationFromZip= () => {
+  let url = `/api/facilities/earth911/coords/94608`
+  fetch(url,{ })
+    .then((response) => {
+      return response.json();
+    })
+    .then((location) => {
+      // this.setState({facilities:facilities_data.results.result});
+    console.log(location)
+    });
+}
+
 /////// Detail Modal ///////
 openModalHandler = (facility_id) => {
   console.log(facility_id)
@@ -176,21 +198,24 @@ toggleBurger = () => {
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
   this.setState({userZip:value})
-  this.closeGeoLocationModal()  // Is this good or bad UX?
 }
 
-closeGeoLocationModal = () => {
-  this.closeGeoLocationModal()
-  //// TODO Update user lat lon based on API call here.
 
-}
 
 openGeoLocationModal = () => {
     this.setState({geolocationModal: true})
 }
 
 closeGeoLocationModal = () => {
-    this.setState({geolocationModal: false})
+    this.setState({geolocationModal: false,
+                   viewport: {latitude: 37.806973,
+                              longitude: -122.269841,
+                              zoom: 14,
+                              bearing: 0,
+                              pitch: 0
+                            }})
+         //TODO replace viewport state update with fetch.)
+
 }
 
 catchGeoLocationError = (error) => {
@@ -304,20 +329,21 @@ render() {
             </Switch>
 
           </div>
-          <ReactModal
-            isOpen={this.state.geolocationModal}
-            onRequestClose={this.closeGeoLocationModal}
-            className="App-Modal"
-            overlayClassName="App-Overlay">
-            <div className="App-Modal-Content">
-              <h1>Location Error!</h1>
-              <p>Unable to detect your location. Please provide your zip code
-              so that we can provide local results</p>
-            <h3>Enter Zip:</h3>
-            <Zip onValue={(value) => {this.enterZip(value)}}/>
-            </div>
-            <button>OK</button>
-          </ReactModal>
+          <Modal
+              show={this.state.geolocationModal}
+              onCancel={this.closeGeoLocationModal}
+              header="Location Error!"
+              footerClass="modal__footer__button_right"
+              footer={<Button onClick={this.closeGeoLocationModal}>OK</Button>}>
+              <div>
+                  <div className="App-Modal-Content">
+                    <p>We are unable to detect your location. Please provide your zip code
+                    so that we can provide local results</p>
+                  <h3>Enter Zip:</h3>
+                  <Zip onValue={(value) => {this.enterZip(value)}}/>
+                  </div>
+              </div>
+             </Modal>
           <div className="App-mainContent">
             <Switch>
               <Route exact path='/materials/' 
@@ -343,7 +369,9 @@ render() {
                                     openModalHandler={this.openModalHandler}
                                     facilityModal={this.state.facilityModal}
                                     closeModalHandler={this.closeModalHandler}
-                                    facilityDetails={this.state.facilityDetails}/>
+                                    facilityDetails={this.state.facilityDetails}
+                                    onMouseOver={this.onMouseOver}
+                                    onMouseOut={this.onMouseOut}/>
                                 )}/>
             </Switch>
           </div>
