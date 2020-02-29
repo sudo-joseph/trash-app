@@ -263,7 +263,6 @@ render() {
       backgroundColor: "DarkGreen",
       fontFamily: "Arial",
       top: 100,
-      zIndex: 5,
       textAlign: "center",
       width: "200px"
     }
