@@ -67,6 +67,15 @@ _closePopup = () => {
   this._onClickMarker('')
 }
 
+onMouseOver = (facility_id) => {
+  var element = document.getElementById(facility_id);
+  element.classList.add("MapPin-Icon-CardHover");
+}
+
+onMouseOut = (facility_id) => {
+  var element = document.getElementById(facility_id);
+  element.classList.remove("MapPin-Icon-CardHover");
+}
 
 /////// Fetch Data ///////
 fetchAllFacilities = () => {
@@ -339,7 +348,9 @@ render() {
                                     openModalHandler={this.openModalHandler}
                                     facilityModal={this.state.facilityModal}
                                     closeModalHandler={this.closeModalHandler}
-                                    facilityDetails={this.state.facilityDetails}/>
+                                    facilityDetails={this.state.facilityDetails}
+                                    onMouseOver={this.onMouseOver}
+                                    onMouseOut={this.onMouseOut}/>
                                 )}/>
             </Switch>
           </div>

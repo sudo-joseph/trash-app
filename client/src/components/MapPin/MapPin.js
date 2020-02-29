@@ -14,7 +14,7 @@ export default class MapPin extends PureComponent {
     return data.map((facility, index) => (
       <Marker key={`marker-${index}`} longitude={facility.longitude} latitude={facility.latitude}>
         <svg className="MapPin-Icon"
-             id={this.facility_id}
+             id={facility.location_id}
              onClick={() => this.props.onClick(facility.location_id)}
              viewBox="0 0 60 100"
              enable-background="new 0 0 60 100"
