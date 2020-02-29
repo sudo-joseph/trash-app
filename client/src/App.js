@@ -149,14 +149,25 @@ fetchFacilityDetails = facility_id => {
 }
 
 fetchLocationFromZip= () => {
-  let url = `/api/facilities/earth911/coords/94608`
+  // let url = `/api/facilities/earth911/coords?zipcode=${this.state.userZip}`
+  let url = `/api/facilities/earth911/coords?zipcode=94608`
+  console.log(this.state.userZip)
+  console.log(url)
   fetch(url,{ })
     .then((response) => {
       return response.json();
     })
-    .then((location) => {
-      // this.setState({facilities:facilities_data.results.result});
-    console.log(location)
+    .then((results) => {
+      let lat=results.results.result.latitude;
+      let lng=results.results.result.longitude;
+      this.setState({userLat:lat,
+                     userLng:lng,
+                     viewport: {latitude: lat,
+                                longitude: lng,
+                                zoom: 12,
+                                bearing: 0,
+                                pitch: 0
+                                }});
     });
 }
 
@@ -192,7 +203,8 @@ toggleBurger = () => {
 
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
-  this.setState({userZip:value})
+  this.setState({userZip:value},
+    this.fetchLocationFromZip())
 }
 
 
@@ -202,15 +214,7 @@ openGeoLocationModal = () => {
 }
 
 closeGeoLocationModal = () => {
-    this.setState({geolocationModal: false,
-                   viewport: {latitude: 37.806973,
-                              longitude: -122.269841,
-                              zoom: 14,
-                              bearing: 0,
-                              pitch: 0
-                            }})
-         //TODO replace viewport state update with fetch.)
-
+    this.setState({geolocationModal: false})
 }
 
 catchGeoLocationError = (error) => {
@@ -325,7 +329,7 @@ render() {
           </div>
           <Modal
               show={this.state.geolocationModal}
-              onCancel={this.closeGeoLocationModal}
+              onCancel={()=>{}}
               header="Location Error!"
               footerClass="modal__footer__button_right"
               footer={<Button onClick={this.closeGeoLocationModal}>OK</Button>}>
