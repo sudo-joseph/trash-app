@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import CommonCard from '../../CommonCard/CommonCard';
 import Button from '../../Button/Button';
 import Modal from '../../Modal/Modal';
 import './MaterialsList.css';
@@ -35,6 +36,9 @@ const MaterialsList = props => {
           <button onClick={openDetailsHander}>Card</button>
         </div>
       </div>
+      <CommonCard>
+        <h2>Testing</h2>
+      </CommonCard>
     </React.Fragment>
   );
 };
