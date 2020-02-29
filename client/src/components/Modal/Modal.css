@@ -4,26 +4,29 @@
     top: 22vh;
     left: 10%;
     width: 80%;
-    background: white;
+    background: rgb(247, 247, 239);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 8px;
+    border-radius: 20px;
+    border: 2px solid green;
   }
   
   .modal__header {
-    width: 97.6%;
-    /* padding: 1rem 0.5rem; */
     padding: 1rem 0.5rem;
-    background: #556b2f;
+    background: #2b491a;
     color: white;
-    border-radius: 8px 8px 0px 0px;
+    border-radius: 18px 18px 0px 0px;
   }
   
   .modal__header h2 {
+    color: rgb(255, 255, 109);
     margin: 0.5rem;
+    text-align: center;
   }
   
   .modal__content {
     padding: 1rem 0.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
   }
   
   .modal__footer {
