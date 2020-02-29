@@ -15,57 +15,54 @@ class RecyclePage extends Component {
 
   render() {
     return (
-      <div className="RecyclePage">
-        <div className="RecyclePage-Map">
-          <ReactMapGL
-                  {...this.props.viewport}
-                  width="100%"
-                  height="100%"
-                  onViewportChange={this.props._updateViewport}
-                  mapboxApiAccessToken={TOKEN}
-                  mapStyle="mapbox://styles/jreid655/ck452mq2x1o2k1dnw6b76y20v"
-                >
-             <MapPin
-               data={this.props.facilities}
-               onClick={this.props.openModalHandler}
-               />
-          </ReactMapGL>
-        </div>
-        <div className="RecyclePage-Cards">
-          {this.props.facilities.map((facility, index)=>(
-            <React.Fragment>
-            {(this.props.facilityDetails!==null)?
-            (<Modal
-                show={this.props.facilityModal}
-                onCancel={this.props.closeModalHandler}
-                header={facility.description}
-                footerClass="modal__footer__button_right"
-                footer={<Button onClick={this.props.closeModalHandler}>CLOSE</Button>}>
-                <div>
-                  <ul style={{ listStyleType: "none" }}>
-                   <li><strong>Phone:</strong> {this.props.facilityDetails.phone}</li>
-                   <li><strong>Hours:</strong>  {this.props.facilityDetails.hours}</li>
-                   <li><strong>URL:</strong> {this.props.facilityDetails.url ? this.props.facilityDetails.url : "N/A"}</li>
-
-                  </ul>
-                   <p>Note: {this.props.facilityDetails.notes_public ? this.props.facilityDetails.notes_public : "N/A" }</p>
-                </div>
-
-               </Modal>):(null)}
-          <Card
-              key={index}
-              facility={facility}
-              name={facility.description}
-              distance={facility.distance}
-              _onClickCard={this.props._onClickCard}
-              openModalHandler={()=>this.props.openModalHandler(facility.location_id)}
-              onMouseOver={this.props.onMouseOver}
-              onMouseOut={this.props.onMouseOut}
+      <React.Fragment>
+        {this.props.facilityModal && <Modal
+            show={this.props.facilityModal}
+            onCancel={this.props.closeModalHandler}
+            header={this.props.facilityDetails.description}
+            footerClass="modal__footer__button_right"
+            footer={<Button onClick={this.props.closeModalHandler}>CLOSE</Button>}>
+            <div>
+              <ul style={{ listStyleType: "none" }}>
+                <li><strong>Phone:</strong> {this.props.facilityDetails.phone}</li>
+                <li><strong>Hours:</strong>  {this.props.facilityDetails.hours}</li>
+                <li><strong>URL:</strong> {this.props.facilityDetails.url ? this.props.facilityDetails.url : "N/A"}</li>
+              </ul>
+                <p>Note: {this.props.facilityDetails.notes_public ? this.props.facilityDetails.notes_public : "N/A" }</p>
+            </div>
+        </Modal>}
+        <div className="RecyclePage">
+          <div className="RecyclePage-Map">
+            <ReactMapGL
+              {...this.props.viewport}
+              width="100%"
+              height="100%"
+              onViewportChange={this.props._updateViewport}
+              mapboxApiAccessToken={TOKEN}
+              mapStyle="mapbox://styles/jreid655/ck452mq2x1o2k1dnw6b76y20v"
+            >
+              <MapPin
+                data={this.props.facilities}
+                onClick={this.props.openModalHandler}
               />
-            </React.Fragment>
-            ))}
-      </div>
-    </div>
+            </ReactMapGL>
+          </div>
+          <div className="RecyclePage-Cards">
+            {this.props.facilities.map((facility, index)=>(
+            <Card
+                key={index}
+                facility={facility}
+                name={facility.description}
+                distance={facility.distance}
+                _onClickCard={this.props._onClickCard}
+                openModalHandler={()=>this.props.openModalHandler(facility.location_id)}
+                onMouseOver={this.props.onMouseOver}
+                onMouseOut={this.props.onMouseOut}
+                />
+              ))}
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }

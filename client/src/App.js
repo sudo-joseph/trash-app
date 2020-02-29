@@ -7,6 +7,7 @@ import RecyclePage from './components/pages/RecyclePage/RecyclePage.js';
 import Materials from './components/pages/Materials/Materials.js';
 import About from './components/pages/About/About.js';
 import NavBar from './components/NavBar/NavBar.js';
+
 import MaterialsList from './components/pages/MaterialsList/MaterialsList';
 import Modal from './components/Modal/Modal.js';
 import Button from './components/Button/Button.js';
@@ -15,7 +16,7 @@ import Button from './components/Button/Button.js';
 import './App.css';
 
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -92,13 +93,12 @@ fetchAllFacilities = () => {
 
 fetchFacilitiesSpecificMaterials = () => {
   //Fetches facilities that can service user selcted materials.
-    let matString = "material_id[]=",
-        queryMats =[],
-        queryMatsString = '',
-        lat = this.state.userLat,
-        lng = this.state.userLng;
+    let queryMats =[];
+    let queryMatsString = '';
+    let lat = this.state.userLat;
+    let lng = this.state.userLng;
 
-    this.state.selectedMaterials.map(material=> {
+    this.state.selectedMaterials.map( material => {
       queryMats.push(material.value);});
       queryMatsString = queryMats.toString()
 
@@ -122,32 +122,30 @@ fetchMaterials = () => {
     })
     .then((materials_data) => {
       let materials = [];
-      materials_data.results.result.map(material=> {
-        materials.push({value:material.material_id,
-                        label:material.description})
+      materials_data.results.result.map( material => {
+        materials.push({
+                        value:material.material_id,
+                        label:material.description,
+                        description: material.long_description
+                      })
       });
       this.setState({materials:materials})
       });
 }
 
-fetchFacilityDetails = (facility_id) => {
+fetchFacilityDetails = facility_id => {
   //Fetches facilities that can service user selcted facility on this card
   let url = `/api/facilities/earth911/facilities/${facility_id}`
 
-  let myPromise = fetch(url, {})
-                    .then((response) => {
-                      return response.json();
-                    })
-                    .then((facility_data) => {
-                      console.log(facility_data);
-                      this.setState({facilityDetails: facility_data.results.result[facility_id]});
-                    }).then((data) => {
-                      const myPromise = new Promise(function(resolve, reject) {
-                         resolve();
-                      });
-                      return myPromise
-                    });
-  return myPromise
+  fetch(url, {})
+    .then((response) => response.json())
+    .then((facility_data) => {
+      this.setState({
+        facilityDetails: facility_data.results.result[facility_id],
+        selectedFacility: facility_id,
+        facilityModal: true
+      });
+    })
 }
 
 fetchLocationFromZip= () => {
@@ -164,10 +162,7 @@ fetchLocationFromZip= () => {
 
 /////// Detail Modal ///////
 openModalHandler = (facility_id) => {
-  console.log(facility_id)
   this.fetchFacilityDetails(facility_id)
-        .then(this.setState({selectedFacility:facility_id,
-                             facilityModal:true}));
 }
 
 closeModalHandler = (event) => {
@@ -288,7 +283,6 @@ render() {
     popupInfo: this.state.facility_popup,
     onSearch: this.fetchFacilitiesSpecificMaterials,
   }
-  console.log("materials list: ", this.state.materials)
   return (
       <Sidebar
         sidebar={<>
