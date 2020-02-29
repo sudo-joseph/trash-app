@@ -149,10 +149,7 @@ fetchFacilityDetails = facility_id => {
 }
 
 fetchLocationFromZip= () => {
-  // let url = `/api/facilities/earth911/coords?zipcode=${this.state.userZip}`
-  let url = `/api/facilities/earth911/coords?zipcode=94608`
-  console.log(this.state.userZip)
-  console.log(url)
+  let url = `/api/facilities/earth911/coords?zipcode=${this.state.userZip}`
   fetch(url,{ })
     .then((response) => {
       return response.json();
@@ -204,7 +201,7 @@ toggleBurger = () => {
 /////// GeoLocation & Failure Modal ///////
 enterZip = (value) => {
   this.setState({userZip:value},
-    this.fetchLocationFromZip())
+    ()=>this.fetchLocationFromZip())
 }
 
 
